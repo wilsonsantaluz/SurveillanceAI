@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "+Is9JpPPN5w=",
+  "success": true,
+  "projectFilePath": "C:\\wilson\\SurveillanceAI\\SurveillanceAI.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\WilsonLuzCONVESTE\\.nuget\\packages\\microsoft.ml.onnxruntime\\1.24.4\\microsoft.ml.onnxruntime.1.24.4.nupkg.sha512",
+    "C:\\Users\\WilsonLuzCONVESTE\\.nuget\\packages\\microsoft.ml.onnxruntime.managed\\1.24.4\\microsoft.ml.onnxruntime.managed.1.24.4.nupkg.sha512",
+    "C:\\Users\\WilsonLuzCONVESTE\\.nuget\\packages\\opencvsharp4\\4.13.0.20260330\\opencvsharp4.4.13.0.20260330.nupkg.sha512",
+    "C:\\Users\\WilsonLuzCONVESTE\\.nuget\\packages\\opencvsharp4.runtime.win\\4.13.0.20260302\\opencvsharp4.runtime.win.4.13.0.20260302.nupkg.sha512",
+    "C:\\Users\\WilsonLuzCONVESTE\\.nuget\\packages\\system.memory\\4.6.3\\system.memory.4.6.3.nupkg.sha512",
+    "C:\\Users\\WilsonLuzCONVESTE\\.nuget\\packages\\system.numerics.tensors\\9.0.0\\system.numerics.tensors.9.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
