@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\wilson\\SurveillanceAI\\SurveillanceAI.csproj": {}
+    "C:\\source\\SurveillanceAI\\SurveillanceAI.csproj": {}
   },
   "projects": {
-    "C:\\wilson\\SurveillanceAI\\SurveillanceAI.csproj": {
+    "C:\\source\\SurveillanceAI\\SurveillanceAI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\wilson\\SurveillanceAI\\SurveillanceAI.csproj",
+        "projectUniqueName": "C:\\source\\SurveillanceAI\\SurveillanceAI.csproj",
         "projectName": "SurveillanceAI",
-        "projectPath": "C:\\wilson\\SurveillanceAI\\SurveillanceAI.csproj",
-        "packagesPath": "C:\\Users\\WilsonLuzCONVESTE\\.nuget\\packages\\",
-        "outputPath": "C:\\wilson\\SurveillanceAI\\obj\\",
+        "projectPath": "C:\\source\\SurveillanceAI\\SurveillanceAI.csproj",
+        "packagesPath": "C:\\Users\\mslix\\.nuget\\packages\\",
+        "outputPath": "C:\\source\\SurveillanceAI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\WilsonLuzCONVESTE\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\mslix\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -80,7 +80,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.308/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

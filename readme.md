@@ -1,104 +1,104 @@
-# 🛡️ SurveillanceAI — Detecção Inteligente de Comportamento em Vídeo (v1.0)
+# 🛡️ SurveillanceAI — Intelligent Video Behavior Analysis (v1.0)
 
-## 📌 Visão Geral
+## 📌 Overview
 
-O **SurveillanceAI** é um sistema de visão computacional em tempo real desenvolvido em **.NET (C#)** que analisa vídeo de câmeras para identificar **interações suspeitas entre pessoas**, com foco inicial em cenários de possível abordagem/assalto.
+**SurveillanceAI** is a real-time computer vision system built with **.NET (C#)**. It analyzes camera footage to identify **potentially concerning interactions between people**, initially focusing on scenarios involving a possible confrontation or robbery.
 
-Diferente de soluções tradicionais baseadas apenas em detecção de objetos, este projeto introduz uma abordagem **comportamental**, analisando:
+Unlike traditional solutions based only on object detection, this project introduces a **behavioral** approach that analyzes:
 
-* proximidade entre indivíduos
-* dinâmica de aproximação
-* contexto espacial
-
----
-
-## 🎯 Objetivo
-
-Detectar automaticamente situações potencialmente perigosas em vídeo, como:
-
-* aproximação agressiva entre pessoas
-* invasão de espaço pessoal
-* padrões iniciais de abordagem suspeita
+* proximity between individuals
+* approach dynamics
+* spatial context
 
 ---
 
-## ⚙️ Tecnologias Utilizadas
+## 🎯 Objective
+
+Automatically flag potentially dangerous situations in video, such as:
+
+* aggressive approaches between people
+* intrusion into personal space
+* early patterns of a potentially suspicious approach
+
+---
+
+## ⚙️ Technologies
 
 * **.NET 8 (C#)**
-* **OpenCvSharp** → captura e renderização de vídeo
-* **ONNX Runtime** → execução de modelos de IA
-* **YOLOv8 (ONNX)** → detecção de pessoas em tempo real
+* **OpenCvSharp** → video capture and rendering
+* **ONNX Runtime** → AI model inference
+* **YOLOv8 (ONNX)** → real-time person detection
 
 ---
 
-## 🧠 Arquitetura do Sistema
+## 🧠 System Architecture
 
-O sistema foi projetado com separação clara de responsabilidades:
+The system is designed with a clear separation of responsibilities:
 
-| Camada       | Responsabilidade                      |
-| ------------ | ------------------------------------- |
-| Detector     | Identificação de objetos (YOLO)       |
-| Analyzer     | Lógica de comportamento (proximidade) |
-| UI (Program) | Visualização e alertas                |
+| Layer        | Responsibility                       |
+| ------------ | ------------------------------------ |
+| Detector     | Object detection (YOLO)              |
+| Analyzer     | Behavioral logic (proximity)         |
+| UI (Program) | Visualization and alerts             |
 
 ---
 
-## 🔄 Fluxo de Funcionamento
+## 🔄 How It Works
 
 ```mermaid
 flowchart TD
-    A[Câmera / Webcam] --> B[Captura de Frame]
-    B --> C[Detecção YOLOv8 ONNX]
-    C --> D[Lista de Pessoas Detectadas]
+    A[Camera / Webcam] --> B[Frame Capture]
+    B --> C[YOLOv8 ONNX Detection]
+    C --> D[Detected People]
     D --> E[Proximity Analyzer]
-    E --> F{Distância < Limite?}
-    F -->|Sim| G[Alerta ⚠️]
-    F -->|Não| H[Continua Monitoramento]
-    G --> I[Exibição Visual + Log]
+    E --> F{Distance < Threshold?}
+    F -->|Yes| G[Alert ⚠️]
+    F -->|No| H[Continue Monitoring]
+    G --> I[Visual Display + Log]
     H --> I
 ```
 
 ---
 
-## 📏 Lógica de Proximidade
+## 📏 Proximity Logic
 
-Para cada frame:
+For each frame, the system:
 
-1. Identifica todas as pessoas
-2. Calcula a distância entre cada par
-3. Detecta aproximação ou proximidade crítica
+1. Identifies all detected people
+2. Calculates the distance between each pair
+3. Flags close proximity or a critical distance
 
-### Regra base (v1.0)
+### Baseline rule (v1.0)
 
 ```
-SE distância < threshold
-→ interação suspeita
+IF distance < threshold
+→ flag a potentially concerning interaction
 ```
 
 ---
 
-## 🖥️ Exemplo Visual
+## 🖥️ Visual Output
 
-O sistema exibe:
+The system displays:
 
-* 🔴 bounding boxes nas pessoas
-* 🟡 linha entre indivíduos
-* 📏 distância em tempo real
-* ⚠️ alerta visual em proximidade crítica
-
----
-
-## 🔊 Sistema de Alerta
-
-* Logs no console
-* possibilidade de alerta sonoro (beep)
-* base pronta para integração com notificações externas
+* 🔴 bounding boxes around people
+* 🟡 a line between individuals
+* 📏 real-time distance
+* ⚠️ a visual alert when proximity is critical
 
 ---
 
-## 🚀 Como Executar
+## 🔊 Alert System
 
-### 1. Clonar o projeto
+* Console logs
+* Optional audible alert (beep)
+* Foundation for integrating external notifications
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the project
 
 ```bash
 git clone <repo>
@@ -107,7 +107,7 @@ cd SurveillanceAI
 
 ---
 
-### 2. Instalar dependências
+### 2. Restore dependencies
 
 ```bash
 dotnet restore
@@ -115,21 +115,21 @@ dotnet restore
 
 ---
 
-### 3. Adicionar modelo YOLO
+### 3. Add the YOLO model
 
-Coloque o arquivo:
+Place the following file:
 
 ```
 yolov8n.onnx
 ```
 
-na pasta do projeto e configure como:
+in the project folder and set:
 
 * Copy to Output Directory: `Copy if newer`
 
 ---
 
-### 4. Executar
+### 4. Run the application
 
 ```bash
 dotnet run
@@ -137,56 +137,56 @@ dotnet run
 
 ---
 
-## 📷 Fontes de Vídeo
+## 📷 Video Sources
 
-Suporte a:
+Supported sources:
 
-* webcam local (`VideoCapture(0)`)
-* câmera IP (HTTP/RTSP)
-* celular como câmera (IP Webcam / DroidCam)
+* Local webcam (`VideoCapture(0)`)
+* IP camera (HTTP/RTSP)
+* Phone as a camera (IP Webcam / DroidCam)
 
 ---
 
-## ⚠️ Limitações (v1.0)
+## ⚠️ Limitations (v1.0)
 
-* não diferencia intenção (ex: conversa vs assalto)
-* sem tracking de identidade (ainda)
-* dependente de qualidade da imagem
-* detecção de armas não implementada (requer modelo custom)
+* Cannot determine intent (e.g., conversation vs. robbery)
+* No individual identity tracking yet
+* Performance depends on image quality
+* Weapon detection is not implemented (requires a custom model)
 
 ---
 
 ## 🧭 Roadmap
 
-### 🔜 Próximas versões
+### 🔜 Planned for future versions
 
-* tracking de indivíduos (ID por pessoa)
-* detecção de velocidade / perseguição
-* classificação de comportamento (ML)
-* integração com alertas externos (API / WhatsApp)
-* suporte multi-câmera (pipeline distribuído)
-
----
-
-## 💡 Diferencial
-
-Este projeto não depende apenas de “detectar objetos”, mas sim de **interpretar comportamento** — o que o aproxima de soluções reais de segurança inteligente.
+* Individual tracking (ID per person)
+* Speed and pursuit detection
+* Behavior classification (ML)
+* External alert integrations (API / WhatsApp)
+* Multi-camera support (distributed pipeline)
 
 ---
 
-## 👨‍💻 Autor
+## 💡 What Makes It Different
 
-Projeto desenvolvido como base para sistemas de monitoramento inteligente e análise comportamental em tempo real.
+This project goes beyond simply **detecting objects** by exploring **behavioral context**, bringing it closer to real-world intelligent security solutions.
 
 ---
 
-## 📣 Discurso do Projeto (Pitch)
+## 👨‍💻 Author
 
-> “O SurveillanceAI é uma evolução dos sistemas tradicionais de vigilância.
-> Em vez de apenas enxergar pessoas, ele tenta entender o comportamento delas.
+Developed as a foundation for intelligent monitoring systems and real-time behavioral analysis.
+
+---
+
+## 📣 Project Pitch
+
+> “SurveillanceAI is an evolution of traditional surveillance systems.
+> Instead of only detecting people, it aims to understand their behavior.
 >
-> Ao analisar proximidade, movimento e interação, o sistema consegue identificar padrões iniciais de risco, como abordagens suspeitas, antes mesmo de um incidente acontecer.
+> By analyzing proximity, movement, and interaction, the system can flag early indicators of potential risk, such as unusual approaches, before an incident occurs.
 >
-> Essa abordagem abre caminho para sistemas de segurança mais proativos, capazes de agir antes do problema — e não apenas registrar depois.”
+> This approach points toward more proactive security systems that can respond to potential issues instead of only recording them afterward.”
 
 ---
