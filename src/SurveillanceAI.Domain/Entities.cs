@@ -1,7 +1,7 @@
 namespace SurveillanceAI.Domain;
 
 public enum UserRole { Administrator, Operator, Viewer }
-public enum SourceKind { Webcam, Rtsp, VideoFile }
+public enum SourceKind { Webcam, Rtsp, VideoFile, HttpStream }
 public enum ReviewStatus { Pending, Reviewed, FalsePositive }
 public enum Severity { Information, Warning, Critical }
 public sealed class User
