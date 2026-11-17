@@ -186,7 +186,7 @@ public sealed partial class MainViewModel : ObservableObject
         if (value?.EvidencePath is { } path) { try { EvidenceImage = Decode(File.ReadAllBytes(evidence.Resolve(path))); } catch { Message = Texts.T("Evidence is unavailable or has expired."); } }
     }
     [RelayCommand] private void NewCamera() { SelectedCamera = null; CameraDraft = new(); }
-    [RelayCommand] private Task SaveCameraAsync(PasswordBox box) => Run(async () => { var source = box.Password; box.Clear(); await store.SaveCameraAsync(CameraDraft, source); await monitoring.ReloadAsync(); Replace(Cameras, await store.CamerasAsync()); Message = Texts.T("Camera saved and monitoring configuration applied."); });
+    [RelayCommand] private Task SaveCameraAsync(TextBox box) => Run(async () => { var source = box.Text; box.Clear(); await store.SaveCameraAsync(CameraDraft, source); await monitoring.ReloadAsync(); Replace(Cameras, await store.CamerasAsync()); Message = Texts.T("Camera saved and monitoring configuration applied."); });
     [RelayCommand] private Task TestCameraAsync() => Run(async () => { Message = await monitoring.TestAsync(CameraDraft) ? Texts.T("Connection succeeded; a frame was received.") : Texts.T("Connection failed. Save the source first, then check device availability."); });
     [RelayCommand] private Task RestartMonitoringAsync() => Run(async () => { await monitoring.ReloadAsync(); Message = Texts.T("Monitoring configuration applied."); });
     [RelayCommand] private void NewRule() { SelectedRule = null; RuleDraft = new(); }
