@@ -53,6 +53,16 @@ public sealed class ProductTests
         Assert.Empty(await store.EventsAsync(new EventFilter(FromUtc:DateTime.UtcNow.AddDays(1))));
         Assert.Empty(await store.EventsAsync(new EventFilter(Page:1)));
     }
+    [Fact] public void CameraSourceValidationAcceptsHttpStreamsAndRejectsInvalidSchemes()
+    {
+        ProductStore.ValidateSource(SourceKind.HttpStream, "http://192.168.1.246:8080/stream");
+        ProductStore.ValidateSource(SourceKind.HttpStream, "https://example.test/live.mjpg");
+        ProductStore.ValidateSource(SourceKind.Rtsp, "rtsp://192.168.1.100/live");
+        ProductStore.ValidateSource(SourceKind.Webcam, "0");
+        Assert.Throws<ArgumentException>(() => ProductStore.ValidateSource(SourceKind.HttpStream, "rtsp://example.test/live"));
+        Assert.Throws<ArgumentException>(() => ProductStore.ValidateSource(SourceKind.HttpStream, "file:///etc/passwd"));
+        Assert.Throws<ArgumentException>(() => ProductStore.ValidateSource(SourceKind.Webcam, "http://example.test/live"));
+    }
     [Fact] public async Task NotificationsRetryAndFailuresArePersistent()
     {
         await using var factory = new TestDatabase(); await factory.InitializeAsync();
