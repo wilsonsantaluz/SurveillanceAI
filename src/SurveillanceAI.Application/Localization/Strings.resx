@@ -1,0 +1,999 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms</value>
+  </resheader>
+  <data name="Tb0a83b2b83dcaba9" xml:space="preserve">
+    <value>Informe a origem da câmera.</value>
+    <comment>A camera source is required.</comment>
+  </data>
+  <data name="Tce2abb402c199f76" xml:space="preserve">
+    <value>Informe uma senha para o novo usuário.</value>
+    <comment>A password is required for a new user.</comment>
+  </data>
+  <data name="T64cff1319d2fd2cb" xml:space="preserve">
+    <value>Ação</value>
+    <comment>Action</comment>
+  </data>
+  <data name="T92340695899bd2d8" xml:space="preserve">
+    <value>Ativo</value>
+    <comment>Active</comment>
+  </data>
+  <data name="Te0af7219b592bf36" xml:space="preserve">
+    <value>Cadastre câmeras para começar. Pausar a prévia não interrompe o monitoramento.</value>
+    <comment>Add cameras to begin. Preview pause does not stop monitoring.</comment>
+  </data>
+  <data name="Tf1dbc1bcd61f819e" xml:space="preserve">
+    <value>Teste administrativo de envio. Esta mensagem não está associada a um incidente de monitoramento.</value>
+    <comment>Administrative delivery test. No surveillance incident is associated with this message.</comment>
+  </data>
+  <data name="Te7d3e769f3f593da" xml:space="preserve">
+    <value>Administrador</value>
+    <comment>Administrator</comment>
+  </data>
+  <data name="T0ad881a4e2bf0d85" xml:space="preserve">
+    <value>A configuração inicial do administrador já foi concluída.</value>
+    <comment>Administrator setup is already complete.</comment>
+  </data>
+  <data name="T4cab20469e8c18c3" xml:space="preserve">
+    <value>Regras de alerta</value>
+    <comment>Alert rules</comment>
+  </data>
+  <data name="Ta52ace420f2175d0" xml:space="preserve">
+    <value>Todos</value>
+    <comment>All</comment>
+  </data>
+  <data name="T06e70139fcf5e5c7" xml:space="preserve">
+    <value>Tentativas</value>
+    <comment>Attempts</comment>
+  </data>
+  <data name="Tfd9948a65aaaeb4f" xml:space="preserve">
+    <value>Caixa delimitadora (x, y, largura, altura)</value>
+    <comment>Bounding box (x, y, width, height)</comment>
+  </data>
+  <data name="T03494b0d1f803522" xml:space="preserve">
+    <value>Câmera</value>
+    <comment>Camera</comment>
+  </data>
+  <data name="T36267f2455d38224" xml:space="preserve">
+    <value>ID da câmera</value>
+    <comment>Camera ID</comment>
+  </data>
+  <data name="T9d2021e8c60557a2" xml:space="preserve">
+    <value>ID da câmera (em branco = todas)</value>
+    <comment>Camera ID (blank = all cameras)</comment>
+  </data>
+  <data name="T391b3d3c1b6deacc" xml:space="preserve">
+    <value>ID da câmera (em branco = todas)</value>
+    <comment>Camera ID (blank = all)</comment>
+  </data>
+  <data name="T976f8cd560b70daa" xml:space="preserve">
+    <value>Configuração da câmera</value>
+    <comment>Camera configuration</comment>
+  </data>
+  <data name="T756a730407945963" xml:space="preserve">
+    <value>Cadastro de câmeras</value>
+    <comment>Camera registry</comment>
+  </data>
+  <data name="T3b762deffee354bd" xml:space="preserve">
+    <value>Câmera salva e configuração de monitoramento aplicada.</value>
+    <comment>Camera saved and monitoring configuration applied.</comment>
+  </data>
+  <data name="T1344bce4f687af9b" xml:space="preserve">
+    <value>Câmera: {0}
+UTC: {1:O}
+Classe: {2}
+Confiança: {3:P1}
+Modelo: {4}
+Evento: {5}
+Esta detecção não foi verificada e exige revisão do operador.</value>
+    <comment>Camera: {0}
+UTC: {1:O}
+Class: {2}
+Confidence: {3:P1}
+Model: {4}
+Event: {5}
+This is an unverified detection requiring operator review.</comment>
+  </data>
+  <data name="Ta9b675db7c20dfbd" xml:space="preserve">
+    <value>Câmeras</value>
+    <comment>Cameras</comment>
+  </data>
+  <data name="T3f9c991f63a9a376" xml:space="preserve">
+    <value>Alterar senha</value>
+    <comment>Change password</comment>
+  </data>
+  <data name="T8a6a1da8ec839127" xml:space="preserve">
+    <value>Alterar sua senha</value>
+    <comment>Change your password</comment>
+  </data>
+  <data name="T4f3a9bd003974a5e" xml:space="preserve">
+    <value>Classe</value>
+    <comment>Class</comment>
+  </data>
+  <data name="T5e298ea6aad001ee" xml:space="preserve">
+    <value>O mapeamento de classes deve ser único e não vazio.</value>
+    <comment>Class mapping must be unique and nonempty.</comment>
+  </data>
+  <data name="Tc17230be040446c0" xml:space="preserve">
+    <value>As pontuações das classes não correspondem a probabilidades.</value>
+    <comment>Class scores contradict probability semantics.</comment>
+  </data>
+  <data name="T6d770b06abfa034f" xml:space="preserve">
+    <value>Classes (separadas por vírgulas; em branco = todas)</value>
+    <comment>Classes (comma separated; blank = all)</comment>
+  </data>
+  <data name="T7179ea0035fca783" xml:space="preserve">
+    <value>Limpar filtros</value>
+    <comment>Clear filters</comment>
+  </data>
+  <data name="T6422e3e78f5e5f5a" xml:space="preserve">
+    <value>Confiança</value>
+    <comment>Confidence</comment>
+  </data>
+  <data name="Td255600fcb65349f" xml:space="preserve">
+    <value>Confiança (0–1)</value>
+    <comment>Confidence (0-1)</comment>
+  </data>
+  <data name="T915155eb0a6018cb" xml:space="preserve">
+    <value>Regras de confirmação</value>
+    <comment>Confirmation rules</comment>
+  </data>
+  <data name="Tb6451f586b6de545" xml:space="preserve">
+    <value>Janela de confirmação (segundos)</value>
+    <comment>Confirmation window (seconds)</comment>
+  </data>
+  <data name="T5dfa99a6fa762317" xml:space="preserve">
+    <value>Confirmações</value>
+    <comment>Confirmations</comment>
+  </data>
+  <data name="Td403c686f6a10480" xml:space="preserve">
+    <value>Conectando</value>
+    <comment>Connecting</comment>
+  </data>
+  <data name="T1177ef160e682974" xml:space="preserve">
+    <value>Falha na conexão. Salve a origem e verifique a disponibilidade do dispositivo.</value>
+    <comment>Connection failed. Save the source first, then check device availability.</comment>
+  </data>
+  <data name="Tc72d2b3f34d4c390" xml:space="preserve">
+    <value>Conexão realizada; um quadro foi recebido.</value>
+    <comment>Connection succeeded; a frame was received.</comment>
+  </data>
+  <data name="T31fbef162594de01" xml:space="preserve">
+    <value>Continuar</value>
+    <comment>Continue</comment>
+  </data>
+  <data name="Tad605ef6f2b9dac8" xml:space="preserve">
+    <value>Intervalo entre alertas (s)</value>
+    <comment>Cooldown (s)</comment>
+  </data>
+  <data name="T09828dbe81fedca9" xml:space="preserve">
+    <value>Intervalo entre alertas (segundos)</value>
+    <comment>Cooldown (seconds)</comment>
+  </data>
+  <data name="T427dd2969bd140be" xml:space="preserve">
+    <value>Crítica</value>
+    <comment>Critical</comment>
+  </data>
+  <data name="T72ed2bd767cef627" xml:space="preserve">
+    <value>Senha atual</value>
+    <comment>Current password</comment>
+  </data>
+  <data name="T7bd90cab5f6dccd4" xml:space="preserve">
+    <value>A senha atual está incorreta.</value>
+    <comment>Current password is incorrect.</comment>
+  </data>
+  <data name="T906115657390f367" xml:space="preserve">
+    <value>Enviado</value>
+    <comment>Delivered</comment>
+  </data>
+  <data name="T54d445cf5469028c" xml:space="preserve">
+    <value>Tentativas de envio | clique em Atualizar</value>
+    <comment>Delivery attempts | refresh to update</comment>
+  </data>
+  <data name="Td6d9f3f1535c506f" xml:space="preserve">
+    <value>Falha no envio ({0}). Verifique a configuração SMTP e a conectividade.</value>
+    <comment>Delivery failed ({0}). Check SMTP configuration and connectivity.</comment>
+  </data>
+  <data name="T526e0087cc3f254d" xml:space="preserve">
+    <value>Descrição</value>
+    <comment>Description</comment>
+  </data>
+  <data name="T0528a9b93e661db0" xml:space="preserve">
+    <value>Eventos de detecção | revisão do operador</value>
+    <comment>Detection events | operator review</comment>
+  </data>
+  <data name="T24e31fe47b345f85" xml:space="preserve">
+    <value>Sobrepor detecções</value>
+    <comment>Detection overlays</comment>
+  </data>
+  <data name="T3889ce7e856b26c8" xml:space="preserve">
+    <value>Diagnóstico | histórico de auditoria</value>
+    <comment>Diagnostics | audit trail</comment>
+  </data>
+  <data name="T969ccbd3cf6300ec" xml:space="preserve">
+    <value>E-mail</value>
+    <comment>Email</comment>
+  </data>
+  <data name="Tdfec8a3ea5eba63b" xml:space="preserve">
+    <value>Manifesto vazio.</value>
+    <comment>Empty manifest.</comment>
+  </data>
+  <data name="T5ba3def331feb3c6" xml:space="preserve">
+    <value>Habilitar canal de notificações</value>
+    <comment>Enable notification channel</comment>
+  </data>
+  <data name="T92c1cdfdf4cb9cf6" xml:space="preserve">
+    <value>Habilitado</value>
+    <comment>Enabled</comment>
+  </data>
+  <data name="T4959731bfb4e3261" xml:space="preserve">
+    <value>Informe o nome da câmera e FPS de inferência entre 1 e 30.</value>
+    <comment>Enter a camera name and inference FPS from 1 to 30.</comment>
+  </data>
+  <data name="Td2e72e0c5c21ecf2" xml:space="preserve">
+    <value>Informe o nome do destinatário e um e-mail válido.</value>
+    <comment>Enter a recipient name and valid email address.</comment>
+  </data>
+  <data name="T759d80b0dfa92677" xml:space="preserve">
+    <value>Informe um nome de usuário de 1 a 100 caracteres.</value>
+    <comment>Enter a username of 1-100 characters.</comment>
+  </data>
+  <data name="Tc63d94fb85f5fb54" xml:space="preserve">
+    <value>Informe um nome de usuário de 1 a 100 caracteres.</value>
+    <comment>Enter a username of 1–100 characters.</comment>
+  </data>
+  <data name="T5b333eeac28776cf" xml:space="preserve">
+    <value>Informe servidor SMTP, porta, remetente e modo TLS válidos, com 1 a 10 tentativas.</value>
+    <comment>Enter a valid SMTP host, port, sender, TLS mode and 1-10 attempts.</comment>
+  </data>
+  <data name="T92a39978997604dd" xml:space="preserve">
+    <value>Informe servidor SMTP, porta, remetente e modo TLS válidos, com 1 a 10 tentativas.</value>
+    <comment>Enter a valid SMTP host, port, sender, TLS mode and 1–10 attempts.</comment>
+  </data>
+  <data name="T97db171dfcfdbf48" xml:space="preserve">
+    <value>Informe um destinatário válido para o teste.</value>
+    <comment>Enter a valid test recipient.</comment>
+  </data>
+  <data name="T358af3042c068d20" xml:space="preserve">
+    <value>Informe uma URI RTSP.</value>
+    <comment>Enter an RTSP URI.</comment>
+  </data>
+  <data name="T54a0e8c17ebb21a1" xml:space="preserve">
+    <value>Erro</value>
+    <comment>Error</comment>
+  </data>
+  <data name="T4754975ae2800770" xml:space="preserve">
+    <value>Erro: verifique o modelo e a origem</value>
+    <comment>Error: check model/source</comment>
+  </data>
+  <data name="Tf9c7f3d82867c587" xml:space="preserve">
+    <value>Detalhes do evento</value>
+    <comment>Event details</comment>
+  </data>
+  <data name="T538c9c11cd670d8c" xml:space="preserve">
+    <value>Revisão do evento salva.</value>
+    <comment>Event review saved.</comment>
+  </data>
+  <data name="T8d14f6e72de8f18a" xml:space="preserve">
+    <value>Eventos</value>
+    <comment>Events</comment>
+  </data>
+  <data name="Tb9022c55bac8bfc8" xml:space="preserve">
+    <value>Pasta de evidências: {0}</value>
+    <comment>Evidence directory: {0}</comment>
+  </data>
+  <data name="T53f2941600db162b" xml:space="preserve">
+    <value>O arquivo de evidência não pode ser um link simbólico.</value>
+    <comment>Evidence file cannot be a reparse point.</comment>
+  </data>
+  <data name="Ta85c99c51e1bfd10" xml:space="preserve">
+    <value>A evidência não está disponível ou expirou.</value>
+    <comment>Evidence is unavailable or has expired.</comment>
+  </data>
+  <data name="T3b64f54ad96fee30" xml:space="preserve">
+    <value>O caminho da evidência está fora da pasta permitida.</value>
+    <comment>Evidence path escapes storage.</comment>
+  </data>
+  <data name="T12e5872aa5b56c68" xml:space="preserve">
+    <value>O caminho da evidência deve ser relativo.</value>
+    <comment>Evidence path must be relative.</comment>
+  </data>
+  <data name="Te36e6eb085fa6249" xml:space="preserve">
+    <value>A pasta de evidências não pode usar links simbólicos ou junções.</value>
+    <comment>Evidence storage cannot use reparse points.</comment>
+  </data>
+  <data name="Td0579c51dbf76a7b" xml:space="preserve">
+    <value>Classe exata do modelo</value>
+    <comment>Exact model class</comment>
+  </data>
+  <data name="T5136105484f7c5d2" xml:space="preserve">
+    <value>Ampliar câmera</value>
+    <comment>Expand camera</comment>
+  </data>
+  <data name="Ta07558607f80bf3c" xml:space="preserve">
+    <value>Esperadas caixas YOLO cx/cy/w/h decodificadas e pontuações de classes. Exportações com objectness ou NMS integrado não são compatíveis.</value>
+    <comment>Expected decoded YOLO cx/cy/w/h plus class scores. Objectness and end-to-end NMS exports are unsupported.</comment>
+  </data>
+  <data name="T134076c652ae18a8" xml:space="preserve">
+    <value>Esperada entrada RGB NCHW float32, com lote 1 ou dinâmico.</value>
+    <comment>Expected float32 NCHW RGB input, batch 1 or dynamic.</comment>
+  </data>
+  <data name="Tc726b92c646e2901" xml:space="preserve">
+    <value>Esperado um quadro BGR não vazio.</value>
+    <comment>Expected nonempty BGR frame.</comment>
+  </data>
+  <data name="T031a8f0f659df890" xml:space="preserve">
+    <value>Falhou</value>
+    <comment>Failed</comment>
+  </data>
+  <data name="T4d084fe49ce18b4c" xml:space="preserve">
+    <value>Falso positivo</value>
+    <comment>FalsePositive</comment>
+  </data>
+  <data name="T6e2f719ab40d2677" xml:space="preserve">
+    <value>Primeiro acesso: crie sua conta de administrador. Use uma senha de pelo menos 12 caracteres.</value>
+    <comment>First run: create your administrator account. Use a password of at least 12 characters.</comment>
+  </data>
+  <data name="T3813fd079009b900" xml:space="preserve">
+    <value>Data inicial</value>
+    <comment>From date</comment>
+  </data>
+  <data name="T4a823118b9ba8baa" xml:space="preserve">
+    <value>Servidor</value>
+    <comment>Host</comment>
+  </data>
+  <data name="T58e8964614db20bf" xml:space="preserve">
+    <value>FPS de inferência</value>
+    <comment>Inference FPS</comment>
+  </data>
+  <data name="Tdd028ed38e821532" xml:space="preserve">
+    <value>Quadros de inferência por segundo (1–30)</value>
+    <comment>Inference frames per second (1-30)</comment>
+  </data>
+  <data name="T1cb0ba125f84c982" xml:space="preserve">
+    <value>Informação</value>
+    <comment>Information</comment>
+  </data>
+  <data name="T77cdb544ea9a0101" xml:space="preserve">
+    <value>Administrador inicial criado</value>
+    <comment>Initial administrator created</comment>
+  </data>
+  <data name="T44d26bae4675488b" xml:space="preserve">
+    <value>Credenciais inválidas ou conta indisponível.</value>
+    <comment>Invalid credentials or account unavailable.</comment>
+  </data>
+  <data name="Tfe0125e1327b3945" xml:space="preserve">
+    <value>SHA-256 do modelo inválido.</value>
+    <comment>Invalid model SHA-256.</comment>
+  </data>
+  <data name="T93f2ac9782396edd" xml:space="preserve">
+    <value>Situação de revisão inválida.</value>
+    <comment>Invalid review status.</comment>
+  </data>
+  <data name="Tabfe976a16442fbd" xml:space="preserve">
+    <value>Regra inválida: use 2 a 100 confirmações, janela e intervalo positivos e confiança/IoU entre 0 e 1.</value>
+    <comment>Invalid rule: require 2-100 confirmations, a positive window/cooldown and confidence/IoU within 0-1.</comment>
+  </data>
+  <data name="T44e9488eae101569" xml:space="preserve">
+    <value>Regra inválida: use 2 a 100 confirmações, janela e intervalo positivos e confiança/IoU entre 0 e 1.</value>
+    <comment>Invalid rule: require 2–100 confirmations, a positive window/cooldown and confidence/IoU within 0–1.</comment>
+  </data>
+  <data name="T459cf1c3707490bc" xml:space="preserve">
+    <value>CENTRAL DE MONITORAMENTO LOCAL</value>
+    <comment>LOCAL MONITORING WORKSPACE</comment>
+  </data>
+  <data name="Ta4fe65264ef7dbb3" xml:space="preserve">
+    <value>Idioma</value>
+    <comment>Language</comment>
+  </data>
+  <data name="T42154791e7743b93" xml:space="preserve">
+    <value>Idioma salvo.</value>
+    <comment>Language saved.</comment>
+  </data>
+  <data name="Taacada7cfaeecd75" xml:space="preserve">
+    <value>Deixe em branco para manter a origem salva.</value>
+    <comment>Leave blank to retain the saved source.</comment>
+  </data>
+  <data name="T832b508b1f614d34" xml:space="preserve">
+    <value>Usuário local</value>
+    <comment>Local user</comment>
+  </data>
+  <data name="Teee9b4f0704908c8" xml:space="preserve">
+    <value>Teste local (sem TLS)</value>
+    <comment>LocalTest</comment>
+  </data>
+  <data name="T8ef204ca7a623af3" xml:space="preserve">
+    <value>O modo de teste local permite apenas SMTP no próprio computador.</value>
+    <comment>LocalTest permits only loopback SMTP.</comment>
+  </data>
+  <data name="T15b61974b2707a7b" xml:space="preserve">
+    <value>Localização</value>
+    <comment>Location</comment>
+  </data>
+  <data name="T49616145514e9abf" xml:space="preserve">
+    <value>Sair</value>
+    <comment>Log out</comment>
+  </data>
+  <data name="T9d6322c1f4d9d3f3" xml:space="preserve">
+    <value>Entrada no sistema</value>
+    <comment>Login</comment>
+  </data>
+  <data name="Td5125919eb3bdbad" xml:space="preserve">
+    <value>Marcar como falso positivo</value>
+    <comment>Mark false positive</comment>
+  </data>
+  <data name="Tf73cf2143127e953" xml:space="preserve">
+    <value>Marcar como revisado</value>
+    <comment>Mark reviewed</comment>
+  </data>
+  <data name="T562fccd1165da790" xml:space="preserve">
+    <value>Máximo de tentativas de envio (1–10)</value>
+    <comment>Maximum delivery attempts (1-10)</comment>
+  </data>
+  <data name="T6c04f45d7376c980" xml:space="preserve">
+    <value>Mínimo de confirmações (2–100)</value>
+    <comment>Minimum confirmations (2-100)</comment>
+  </data>
+  <data name="T3325acac441bf3ee" xml:space="preserve">
+    <value>Nível mínimo do registro em arquivo</value>
+    <comment>Minimum file log level</comment>
+  </data>
+  <data name="T4f0b011effef496d" xml:space="preserve">
+    <value>Severidade mínima</value>
+    <comment>Minimum severity</comment>
+  </data>
+  <data name="T58b9411c551be704" xml:space="preserve">
+    <value>Modelo e evidências</value>
+    <comment>Model &amp; evidence</comment>
+  </data>
+  <data name="T01f5c2ff2899c16a" xml:space="preserve">
+    <value>Pasta do pacote do modelo</value>
+    <comment>Model bundle directory</comment>
+  </data>
+  <data name="T9085cb63bab7b78a" xml:space="preserve">
+    <value>O hash do modelo não corresponde ao manifesto.</value>
+    <comment>Model checksum does not match manifest.</comment>
+  </data>
+  <data name="Td9768ec23cbc941e" xml:space="preserve">
+    <value>Informe somente o nome de um arquivo ONNX, sem pastas.</value>
+    <comment>Model file must be a plain ONNX filename.</comment>
+  </data>
+  <data name="T8ab1ee4a5b8bb2b7" xml:space="preserve">
+    <value>Os nomes ou a quantidade de tensores não correspondem ao contrato de detecção.</value>
+    <comment>Model tensor names/count do not match the detection contract.</comment>
+  </data>
+  <data name="Ta1bae71f3146b73a" xml:space="preserve">
+    <value>Configuração de monitoramento aplicada.</value>
+    <comment>Monitoring configuration applied.</comment>
+  </data>
+  <data name="T1fcd9d1273f60d60" xml:space="preserve">
+    <value>Visão geral do monitoramento</value>
+    <comment>Monitoring overview</comment>
+  </data>
+  <data name="Td1e6e8d2656963ad" xml:space="preserve">
+    <value>O monitoramento depende deste aplicativo. Mantenha-o aberto. Um serviço Windows persistente está planejado.</value>
+    <comment>Monitoring runs in this desktop process. Keep the application open. A separate persistent Windows service is planned.</comment>
+  </data>
+  <data name="Tb53181a4d853c390" xml:space="preserve">
+    <value>Minha conta</value>
+    <comment>My account</comment>
+  </data>
+  <data name="Tdcd1d5223f73b3a9" xml:space="preserve">
+    <value>Nome</value>
+    <comment>Name</comment>
+  </data>
+  <data name="Tcb5d0b1edac98da3" xml:space="preserve">
+    <value>Nova câmera</value>
+    <comment>New camera</comment>
+  </data>
+  <data name="Tdeb54cdd6f279d26" xml:space="preserve">
+    <value>Nova senha (12 ou mais caracteres)</value>
+    <comment>New password (12+ characters)</comment>
+  </data>
+  <data name="Ta8aa0960d45ebc2f" xml:space="preserve">
+    <value>Nova senha (em branco = manter atual)</value>
+    <comment>New password (blank = unchanged)</comment>
+  </data>
+  <data name="T45cc42099f1c616f" xml:space="preserve">
+    <value>Novo destinatário</value>
+    <comment>New recipient</comment>
+  </data>
+  <data name="T99cd24efe9831454" xml:space="preserve">
+    <value>Nova regra</value>
+    <comment>New rule</comment>
+  </data>
+  <data name="T6384ffa7712cb2d5" xml:space="preserve">
+    <value>Novo usuário</value>
+    <comment>New user</comment>
+  </data>
+  <data name="T1ff57a29d7c9d11b" xml:space="preserve">
+    <value>Próxima</value>
+    <comment>Next</comment>
+  </data>
+  <data name="Tad04681c3108cfbc" xml:space="preserve">
+    <value>Nenhuma câmera cadastrada</value>
+    <comment>No cameras configured</comment>
+  </data>
+  <data name="T09fdfa0d5d69275a" xml:space="preserve">
+    <value>Pontuação de classe não finita.</value>
+    <comment>Nonfinite class score.</comment>
+  </data>
+  <data name="T788011833a5a0f22" xml:space="preserve">
+    <value>Notificações</value>
+    <comment>Notifications</comment>
+  </data>
+  <data name="Ta1794783aab72d20" xml:space="preserve">
+    <value>Desconectada</value>
+    <comment>Offline</comment>
+  </data>
+  <data name="T0d21bd52022ca7f7" xml:space="preserve">
+    <value>Conectada</value>
+    <comment>Online</comment>
+  </data>
+  <data name="Ta1e33fff0945b2c2" xml:space="preserve">
+    <value>Falha na operação ({0}). Verifique a configuração e o diagnóstico.</value>
+    <comment>Operation failed ({0}). Check configuration and diagnostics.</comment>
+  </data>
+  <data name="T291101a07fe980e9" xml:space="preserve">
+    <value>Operador</value>
+    <comment>Operator</comment>
+  </data>
+  <data name="T7d2a121620cebfb9" xml:space="preserve">
+    <value>Anotações do operador</value>
+    <comment>Operator notes</comment>
+  </data>
+  <data name="T0e50346ddcd62e3e" xml:space="preserve">
+    <value>Visão geral e ao vivo</value>
+    <comment>Overview &amp; Live</comment>
+  </data>
+  <data name="Te8b8355262d0af49" xml:space="preserve">
+    <value>Página 1</value>
+    <comment>Page 1</comment>
+  </data>
+  <data name="Tf292dc85abc5eff4" xml:space="preserve">
+    <value>Página {0} · {1} resultados (100 por página)</value>
+    <comment>Page {0} · {1} results (100 per page)</comment>
+  </data>
+  <data name="Te7cf3ef4f17c3999" xml:space="preserve">
+    <value>Senha</value>
+    <comment>Password</comment>
+  </data>
+  <data name="T9956a896101115c0" xml:space="preserve">
+    <value>Senha (em branco = manter atual)</value>
+    <comment>Password (blank = unchanged)</comment>
+  </data>
+  <data name="T3575725cdc20017c" xml:space="preserve">
+    <value>Senha alterada</value>
+    <comment>Password changed</comment>
+  </data>
+  <data name="Ta768c77be9ddf3bd" xml:space="preserve">
+    <value>Senha alterada.</value>
+    <comment>Password changed.</comment>
+  </data>
+  <data name="T77a8ee74c1649800" xml:space="preserve">
+    <value>Pausar / retomar prévia</value>
+    <comment>Pause / resume preview</comment>
+  </data>
+  <data name="T331551b0de4157c9" xml:space="preserve">
+    <value>Pendente</value>
+    <comment>Pending</comment>
+  </data>
+  <data name="T72e9a59f5a1d6289" xml:space="preserve">
+    <value>Porta</value>
+    <comment>Port</comment>
+  </data>
+  <data name="Tc38953c2b10be479" xml:space="preserve">
+    <value>Possíveis detecções exigem revisão do operador. O monitoramento para ao fechar o aplicativo.</value>
+    <comment>Potential detections require operator review. Monitoring stops when the application exits.</comment>
+  </data>
+  <data name="Tb6dd2b504620dc47" xml:space="preserve">
+    <value>Possível detecção de {0} — revisão necessária</value>
+    <comment>Potential {0} detection — review required</comment>
+  </data>
+  <data name="Ta57b08a480b822a0" xml:space="preserve">
+    <value>Anterior</value>
+    <comment>Previous</comment>
+  </data>
+  <data name="Ta861695dd79cfc31" xml:space="preserve">
+    <value>Proximidade: apenas diagnóstico</value>
+    <comment>Proximity diagnostic only</comment>
+  </data>
+  <data name="Tb2af0c7c0b804386" xml:space="preserve">
+    <value>Possíveis detecções recentes | revise em Eventos</value>
+    <comment>Recent potential detections | review in Events</comment>
+  </data>
+  <data name="T51fac985e95345d9" xml:space="preserve">
+    <value>Destinatário</value>
+    <comment>Recipient</comment>
+  </data>
+  <data name="T4f1ecd56f4d8a127" xml:space="preserve">
+    <value>Destinatário salvo.</value>
+    <comment>Recipient saved.</comment>
+  </data>
+  <data name="T1e8568a82c2620ce" xml:space="preserve">
+    <value>Destinatários</value>
+    <comment>Recipients</comment>
+  </data>
+  <data name="T0e91610117029a62" xml:space="preserve">
+    <value>Atualizar</value>
+    <comment>Refresh</comment>
+  </data>
+  <data name="T7c3c80d239d11cfb" xml:space="preserve">
+    <value>Retenção em dias (eventos e evidências)</value>
+    <comment>Retention in days (events and evidence)</comment>
+  </data>
+  <data name="Tf4bffe6a81f20cf8" xml:space="preserve">
+    <value>A retenção deve ser de 1 a 3650 dias.</value>
+    <comment>Retention must be 1-3650 days.</comment>
+  </data>
+  <data name="T729513a5b4f61174" xml:space="preserve">
+    <value>A retenção deve ser de 1 a 3650 dias.</value>
+    <comment>Retention must be 1–3650 days.</comment>
+  </data>
+  <data name="T02e565ef63bc0338" xml:space="preserve">
+    <value>Voltar à central</value>
+    <comment>Return to workspace</comment>
+  </data>
+  <data name="Taff0766a5290e117" xml:space="preserve">
+    <value>Revisão</value>
+    <comment>Review</comment>
+  </data>
+  <data name="Tfad6057bb5403e59" xml:space="preserve">
+    <value>Revisado</value>
+    <comment>Reviewed</comment>
+  </data>
+  <data name="T14736a2eb9f4159f" xml:space="preserve">
+    <value>Perfil</value>
+    <comment>Role</comment>
+  </data>
+  <data name="T96bb14c9eee3c331" xml:space="preserve">
+    <value>RTSP</value>
+    <comment>Rtsp</comment>
+  </data>
+  <data name="T62845f31a2fe00be" xml:space="preserve">
+    <value>Regra</value>
+    <comment>Rule</comment>
+  </data>
+  <data name="T6820eb76cc155745" xml:space="preserve">
+    <value>Regra salva. O monitoramento atualiza as regras em até cinco segundos.</value>
+    <comment>Rule saved. Active workers refresh rules within five seconds.</comment>
+  </data>
+  <data name="Tc6141953f8959752" xml:space="preserve">
+    <value>As dimensões do tensor produzido não correspondem ao manifesto.</value>
+    <comment>Runtime tensor shape does not match manifest.</comment>
+  </data>
+  <data name="Tdc6d3eadda7ffa7b" xml:space="preserve">
+    <value>Conexão e autenticação SMTP realizadas.</value>
+    <comment>SMTP connection and authentication succeeded.</comment>
+  </data>
+  <data name="T73e52e452bc4eee6" xml:space="preserve">
+    <value>Falha na conexão SMTP ({0}). Verifique a configuração salva e a conectividade.</value>
+    <comment>SMTP connection failed ({0}). Check saved configuration and connectivity.</comment>
+  </data>
+  <data name="Td39ee4f0a5ba14e5" xml:space="preserve">
+    <value>Envio por SMTP</value>
+    <comment>SMTP delivery</comment>
+  </data>
+  <data name="Tbc3c19cedce84b01" xml:space="preserve">
+    <value>Configurações SMTP salvas.</value>
+    <comment>SMTP settings saved.</comment>
+  </data>
+  <data name="Ta759f7f078c6cf46" xml:space="preserve">
+    <value>Salvar e aplicar</value>
+    <comment>Save &amp; apply</comment>
+  </data>
+  <data name="Ta6a7b3ded90c73e0" xml:space="preserve">
+    <value>Salvar e aplicar configurações</value>
+    <comment>Save &amp; apply system settings</comment>
+  </data>
+  <data name="T9a36c6995aface90" xml:space="preserve">
+    <value>Salvar SMTP</value>
+    <comment>Save SMTP</comment>
+  </data>
+  <data name="Tb8c80d41de1a608d" xml:space="preserve">
+    <value>Salvar destinatário</value>
+    <comment>Save recipient</comment>
+  </data>
+  <data name="T4e62c225adb2e2aa" xml:space="preserve">
+    <value>Salvar regra</value>
+    <comment>Save rule</comment>
+  </data>
+  <data name="T106ba1bafa7713c7" xml:space="preserve">
+    <value>Salvar imagens de eventos confirmados</value>
+    <comment>Save snapshots for confirmed events</comment>
+  </data>
+  <data name="T038128ec4d37e4e5" xml:space="preserve">
+    <value>Salvar usuário</value>
+    <comment>Save user</comment>
+  </data>
+  <data name="T49c266baaaa70981" xml:space="preserve">
+    <value>Buscar</value>
+    <comment>Search</comment>
+  </data>
+  <data name="T7c7a011f6c7773b1" xml:space="preserve">
+    <value>Buscar classe ou anotações</value>
+    <comment>Search class or notes</comment>
+  </data>
+  <data name="Te497e8078154ac55" xml:space="preserve">
+    <value>Selecione um nível de registro compatível.</value>
+    <comment>Select a supported logging level.</comment>
+  </data>
+  <data name="T0d6dd5ee4efc9864" xml:space="preserve">
+    <value>Selecione um perfil de usuário válido.</value>
+    <comment>Select a supported user role.</comment>
+  </data>
+  <data name="T957871a1224bd195" xml:space="preserve">
+    <value>Selecione um evento primeiro.</value>
+    <comment>Select an event first.</comment>
+  </data>
+  <data name="T46ebd7db3f8cf6ca" xml:space="preserve">
+    <value>Enviar e-mail de teste</value>
+    <comment>Send test email</comment>
+  </data>
+  <data name="T5acaf00913a801d1" xml:space="preserve">
+    <value>Nome do remetente</value>
+    <comment>Sender display name</comment>
+  </data>
+  <data name="Te0749213ebda3833" xml:space="preserve">
+    <value>E-mail do remetente</value>
+    <comment>Sender email</comment>
+  </data>
+  <data name="T5e9f98120dbe5682" xml:space="preserve">
+    <value>Severidade</value>
+    <comment>Severity</comment>
+  </data>
+  <data name="Tcbf102347f4bb899" xml:space="preserve">
+    <value>Entre para monitorar câmeras e revisar detecções.</value>
+    <comment>Sign in to monitor cameras and review detections.</comment>
+  </data>
+  <data name="T0e570ca6fabe24f9" xml:space="preserve">
+    <value>Origem</value>
+    <comment>Source</comment>
+  </data>
+  <data name="T4092bf2af82c5e09" xml:space="preserve">
+    <value>Origem desconectada ou reprodução encerrada.</value>
+    <comment>Source disconnected or playback ended.</comment>
+  </data>
+  <data name="T21d1dc9118a9e35e" xml:space="preserve">
+    <value>Origem indisponível.</value>
+    <comment>Source unavailable.</comment>
+  </data>
+  <data name="Tede1bd69cee48e2d" xml:space="preserve">
+    <value>Origem: índice do dispositivo, URI RTSP ou caminho do vídeo</value>
+    <comment>Source: device index, RTSP URI, or video path</comment>
+  </data>
+  <data name="Tf6bf3baf24970da7" xml:space="preserve">
+    <value>IoU de associação espacial (0–1)</value>
+    <comment>Spatial association IoU (0-1)</comment>
+  </data>
+  <data name="T72826c14586bef03" xml:space="preserve">
+    <value>TLS ao conectar</value>
+    <comment>SslOnConnect</comment>
+  </data>
+  <data name="Tbce777af6b22ae94" xml:space="preserve">
+    <value>STARTTLS obrigatório</value>
+    <comment>StartTls</comment>
+  </data>
+  <data name="T28bb824edc6433d1" xml:space="preserve">
+    <value>Falha na inicialização ({0}). Verifique o acesso aos dados locais e as dependências instaladas.</value>
+    <comment>Startup failed ({0}). Check local data access and installed dependencies.</comment>
+  </data>
+  <data name="T920e413c7d411b61" xml:space="preserve">
+    <value>Situação</value>
+    <comment>Status</comment>
+  </data>
+  <data name="T1a4f630ac1b69fd0" xml:space="preserve">
+    <value>Parada</value>
+    <comment>Stopped</comment>
+  </data>
+  <data name="T8c6c8fa7edbaa8a3" xml:space="preserve">
+    <value>O SurveillanceAI já está em execução para esta pasta de dados.</value>
+    <comment>SurveillanceAI is already running for this data directory.</comment>
+  </data>
+  <data name="T094881e582d6429d" xml:space="preserve">
+    <value>SurveillanceAI | Central de monitoramento</value>
+    <comment>SurveillanceAI | Monitoring workspace</comment>
+  </data>
+  <data name="T6725e7bbcd28f3a8" xml:space="preserve">
+    <value>Sistema</value>
+    <comment>System</comment>
+  </data>
+  <data name="T542c814687826a5e" xml:space="preserve">
+    <value>Configurações do sistema salvas e monitoramento reiniciado.</value>
+    <comment>System settings saved and monitoring restarted.</comment>
+  </data>
+  <data name="T105155fa009a1b73" xml:space="preserve">
+    <value>Notificação de teste enfileirada</value>
+    <comment>Test notification queued</comment>
+  </data>
+  <data name="Td20eaa95b974e701" xml:space="preserve">
+    <value>Teste enfileirado com o SMTP salvo. Atualize a situação do envio após alguns segundos.</value>
+    <comment>Test queued using saved SMTP settings. Refresh delivery status after a few seconds.</comment>
+  </data>
+  <data name="T6a78f10cfd3dac70" xml:space="preserve">
+    <value>E-mail para teste</value>
+    <comment>Test recipient email</comment>
+  </data>
+  <data name="Tc402aeca1f480a60" xml:space="preserve">
+    <value>Testar conexão SMTP salva</value>
+    <comment>Test saved SMTP connection</comment>
+  </data>
+  <data name="Tdaa52af0d556cba6" xml:space="preserve">
+    <value>Testar conexão salva</value>
+    <comment>Test saved connection</comment>
+  </data>
+  <data name="T40b6191505c28317" xml:space="preserve">
+    <value>Os testes usam as configurações salvas e podem enviar com o canal de notificações desabilitado.</value>
+    <comment>Tests use saved settings and can send while the notification channel is disabled.</comment>
+  </data>
+  <data name="Tc96178c6c6083be7" xml:space="preserve">
+    <value>A câmera indicada para o destinatário não existe.</value>
+    <comment>The recipient camera does not exist.</comment>
+  </data>
+  <data name="Tcb8e4b9e5944c644" xml:space="preserve">
+    <value>A câmera indicada na regra não existe.</value>
+    <comment>The rule camera does not exist.</comment>
+  </data>
+  <data name="T8bbe395318769ddc" xml:space="preserve">
+    <value>O arquivo de vídeo não existe.</value>
+    <comment>The video file does not exist.</comment>
+  </data>
+  <data name="T55b8eb092a4dc5cb" xml:space="preserve">
+    <value>Estes valores iniciais não foram validados. Proximidade comum e quantidade de pessoas nunca geram alertas de ameaça.</value>
+    <comment>These are unvalidated starting values. Ordinary proximity and person count never generate threat alerts.</comment>
+  </data>
+  <data name="Taa30a2348551998c" xml:space="preserve">
+    <value>Data final</value>
+    <comment>Through date</comment>
+  </data>
+  <data name="T4aee1f423b8a3a10" xml:space="preserve">
+    <value>Data e hora UTC</value>
+    <comment>UTC time</comment>
+  </data>
+  <data name="Td43d51f3862ace3c" xml:space="preserve">
+    <value>Manifesto de detector incompatível ou sem versão. Manifestos de classificadores não são pacotes de detecção.</value>
+    <comment>Unsupported detector manifest or missing version. Classifier manifests are not detection bundles.</comment>
+  </data>
+  <data name="T6e3b69adf0a5c089" xml:space="preserve">
+    <value>Pré-processamento ou dimensões de imagem incompatíveis.</value>
+    <comment>Unsupported preprocessing or image dimensions.</comment>
+  </data>
+  <data name="T74f4b2afb49a88c9" xml:space="preserve">
+    <value>Leiaute de tensor, significado das pontuações, nomes ou limites incompatíveis.</value>
+    <comment>Unsupported tensor layout, score semantics, names or thresholds.</comment>
+  </data>
+  <data name="Td3d6a937392d284c" xml:space="preserve">
+    <value>Use STARTTLS ou TLS ao conectar. O teste local aceita apenas SMTP no próprio computador.</value>
+    <comment>Use StartTls or SslOnConnect. LocalTest allows only loopback SMTP.</comment>
+  </data>
+  <data name="Tf502b31d64ff9be6" xml:space="preserve">
+    <value>Use uma senha de 12 a 256 caracteres.</value>
+    <comment>Use a password between 12 and 256 characters.</comment>
+  </data>
+  <data name="T223e7ba709fb6111" xml:space="preserve">
+    <value>Usuário salvo. Alterações de perfil e ativação entram em vigor no próximo acesso.</value>
+    <comment>User saved. Role and activation changes take effect on the next login.</comment>
+  </data>
+  <data name="Te3b89e9d33f88e52" xml:space="preserve">
+    <value>Nome de usuário</value>
+    <comment>Username</comment>
+  </data>
+  <data name="T6b0cc904d081a8c1" xml:space="preserve">
+    <value>Usuários</value>
+    <comment>Users</comment>
+  </data>
+  <data name="Tf72904bbc0bc98df" xml:space="preserve">
+    <value>Validar pacote e inspecionar modelo</value>
+    <comment>Validate bundle &amp; inspect model</comment>
+  </data>
+  <data name="T4d8fc12486a05dd4" xml:space="preserve">
+    <value>Arquivo de vídeo</value>
+    <comment>VideoFile</comment>
+  </data>
+  <data name="T678bfa6af48b17cd" xml:space="preserve">
+    <value>Visualizador</value>
+    <comment>Viewer</comment>
+  </data>
+  <data name="T0fa85a1192fc695d" xml:space="preserve">
+    <value>Aguardando vídeo</value>
+    <comment>Waiting for video</comment>
+  </data>
+  <data name="Te981ddae45d8f4ca" xml:space="preserve">
+    <value>Atenção</value>
+    <comment>Warning</comment>
+  </data>
+  <data name="T0edcc5414fdd05da" xml:space="preserve">
+    <value>Webcam</value>
+    <comment>Webcam</comment>
+  </data>
+  <data name="T4959be76ef11d4ba" xml:space="preserve">
+    <value>A origem da webcam deve ser um índice de dispositivo igual ou maior que zero.</value>
+    <comment>Webcam source must be a nonnegative device index.</comment>
+  </data>
+  <data name="T38533a49bd19232c" xml:space="preserve">
+    <value>Bem-vindo à central</value>
+    <comment>Welcome to your workspace</comment>
+  </data>
+  <data name="T469a26c49e1acbf1" xml:space="preserve">
+    <value>Não é possível desativar ou reduzir o perfil da conta de administrador em uso.</value>
+    <comment>You cannot deactivate or demote your current administrator account.</comment>
+  </data>
+  <data name="Td31af5d46f3aeaa9" xml:space="preserve">
+    <value>Suas câmeras e evidências permanecem nesta instalação.</value>
+    <comment>Your cameras and evidence stay on this installation.</comment>
+  </data>
+  <data name="T36df1225d0e4ab7a" xml:space="preserve">
+    <value>Seu perfil não permite esta operação.</value>
+    <comment>Your role does not permit this operation.</comment>
+  </data>
+  <data name="T257986ab489514bb" xml:space="preserve">
+    <value>caixas primeiro</value>
+    <comment>boxesFirst</comment>
+  </data>
+  <data name="Tce8281738a2207ca" xml:space="preserve">
+    <value>atributos primeiro</value>
+    <comment>featuresFirst</comment>
+  </data>
+  <data name="T224834529abbd9d6" xml:space="preserve">
+    <value>logits</value>
+    <comment>logits</comment>
+  </data>
+  <data name="Tfcbb0b71c7618c47" xml:space="preserve">
+    <value>probabilidades</value>
+    <comment>probabilities</comment>
+  </data>
+  <data name="T7cc5826975887f16" xml:space="preserve">
+    <value>{0}
+Captura {1:F1} fps · Inferência {2:F1} fps · {3:F0} ms
+Fila {4}/1 · Descartados {5} · Reconexões {6}</value>
+    <comment>{0}
+Capture {1:F1} fps · Inference {2:F1} fps · {3:F0} ms
+Queue {4}/1 · Dropped {5} · Reconnects {6}</comment>
+  </data>
+  <data name="Tcc5a170b82f28b9c" xml:space="preserve">
+    <value>{0} câmeras   /   {1} conectadas   /   {2} desconectadas ou iniciando   /   {3} pendentes   /   {4} eventos hoje (UTC)   /   {5} retidos   /   Memória {6} MB</value>
+    <comment>{0} cameras   /   {1} online   /   {2} offline or starting   /   {3} pending   /   {4} events today (UTC)   /   {5} retained   /   Memory {6} MB</comment>
+  </data>
+  <data name="T812637111695d48a" xml:space="preserve">
+    <value>{0} · {1} classes · {2}×{3} · {4} · {5} · hash verificado</value>
+    <comment>{0} · {1} classes · {2}×{3} · {4} · {5} · checksum verified</comment>
+  </data>
+  <data name="T279771bea2d6ff1e" xml:space="preserve">
+    <value>Câmera salva</value>
+    <comment>Camera saved</comment>
+  </data>
+  <data name="Tb0431ec49dc60d10" xml:space="preserve">
+    <value>Regra salva</value>
+    <comment>Rule saved</comment>
+  </data>
+  <data name="Te1a9a187a03d237a" xml:space="preserve">
+    <value>Destinatário salvo</value>
+    <comment>Recipient saved</comment>
+  </data>
+  <data name="Tfd90e42d2b5a07cf" xml:space="preserve">
+    <value>Usuário atualizado</value>
+    <comment>User updated</comment>
+  </data>
+  <data name="Ta3936d86a6faad57" xml:space="preserve">
+    <value>Configuração atualizada</value>
+    <comment>Setting updated</comment>
+  </data>
+  <data name="T3508bab5c420db9e" xml:space="preserve">
+    <value>Revisão de evento</value>
+    <comment>Event review</comment>
+  </data>
+  <data name="T1cd06d3455802e7c" xml:space="preserve">
+    <value>SurveillanceAI: notificação de teste</value>
+    <comment>SurveillanceAI test notification</comment>
+  </data>
+</root>

@@ -1,0 +1,12 @@
+<Project>
+  <PropertyGroup>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(MSBuildProjectName)' == 'SurveillanceAI'">
+    <!-- Keep compatibility builds away from historical tracked obj files. -->
+    <BaseIntermediateOutputPath>obj/legacy/</BaseIntermediateOutputPath>
+    <DefaultItemExcludes>$(DefaultItemExcludes);src/**;tests/**;.tools/**;artifacts/**;obj/**;bin/**</DefaultItemExcludes>
+  </PropertyGroup>
+</Project>

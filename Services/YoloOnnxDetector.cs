@@ -32,7 +32,7 @@ public class YoloOnnxDetector : IDisposable
 
     public YoloOnnxDetector(string modelPath)
     {
-        var opts = new SessionOptions
+        using var opts = new SessionOptions
         {
             GraphOptimizationLevel = GraphOptimizationLevel.ORT_ENABLE_ALL
         };
@@ -174,7 +174,8 @@ public class YoloOnnxDetector : IDisposable
             for (int c = 0; c < numClasses; c++)
             {
                 float raw = output[0, 4 + c, i];
-                float score = Sigmoid(raw);
+                // Bundled ONNX graph already applies Sigmoid before output0.
+                float score = raw;
 
                 if (score > bestClassScore)
                 {
