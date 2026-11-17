@@ -84,6 +84,53 @@ Testes usam bancos temporários, fontes simuladas, vídeo MJPEG gerado, modelo r
 
 Guias: [validação](docs/validation.md), [implantação](docs/deployment.md), [banco](docs/database.md), [segurança](docs/security.md) e [arquivos alterados](docs/changes.md).
 
+## Glossário das tecnologias
+
+Este glossário descreve o papel de cada tecnologia na arquitetura. Tecnologias em avaliação estão identificadas como **planejadas**, não como recursos já disponíveis.
+
+| Tecnologia / conceito | O que é | Papel no SurveillanceAI |
+| --- | --- | --- |
+| **C# / .NET 10** | Linguagem e plataforma de aplicações. | Implementam a aplicação, o processamento, os serviços e a lógica de monitoramento. |
+| **WPF** | Framework de interface desktop para Windows. | Exibe câmeras, configurações, eventos e alertas. |
+| **MVVM / CommunityToolkit.Mvvm** | Padrão de separação entre apresentação e lógica de interface, com ferramentas de apoio. | Organiza as telas e o estado da aplicação. |
+| **Generic Host** | Infraestrutura .NET para injeção de dependências e serviços hospedados. | Coordena os serviços e o ciclo de vida da aplicação. |
+| **YOLOv8n (You Only Look Once)** | Detector neural de objetos da família YOLO. | Identifica classes predefinidas, como pessoas e celulares, retornando classes e caixas delimitadoras; não possui uma classe de arma de fogo validada neste projeto. |
+| **ONNX** | Formato interoperável para modelos de aprendizado de máquina. | Permite empacotar e executar o detector sem o framework usado no treinamento. |
+| **ONNX Runtime** | Motor de inferência de modelos ONNX. | Executa a detecção localmente; a implementação atual usa CPU. |
+| **Inferência** | Execução de um modelo já treinado em novos dados. | Analisa quadros de vídeo sem realizar novo treinamento. |
+| **Bounding box** | Retângulo que delimita aproximadamente um objeto na imagem. | Mostra a posição de uma detecção e ajuda a registrar evidências. |
+| **Confiança / score** | Pontuação devolvida por um detector para uma hipótese. | Ajuda a filtrar detecções, mas não representa necessariamente uma probabilidade calibrada. |
+| **NMS (Non-Maximum Suppression)** | Processo de remoção de caixas redundantes. | Reduz múltiplas detecções sobre o mesmo objeto. |
+| **IoU (Intersection over Union)** | Medida de sobreposição entre regiões. | Apoia a associação espacial existente; não equivale a rastrear a mesma pessoa ao longo do tempo. |
+| **RTSP** | Protocolo de controle de transmissão de mídia em rede. | Conecta fontes de vídeo compatíveis, como câmeras IP. |
+| **HTTP / MJPEG** | Transporte de imagens ou quadros pela rede. | Permite fontes HTTP compatíveis, incluindo streams de dispositivos móveis. |
+| **SQLite / EF Core** | Banco de dados incorporado e camada de acesso a dados .NET. | Armazenam câmeras, configurações, eventos, revisão e auditoria. |
+| **DPAPI** | Proteção de dados vinculada ao Windows e ao contexto do usuário. | Protege credenciais e origens sensíveis persistidas. |
+| **MailKit / SMTP** | Biblioteca e protocolo de envio de e-mails. | Enviam notificações por meio da fila persistente, quando configuradas. |
+| **Florence-2 (planejado)** | Modelo de visão da Microsoft com tarefas como localização associada a descrições textuais. | Candidato a detector local complementar para objetos como possíveis armas; integração e desempenho ainda precisam ser validados. |
+| **Phrase grounding (planejado)** | Associação de uma descrição textual a regiões da imagem. | Poderá localizar objetos descritos como `handgun` ou `revolver`, sujeito à validação. |
+| **Tracking temporal (planejado)** | Associação de objetos entre quadros sucessivos. | Base potencial para analisar corrida, aglomeração e mudanças de movimento, não disponível como identificação persistente de pessoas. |
+| **Classificação de áudio (futura)** | Reconhecimento de eventos acústicos. | Poderá viabilizar alertas de gritos com captura e modelo de áudio próprios; Florence-2 não analisa áudio. |
+
+## Direção do produto: templates de monitoramento
+
+O objetivo é simplificar a configuração de alertas para operadores de supermercados, farmácias e outros estabelecimentos. Em vez de exigir ajustes de classes, IoU e janelas temporais, a interface poderá oferecer **templates selecionáveis por câmera**, com opções avançadas recolhidas. **Os templates abaixo são uma proposta de evolução, não capacidades já homologadas.**
+
+| Template proposto | Abordagem técnica | Estado |
+| --- | --- | --- |
+| **Objetos conhecidos** | Classes já disponíveis no YOLOv8n e regras existentes. | Base técnica implementada; a nova interface de templates ainda é planejada. |
+| **Possíveis armas de fogo e simulacros** | Avaliação de Florence-2 ou outro detector visual local, independente de intenção, profissão ou proximidade entre pessoas. | Experimental; reconhecimento de armas não validado. |
+| **Facas e objetos cortantes** | Detecção de classes apropriadas, sujeita a testes de precisão. | Planejado; nenhuma capacidade especializada afirmada. |
+| **Pessoas correndo** | Detecção de pessoas, tracking e deslocamento entre quadros. | Planejado; uma imagem isolada não demonstra corrida. |
+| **Aglomeração anormal** | Contagem, densidade, áreas de interesse e variação ao longo do tempo. | Planejado; exige calibração por ambiente. |
+| **Possível confronto físico** | Análise temporal e, se necessário, estimativa de pose ou reconhecimento de ações. | Pesquisa; proximidade de pessoas não comprova briga. |
+| **Gritos / pedidos de socorro** | Captura de áudio e classificador acústico local. | Futuro; requer áudio e modelo independentes. |
+| **Movimento fora do horário** | Análise de movimento e agenda configurável. | Proposta de template, dependente da implementação e testes. |
+
+**Experiência desejada:** habilitar/desabilitar cada template, selecionar câmeras ou regiões de interesse e escolher a sensibilidade. O operador poderá revisar eventos e marcar falsos positivos. O sistema deve diferenciar **alerta preventivo** de **ocorrência confirmada**.
+
+**Princípios:** inferência local sempre que viável, preservação do detector ONNX atual, modularidade, interface simples e avaliação real de falsos positivos, falsos negativos e latência antes de qualquer promessa comercial. O modo de detecção de armas deverá alertar por presença de objeto suspeito, inclusive parado, sem depender da identidade ou intenção de quem estiver na cena.
+
 ## Limitações e próximos passos
 
 - Sem serviço Windows persistente, inicialização automática, watchdog ou garantia contínua.
