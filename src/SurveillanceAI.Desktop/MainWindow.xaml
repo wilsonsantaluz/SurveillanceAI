@@ -164,7 +164,7 @@
                 <TextBlock Text="{loc:Tr Tede1bd69cee48e2d}"/>
                 <ComboBox AutomationProperties.AutomationId="CameraKind" ItemsSource="{Binding SourceKinds}" SelectedItem="{Binding CameraDraft.Kind}" ItemTemplate="{StaticResource LocalizedChoiceTemplate}"/>
                 <TextBlock Text="{loc:Tr Tede1bd69cee48e2d}" TextWrapping="Wrap"/>
-                <PasswordBox AutomationProperties.AutomationId="CameraSource" x:Name="CameraSource"/>
+                <TextBox AutomationProperties.AutomationId="CameraSource" x:Name="CameraSource" ToolTip="Webcam: 0, 1, 2; HTTP: http://host:port/stream; RTSP: rtsp://host/path. Leave blank when editing to keep saved source."/>
                 <TextBlock Text="{loc:Tr Taacada7cfaeecd75}" Style="{StaticResource Caption}"/>
                 <TextBlock Text="{loc:Tr Tdd028ed38e821532}"/>
                 <TextBox Text="{Binding CameraDraft.InferenceFps}"/>

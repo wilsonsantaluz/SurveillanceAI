@@ -30,6 +30,7 @@ public sealed class ProductStore(IDbContextFactory<AppDbContext> factory, Sessio
     {
         if (kind == SourceKind.Webcam && (!int.TryParse(source, out var index) || index < 0)) throw new ArgumentException(Texts.T("Webcam source must be a nonnegative device index."));
         if (kind == SourceKind.Rtsp && (!Uri.TryCreate(source, UriKind.Absolute, out var uri) || (uri.Scheme != "rtsp" && uri.Scheme != "rtsps"))) throw new ArgumentException(Texts.T("Enter an RTSP URI."));
+        if (kind == SourceKind.HttpStream && (!Uri.TryCreate(source, UriKind.Absolute, out var httpUri) || (httpUri.Scheme != Uri.UriSchemeHttp && httpUri.Scheme != Uri.UriSchemeHttps))) throw new ArgumentException("Enter a valid HTTP or HTTPS camera stream URL.");
         if (kind == SourceKind.VideoFile && !File.Exists(source)) throw new ArgumentException(Texts.T("The video file does not exist."));
     }
     public async Task<List<DetectionEvent>> EventsAsync(EventFilter filter)

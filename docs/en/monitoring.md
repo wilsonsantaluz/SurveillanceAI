@@ -25,3 +25,7 @@ The inspected training Phase 3 contract is ResNet18 classification with ImageNet
 Rules match exact class/confidence and optional camera. Basic IoU association grants at most one hit per track per frame/timestamp. Hits expire outside the configured window. Multiple hits confirm a potential detection, then per-track cooldown suppresses repeats. Tracks expire/reset on disconnect. These are unvalidated deployment-specific settings and heuristic spatial association, not identity or behavioral recognition. Occlusion/movement can split tracks and cause duplicates.
 
 Experimental legacy proximity code is not a product alert source. Optional distance lines provide diagnostics only; ordinary proximity and multiple people never imply aggression or robbery.
+
+## HTTP camera streams
+
+Register phone or IP camera HTTP/HTTPS streams using camera type `HttpStream` and the exact URL supplied by the camera app (for example `http://192.168.1.246:8080/stream`). Streams are opened through OpenCV with FFmpeg; MJPEG compatibility depends on the source codec and server. The camera origin is now a readable text field instead of a password field. Leave it blank when editing an existing camera to retain the saved protected source. Avoid displaying URLs containing embedded credentials in public screenshots.
