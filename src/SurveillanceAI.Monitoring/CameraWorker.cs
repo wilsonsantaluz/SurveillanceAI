@@ -18,6 +18,7 @@ public sealed class OpenCvFrameSource : IFrameSource
         capture = new VideoCapture();
         if (camera.Kind == SourceKind.Webcam) return capture.Open(int.Parse(source), VideoCaptureAPIs.DSHOW);
         if (camera.Kind == SourceKind.VideoFile) return capture.Open(source, VideoCaptureAPIs.FFMPEG);
+        if (camera.Kind is not (SourceKind.Rtsp or SourceKind.HttpStream)) throw new ArgumentException("Unsupported camera source type.", nameof(camera));
         // OpenCV CAP_PROP_OPEN_TIMEOUT_MSEC=53, CAP_PROP_READ_TIMEOUT_MSEC=54;
         // this OpenCvSharp release does not expose names for these native properties.
         capture.Dispose();
