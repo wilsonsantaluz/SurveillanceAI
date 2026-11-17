@@ -27,7 +27,7 @@ flowchart TD
     Application --> Domain[Entities / detections / roles]
 ```
 
-The original console project remains available alongside the five new projects. Existing models were preserved. See [architecture](docs/en/architecture.md) and [audit](docs/en/audit.md).
+The legacy console project has been removed. `SurveillanceAI.Desktop` is the sole executable application; the required ONNX model assets are preserved. See [architecture](docs/en/architecture.md) and [audit](docs/en/audit.md).
 
 ## Language
 
@@ -51,7 +51,7 @@ Set `SURVEILLANCEAI_DATA` before launch for an isolated/private local data root 
 
 ## Using the workspace
 
-1. **Cameras:** create a camera with name, description, location, source type and FPS (1-30). Use `0` for the default webcam, a full local file path, or an RTSP URI. Sources are masked/encrypted; blank on edit preserves the saved source. Save, then test the connection. Enable/disable and save to start/stop monitoring. Applying configuration restarts configured workers.
+1. **Cameras:** create a camera with name, description, location, source type and FPS (1-30). Use `0` for the default webcam, a full local file path, or an RTSP URI. Sources are visible while entering them and protected at rest; leaving the field blank while editing preserves the saved source. Select `HttpStream` for HTTP/HTTPS streams such as LensCast. Save, then test the connection. Enable/disable and save to start/stop monitoring. Applying configuration restarts configured workers.
 2. **Overview & Live:** view camera state, previews, model version, capture/inference FPS, latency, drops, reconnects and queue depth. Expand a camera or pause previews; neither stops inference. Nothing is registered automatically.
 3. **Alert rules:** use an exact model class, confidence, confirmations, time window, association IoU, cooldown and severity. Optional camera GUID scopes a rule. Explicitly enable it. Starting values are examples requiring operational validation.
 4. **Events:** search class/notes and filter camera, local date range, severity or review status. Displayed event times are UTC. Pages contain up to 100 rows. Operators/admins can record notes, review or mark false positives; viewers cannot change events.
