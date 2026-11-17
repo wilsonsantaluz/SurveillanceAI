@@ -18,7 +18,7 @@ Execute `./scripts/Smoke-Desktop.ps1` em desktop interativo desbloqueado. Ele cr
 
 Feche e copie toda a pasta antes de atualizar; teste migrações/restauração em cópia. Preserve conta/perfil DPAPI ou reinforme segredos. Copiar só SQLite ativo pode perder WAL. Não há downgrade, atualizador, instalador/assinatura ou recuperação autônoma.
 
-O console técnico continua em `dotnet run --project SurveillanceAI.csproj -- caminho-opcional`; --proximity habilita linhas diagnósticas. Não tem autenticação/persistência/SMTP desktop nem validação física.
+O projeto antigo de console foi removido. Execute exclusivamente o aplicativo WPF com `dotnet run --project src/SurveillanceAI.Desktop` ou o binário publicado `artifacts/publish/SurveillanceAI.Desktop.exe`. O diagnóstico de proximidade continua disponível apenas como opção visual no desktop; não é regra de alerta.
 
 Painel mostra métricas; Sistema mostra auditoria; logs contém JSON técnico. Use conexão salva para fonte/rede/driver/codec, validação de modelo para hash/tensores e SMTP/envios para correio. Não exponha segredos em chamados. Publicação bem-sucedida não valida capacidade, RTSP, autonomia, licença comercial ou instalador.
 
