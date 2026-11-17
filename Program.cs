@@ -1,14 +1,15 @@
-﻿using OpenCvSharp;
+using OpenCvSharp;
 using SurveillanceAI.Services;
 using SurveillanceAI.Utils;
 //O MODELO LOCAL todo parametrizaçao
-var detector = new YoloOnnxDetector("onnxmodel/yolov8n.onnx");
-var analyzer = new ProximityAnalyzer();
+using var detector = new YoloOnnxDetector(Path.Combine(AppContext.BaseDirectory, "onnxmodel/yolov8n.onnx"));
 //USA A CAMERA LOCAL
-using var cap = new VideoCapture(0);
+var source = args.FirstOrDefault(x => !x.StartsWith("--"));
+using var cap = source is not null ? new VideoCapture(source) : new VideoCapture(0);
 //USAR CAMERAS REMOTAS USANDO PROTOCOLO rstsp  V2 VARIAS CAMERAS
 //using var cap = new VideoCapture("rtsp://sua_camera");
-var frame = new Mat();
+using var frame = new Mat();
+if (!cap.IsOpened()) { Logger.Error("Camera unavailable."); return; }
 
 Console.ForegroundColor = ConsoleColor.Cyan;
 Console.OutputEncoding = System.Text.Encoding.UTF8;
@@ -21,7 +22,7 @@ Console.WriteLine(@"
   ╚══════╝ ╚═════╝ ╚═╝  ╚═╝  ╚═══╝  ╚══════╝╚═╝╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝ ╚═════╝╚══════╝
 
                 🛡️  SurveillanceAI v1.0  by ɸWRL.null- ©2026/JLC
-        Detecção Inteligente de Comportamento em Tempo Real
+        Object detection preview - operator review required
 ");
 Logger.Success("Sistema SurveillanceAI iniciado ...");
 
@@ -30,12 +31,12 @@ Console.ResetColor();
 while (true)
 {
     if (!cap.Read(frame) || frame.Empty())
-        continue;
+        break;
 
     var detections = detector.Detect(frame);
 
     //  ANALISA COMPORTAMENTO
-    analyzer.Analyze(detections);
+    // Experimental proximity analysis is not a validated security alert source.
 
     //  DESENHAR PESSOAS
     var persons = detections.Where(x => x.Label == "person").ToList();
@@ -86,6 +87,8 @@ while (true)
     }
 
     // LINHAS ENTRE PESSOAS (visual da distância)
+    // Pixel distances are optional diagnostics, never a threat assessment.
+    if (args.Contains("--proximity"))
     for (int i = 0; i < persons.Count; i++)
     {
         for (int j = i + 1; j < persons.Count; j++)
@@ -116,23 +119,11 @@ while (true)
             );
 
             // 🔴 opcional: alerta visual
-            if (dist < 120)
-            {
-                Cv2.PutText(frame, "⚠️",
-                    new Point((int)p1.CenterX, (int)p1.CenterY),
-                    HersheyFonts.HersheySimplex, 1,
-                    Scalar.Red, 2);
-            }
+
         }
     }
 
     // 🔊 ALERTAS SIMPLES REMOVER DEPOIS
-    if (persons.Count > 1)
-    {
-       
-       Logger.Warn("👥 Mais de uma pessoa detectada");
-    }
-
     if (detections.Any(d => d.Label == "cell phone"))
     {
         Logger.Info("Celular detectado");

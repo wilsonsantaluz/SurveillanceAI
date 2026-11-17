@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Class="SurveillanceAI.Desktop.MainWindow" Title="{loc:Tr T094881e582d6429d}" Width="1440" Height="820" Background="{StaticResource BackgroundBrush}" Foreground="#EDF2FA" FontFamily="Segoe UI" FontSize="13" MinWidth="1120" MinHeight="760" WindowStartupLocation="CenterScreen" xmlns:loc="clr-namespace:SurveillanceAI.Desktop.Localization" xmlns:i18n="clr-namespace:SurveillanceAI.Application.Localization;assembly=SurveillanceAI.Application" Language="{Binding Source={x:Static i18n:Texts.Instance}, Path=LanguageTag, ConverterCulture=en-US}">
+  <Window.Style>
+    <Style TargetType="Window" BasedOn="{StaticResource {x:Type Window}}">
+      <Setter Property="WindowStyle" Value="None"/>
+      <Setter Property="WindowState" Value="Maximized"/>
+      <Style.Triggers>
+        <DataTrigger Binding="{Binding FullscreenCamera}" Value="{x:Null}">
+          <Setter Property="WindowStyle" Value="SingleBorderWindow"/>
+          <Setter Property="WindowState" Value="Normal"/>
+        </DataTrigger>
+      </Style.Triggers>
+    </Style>
+  </Window.Style>
+  <Window.InputBindings>
+    <KeyBinding Key="Escape" Command="{Binding CloseFullscreenCommand}"/>
+  </Window.InputBindings>
+  <Grid Margin="20">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+    <DockPanel Margin="0,0,0,16">
+      <StackPanel Orientation="Horizontal">
+        <TextBlock Text="◈" FontSize="30" Foreground="{StaticResource AccentBrush}"/>
+        <StackPanel>
+          <TextBlock Text="SURVEILLANCE AI" FontSize="21" FontWeight="Bold"/>
+          <TextBlock Text="{loc:Tr T459cf1c3707490bc}" Style="{StaticResource Caption}"/>
+        </StackPanel>
+      </StackPanel>
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Visibility="{Binding LoggedIn, Converter={StaticResource BoolVisibility}}">
+        <TextBlock Text="{Binding RoleDisplay}" Foreground="{StaticResource MutedBrush}"/>
+        <Button Content="{loc:Tr T0e91610117029a62}" Command="{Binding RefreshCommand}"/>
+        <Button Content="{loc:Tr T49616145514e9abf}" Command="{Binding LogoutCommand}" AutomationProperties.AutomationId="Logout"/>
+      </StackPanel>
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+        <TextBlock Text="{loc:Tr Ta4fe65264ef7dbb3}"/>
+        <ComboBox AutomationProperties.AutomationId="LanguageSelector" ItemsSource="{Binding Languages}" DisplayMemberPath="Name" SelectedValuePath="Code" SelectedValue="{Binding SelectedLanguage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+      </StackPanel>
+    </DockPanel>
+    <Border Grid.Row="1" Style="{StaticResource Card}" Width="440" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="{Binding LoginVisible, Converter={StaticResource BoolVisibility}}">
+      <StackPanel Margin="20">
+        <TextBlock Text="{loc:Tr T38533a49bd19232c}" Style="{StaticResource Title}"/>
+        <TextBlock Text="{loc:Tr Tcbf102347f4bb899}" TextWrapping="Wrap" Style="{StaticResource Caption}"/>
+        <TextBlock Text="{loc:Tr T6e2f719ab40d2677}" TextWrapping="Wrap" Foreground="{StaticResource AccentBrush}" Visibility="{Binding Setup, Converter={StaticResource BoolVisibility}}" Margin="4,16"/>
+        <TextBlock Text="{loc:Tr Te3b89e9d33f88e52}"/>
+        <TextBox Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" AutomationProperties.AutomationId="Username"/>
+        <TextBlock Text="{loc:Tr Te7cf3ef4f17c3999}"/>
+        <PasswordBox x:Name="LoginPassword" AutomationProperties.AutomationId="LoginPassword"/>
+        <Button Content="{loc:Tr T31fbef162594de01}" Style="{StaticResource PrimaryButton}" Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=LoginPassword}" AutomationProperties.AutomationId="Login" Margin="4,20,4,4"/>
+        <TextBlock Text="{loc:Tr Td31af5d46f3aeaa9}" TextWrapping="Wrap" Style="{StaticResource Caption}"/>
+      </StackPanel>
+    </Border>
+    <TabControl Grid.Row="1" Visibility="{Binding LoggedIn, Converter={StaticResource BoolVisibility}}">
+      <TabItem Header="{loc:Tr T0e50346ddcd62e3e}" AutomationProperties.AutomationId="TabOverviewLive">
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+          </Grid.RowDefinitions>
+          <DockPanel>
+            <TextBlock Text="{loc:Tr T1fcd9d1273f60d60}" Style="{StaticResource Title}"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+              <CheckBox Content="{loc:Tr T24e31fe47b345f85}" IsChecked="{Binding Overlays}"/>
+              <CheckBox Content="{loc:Tr Ta861695dd79cfc31}" IsChecked="{Binding ProximityDiagnostic}"/>
+              <Button Content="{loc:Tr T77a8ee74c1649800}" Command="{Binding TogglePreviewCommand}" AutomationProperties.AutomationId="TogglePreview"/>
+            </StackPanel>
+          </DockPanel>
+          <Border Grid.Row="1" Style="{StaticResource Card}">
+            <StackPanel>
+              <TextBlock Text="{Binding Summary}" Foreground="{StaticResource AccentBrush}"/>
+              <TextBlock Text="{loc:Tr Tc38953c2b10be479}" Style="{StaticResource Caption}"/>
+            </StackPanel>
+          </Border>
+          <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+            <ItemsControl ItemsSource="{Binding Tiles}">
+              <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <WrapPanel/>
+                </ItemsPanelTemplate>
+              </ItemsControl.ItemsPanel>
+              <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                  <Border Style="{StaticResource Card}" Width="420" Padding="10">
+                    <StackPanel>
+                      <DockPanel>
+                        <TextBlock Text="{Binding Name}" FontWeight="SemiBold" FontSize="16"/>
+                        <TextBlock Text="{Binding State}" Foreground="{StaticResource AccentBrush}" HorizontalAlignment="Right"/>
+                      </DockPanel>
+                      <Grid Height="180" Background="#080F1B">
+                        <TextBlock Text="{loc:Tr T0fa85a1192fc695d}" Foreground="{StaticResource MutedBrush}" HorizontalAlignment="Center"/>
+                        <Image Source="{Binding Image}" Stretch="Uniform"/>
+                      </Grid>
+                      <TextBlock Text="{Binding Metrics}" Style="{StaticResource Caption}"/>
+                      <Button Padding="8,4" Content="{loc:Tr T5136105484f7c5d2}" Command="{Binding DataContext.OpenFullscreenCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}" AutomationProperties.AutomationId="ExpandCamera"/>
+                    </StackPanel>
+                  </Border>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </ScrollViewer>
+          <StackPanel Grid.Row="3">
+            <TextBlock Text="{loc:Tr Tb2af0c7c0b804386}" Style="{StaticResource Caption}"/>
+            <DataGrid ItemsSource="{Binding RecentEvents}" MaxHeight="138">
+              <DataGrid.Columns>
+                <DataGridTextColumn Header="{loc:Tr T4aee1f423b8a3a10}" Binding="{Binding TimestampUtc, StringFormat=g}" Width="180"/>
+                <DataGridTextColumn Header="{loc:Tr T4f3a9bd003974a5e}" Binding="{Binding Label}" Width="*"/>
+                <DataGridTextColumn Header="{loc:Tr T6422e3e78f5e5f5a}" Binding="{Binding Confidence, StringFormat=P1}"/>
+                <DataGridTextColumn Header="{loc:Tr Taff0766a5290e117}" Width="140">
+                  <DataGridTextColumn.Binding>
+                    <MultiBinding Converter="{StaticResource LocalizedValue}">
+                      <Binding Path="Status"/>
+                      <Binding Source="{x:Static i18n:Texts.Instance}" Path="LanguageTag"/>
+                    </MultiBinding>
+                  </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+              </DataGrid.Columns>
+            </DataGrid>
+            <TextBlock Text="{loc:Tr Te0af7219b592bf36}" Style="{StaticResource Caption}"/>
+          </StackPanel>
+        </Grid>
+      </TabItem>
+      <TabItem Header="{loc:Tr Ta9b675db7c20dfbd}" AutomationProperties.AutomationId="TabCameras">
+        <Grid>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="360"/>
+          </Grid.ColumnDefinitions>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+          </Grid.RowDefinitions>
+          <TextBlock Text="{loc:Tr T756a730407945963}" Style="{StaticResource Title}"/>
+          <DataGrid Grid.Row="1" ItemsSource="{Binding Cameras}" SelectedItem="{Binding SelectedCamera}">
+            <DataGrid.Columns>
+              <DataGridTextColumn Header="{loc:Tr Tdcd1d5223f73b3a9}" Binding="{Binding Name}" Width="*"/>
+              <DataGridTextColumn Header="{loc:Tr T15b61974b2707a7b}" Binding="{Binding Location}" Width="*"/>
+              <DataGridTextColumn Header="{loc:Tr T0e570ca6fabe24f9}" Width="100">
+                <DataGridTextColumn.Binding>
+                  <MultiBinding Converter="{StaticResource LocalizedValue}">
+                    <Binding Path="Kind"/>
+                    <Binding Source="{x:Static i18n:Texts.Instance}" Path="LanguageTag"/>
+                  </MultiBinding>
+                </DataGridTextColumn.Binding>
+              </DataGridTextColumn>
+              <DataGridCheckBoxColumn Header="{loc:Tr T92c1cdfdf4cb9cf6}" Binding="{Binding Enabled}"/>
+              <DataGridTextColumn Header="{loc:Tr T58e8964614db20bf}" Binding="{Binding InferenceFps}"/>
+            </DataGrid.Columns>
+          </DataGrid>
+          <Border Grid.Column="1" Grid.RowSpan="2" Style="{StaticResource Card}" IsEnabled="{Binding Administrator}">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+              <StackPanel>
+                <TextBlock Text="{loc:Tr T976f8cd560b70daa}" FontSize="18"/>
+                <Button Content="{loc:Tr Tcb5d0b1edac98da3}" Command="{Binding NewCameraCommand}"/>
+                <TextBlock Text="{loc:Tr Tdcd1d5223f73b3a9}"/>
+                <TextBox AutomationProperties.AutomationId="CameraName" Text="{Binding CameraDraft.Name}"/>
+                <TextBlock Text="{loc:Tr T15b61974b2707a7b}"/>
+                <TextBox Text="{Binding CameraDraft.Location}"/>
+                <TextBlock Text="{loc:Tr T526e0087cc3f254d}"/>
+                <TextBox Text="{Binding CameraDraft.Description}"/>
+                <TextBlock Text="{loc:Tr Tede1bd69cee48e2d}"/>
+                <ComboBox AutomationProperties.AutomationId="CameraKind" ItemsSource="{Binding SourceKinds}" SelectedItem="{Binding CameraDraft.Kind}" ItemTemplate="{StaticResource LocalizedChoiceTemplate}"/>
+                <TextBlock Text="{loc:Tr Tede1bd69cee48e2d}" TextWrapping="Wrap"/>
+                <PasswordBox AutomationProperties.AutomationId="CameraSource" x:Name="CameraSource"/>
+                <TextBlock Text="{loc:Tr Taacada7cfaeecd75}" Style="{StaticResource Caption}"/>
+                <TextBlock Text="{loc:Tr Tdd028ed38e821532}"/>
+                <TextBox Text="{Binding CameraDraft.InferenceFps}"/>
+                <CheckBox AutomationProperties.AutomationId="CameraEnabled" Content="{loc:Tr T92c1cdfdf4cb9cf6}" IsChecked="{Binding CameraDraft.Enabled}"/>
+                <Button AutomationProperties.AutomationId="SaveCamera" Content="{loc:Tr Ta759f7f078c6cf46}" Command="{Binding SaveCameraCommand}" CommandParameter="{Binding ElementName=CameraSource}" Style="{StaticResource PrimaryButton}"/>
+                <Button Content="{loc:Tr Tdaa52af0d556cba6}" Command="{Binding TestCameraCommand}"/>
+              </StackPanel>
+            </ScrollViewer>
+          </Border>
+        </Grid>
+      </TabItem>
+      <TabItem Header="{loc:Tr T8d14f6e72de8f18a}" AutomationProperties.AutomationId="TabEvents">
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+          </Grid.RowDefinitions>
+          <TextBlock Text="{loc:Tr T0528a9b93e661db0}" Style="{StaticResource Title}"/>
+          <WrapPanel Grid.Row="1">
+            <TextBox Width="160" Text="{Binding Search}" ToolTip="{loc:Tr T7c7a011f6c7773b1}"/>
+            <ComboBox Width="160" ItemsSource="{Binding Cameras}" DisplayMemberPath="Name" SelectedItem="{Binding FilterCamera}" ToolTip="{loc:Tr T03494b0d1f803522}"/>
+            <ComboBox ItemsSource="{Binding StatusFilters}" SelectedItem="{Binding FilterStatus}" ItemTemplate="{StaticResource LocalizedChoiceTemplate}"/>
+            <ComboBox ItemsSource="{Binding SeverityFilters}" SelectedItem="{Binding FilterSeverity}" ItemTemplate="{StaticResource LocalizedChoiceTemplate}"/>
+            <DatePicker SelectedDate="{Binding FromDate}" Margin="4" ToolTip="{loc:Tr T3813fd079009b900}"/>
+            <DatePicker SelectedDate="{Binding ToDate}" Margin="4" ToolTip="{loc:Tr Taa30a2348551998c}"/>
+            <Button Content="{loc:Tr T49c266baaaa70981}" Command="{Binding SearchEventsCommand}"/>
+            <Button Content="{loc:Tr T7179ea0035fca783}" Command="{Binding ClearFiltersCommand}"/>
+          </WrapPanel>
+          <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="340"/>
+            </Grid.ColumnDefinitions>
+            <DataGrid ItemsSource="{Binding Events}" SelectedItem="{Binding SelectedEvent}">
+              <DataGrid.Columns>
+                <DataGridTextColumn Header="{loc:Tr T4aee1f423b8a3a10}" Binding="{Binding TimestampUtc, StringFormat=g}" Width="155"/>
+                <DataGridTextColumn Header="{loc:Tr T36267f2455d38224}" Binding="{Binding CameraId}" Width="100"/>
+                <DataGridTextColumn Header="{loc:Tr T4f3a9bd003974a5e}" Binding="{Binding Label}" Width="*"/>
+                <DataGridTextColumn Header="{loc:Tr T6422e3e78f5e5f5a}" Binding="{Binding Confidence, StringFormat=P1}"/>
+                <DataGridTextColumn Header="{loc:Tr T5e9f98120dbe5682}">
+                  <DataGridTextColumn.Binding>
+                    <MultiBinding Converter="{StaticResource LocalizedValue}">
+                      <Binding Path="Severity"/>
+                      <Binding Source="{x:Static i18n:Texts.Instance}" Path="LanguageTag"/>
+                    </MultiBinding>
+                  </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="{loc:Tr Taff0766a5290e117}" Width="100">
+                  <DataGridTextColumn.Binding>
+                    <MultiBinding Converter="{StaticResource LocalizedValue}">
+                      <Binding Path="Status"/>
+                      <Binding Source="{x:Static i18n:Texts.Instance}" Path="LanguageTag"/>
+                    </MultiBinding>
+                  </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+              </DataGrid.Columns>
+            </DataGrid>
+            <Border Grid.Column="1" Style="{StaticResource Card}">
+              <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                  <TextBlock Text="{loc:Tr Tf9c7f3d82867c587}" FontSize="18"/>
+                  <TextBlock Text="{Binding SelectedEvent.Id}" TextWrapping="Wrap" Style="{StaticResource Caption}"/>
+                  <TextBlock Text="{Binding SelectedEvent.ModelVersion}"/>
+                  <TextBlock Text="{Binding SelectedEvent.RuleId}" Style="{StaticResource Caption}"/>
+                  <TextBlock Text="{Binding SelectedEvent.ReviewerId}" Style="{StaticResource Caption}"/>
+                  <TextBlock Text="{Binding SelectedEvent.ReviewedUtc, StringFormat=g}" Style="{StaticResource Caption}"/>
+                  <TextBlock Text="{loc:Tr Tfd9948a65aaaeb4f}" Style="{StaticResource Caption}"/>
+                  <WrapPanel>
+                    <TextBlock Text="{Binding SelectedEvent.X, StringFormat=F0}"/>
+                    <TextBlock Text="{Binding SelectedEvent.Y, StringFormat=F0}"/>
+                    <TextBlock Text="{Binding SelectedEvent.Width, StringFormat=F0}"/>
+                    <TextBlock Text="{Binding SelectedEvent.Height, StringFormat=F0}"/>
+                  </WrapPanel>
+                  <Image Source="{Binding EvidenceImage}" Height="180" Stretch="Uniform"/>
+                  <TextBlock Text="{loc:Tr T7d2a121620cebfb9}"/>
+                  <TextBox Text="{Binding Notes}" Height="90" TextWrapping="Wrap" AcceptsReturn="True"/>
+                  <StackPanel IsEnabled="{Binding CanReview}">
+                    <Button Content="{loc:Tr Tf73cf2143127e953}" Command="{Binding ReviewCommand}" CommandParameter="Reviewed"/>
+                    <Button Content="{loc:Tr Td5125919eb3bdbad}" Command="{Binding ReviewCommand}" CommandParameter="FalsePositive"/>
+                  </StackPanel>
+                </StackPanel>
+              </ScrollViewer>
+            </Border>
+          </Grid>
+          <StackPanel Grid.Row="3" Orientation="Horizontal">
+            <Button Content="{loc:Tr Ta57b08a480b822a0}" Command="{Binding PreviousPageCommand}"/>
+            <TextBlock Text="{Binding PageDisplay}"/>
+            <Button Content="{loc:Tr T1ff57a29d7c9d11b}" Command="{Binding NextPageCommand}"/>
+          </StackPanel>
+        </Grid>
+      </TabItem>
+      <TabItem Header="{loc:Tr T4cab20469e8c18c3}" Visibility="{Binding Administrator, Converter={StaticResource BoolVisibility}}" AutomationProperties.AutomationId="TabAlertrules">
+        <Grid>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="370"/>
+          </Grid.ColumnDefinitions>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+          </Grid.RowDefinitions>
+          <TextBlock Text="{loc:Tr T915155eb0a6018cb}" Style="{StaticResource Title}"/>
+          <DataGrid Grid.Row="1" ItemsSource="{Binding Rules}" SelectedItem="{Binding SelectedRule}">
+            <DataGrid.Columns>
+              <DataGridTextColumn Header="{loc:Tr T62845f31a2fe00be}" Binding="{Binding Name}" Width="*"/>
+              <DataGridTextColumn Header="{loc:Tr T4f3a9bd003974a5e}" Binding="{Binding Label}"/>
+              <DataGridCheckBoxColumn Header="{loc:Tr T92c1cdfdf4cb9cf6}" Binding="{Binding Enabled}"/>
+              <DataGridTextColumn Header="{loc:Tr T5dfa99a6fa762317}" Binding="{Binding Confirmations}"/>
+              <DataGridTextColumn Header="{loc:Tr Tad605ef6f2b9dac8}" Binding="{Binding CooldownSeconds}"/>
+            </DataGrid.Columns>
+          </DataGrid>
+          <Border Grid.Column="1" Grid.RowSpan="2" Style="{StaticResource Card}">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+              <StackPanel>
+                <Button Content="{loc:Tr T99cd24efe9831454}" Command="{Binding NewRuleCommand}"/>
+                <TextBlock Text="{loc:Tr Tdcd1d5223f73b3a9}"/>
+                <TextBox Text="{Binding RuleDraft.Name}"/>
+                <TextBlock Text="{loc:Tr Td0579c51dbf76a7b}"/>
+                <TextBox Text="{Binding RuleDraft.Label}"/>
+                <TextBlock Text="{loc:Tr T9d2021e8c60557a2}"/>
+                <TextBox Text="{Binding RuleDraft.CameraId, TargetNullValue=''}"/>
+                <TextBlock Text="{loc:Tr Td255600fcb65349f}"/>
+                <TextBox Text="{Binding RuleDraft.Confidence}"/>
+                <TextBlock Text="{loc:Tr T6c04f45d7376c980}"/>
+                <TextBox Text="{Binding RuleDraft.Confirmations}"/>
+                <TextBlock Text="{loc:Tr Tb6451f586b6de545}"/>
+                <TextBox Text="{Binding RuleDraft.WindowSeconds}"/>
+                <TextBlock Text="{loc:Tr T09828dbe81fedca9}"/>
+                <TextBox Text="{Binding RuleDraft.CooldownSeconds}"/>
+                <TextBlock Text="{loc:Tr Tf6bf3baf24970da7}"/>
+                <TextBox Text="{Binding RuleDraft.AssociationIou}"/>
+                <ComboBox ItemsSource="{Binding Severities}" SelectedItem="{Binding RuleDraft.Severity}" ItemTemplate="{StaticResource LocalizedChoiceTemplate}"/>
+                <CheckBox Content="{loc:Tr T92c1cdfdf4cb9cf6}" IsChecked="{Binding RuleDraft.Enabled}"/>
+                <Button Content="{loc:Tr T4e62c225adb2e2aa}" Command="{Binding SaveRuleCommand}" Style="{StaticResource PrimaryButton}"/>
+                <TextBlock Text="{loc:Tr T55b8eb092a4dc5cb}" TextWrapping="Wrap" Foreground="#F4BD61"/>
+              </StackPanel>
+            </ScrollViewer>
+          </Border>
+        </Grid>
+      </TabItem>
+      <TabItem Header="{loc:Tr T788011833a5a0f22}" Visibility="{Binding Administrator, Converter={StaticResource BoolVisibility}}" AutomationProperties.AutomationId="TabNotifications">
+        <Grid>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="300"/>
+          </Grid.ColumnDefinitions>
+          <Border Style="{StaticResource Card}">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+              <StackPanel>
+                <TextBlock Text="{loc:Tr Td39ee4f0a5ba14e5}" Style="{StaticResource Title}"/>
+                <CheckBox Content="{loc:Tr T5ba3def331feb3c6}" IsChecked="{Binding Smtp.Enabled}"/>
+                <TextBlock Text="{loc:Tr T4a823118b9ba8baa}"/>
+                <TextBox Text="{Binding Smtp.Host}"/>
+                <TextBlock Text="{loc:Tr T72e9a59f5a1d6289}"/>
+                <TextBox Text="{Binding Smtp.Port}"/>
+                <ComboBox ItemsSource="{Binding TlsModes}" SelectedItem="{Binding Smtp.TlsMode}" ItemTemplate="{StaticResource LocalizedChoiceTemplate}"/>
+                <TextBlock Text="{loc:Tr Te3b89e9d33f88e52}"/>
+                <TextBox Text="{Binding Smtp.Username}"/>
+                <TextBlock Text="{loc:Tr T9956a896101115c0}"/>
+                <PasswordBox x:Name="SmtpPassword"/>
+                <TextBlock Text="{loc:Tr Te0749213ebda3833}"/>
+                <TextBox Text="{Binding Smtp.Sender}"/>
+                <TextBlock Text="{loc:Tr T5acaf00913a801d1}"/>
+                <TextBox Text="{Binding Smtp.SenderName}"/>
+                <TextBlock Text="{loc:Tr T562fccd1165da790}"/>
+                <TextBox Text="{Binding Smtp.MaxAttempts}"/>
+                <Button Content="{loc:Tr T9a36c6995aface90}" Command="{Binding SaveSmtpCommand}" CommandParameter="{Binding ElementName=SmtpPassword}" Style="{StaticResource PrimaryButton}"/>
+                <TextBlock Text="{loc:Tr T6a78f10cfd3dac70}"/>
+                <TextBox Text="{Binding TestAddress}"/>
+                <Button Content="{loc:Tr Tc402aeca1f480a60}" Command="{Binding TestSmtpConnectionCommand}"/>
+                <Button Content="{loc:Tr T46ebd7db3f8cf6ca}" Command="{Binding TestEmailCommand}"/>
+                <TextBlock Text="{loc:Tr T40b6191505c28317}" TextWrapping="Wrap" Style="{StaticResource Caption}"/>
+              </StackPanel>
+            </ScrollViewer>
+          </Border>
+          <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto"/>
+              <RowDefinition Height="*"/>
+              <RowDefinition Height="Auto"/>
+              <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="{loc:Tr T1e8568a82c2620ce}" Style="{StaticResource Title}"/>
+            <DataGrid Grid.Row="1" ItemsSource="{Binding Recipients}" SelectedItem="{Binding SelectedRecipient}">
+              <DataGrid.Columns>
+                <DataGridTextColumn Header="{loc:Tr Tdcd1d5223f73b3a9}" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="{loc:Tr T969ccbd3cf6300ec}" Binding="{Binding Email}" Width="*"/>
+                <DataGridCheckBoxColumn Header="{loc:Tr T92c1cdfdf4cb9cf6}" Binding="{Binding Enabled}"/>
+              </DataGrid.Columns>
+            </DataGrid>
+            <TextBlock Grid.Row="2" Text="{loc:Tr T54d445cf5469028c}" FontSize="18"/>
+            <DataGrid Grid.Row="3" ItemsSource="{Binding Deliveries}">
+              <DataGrid.Columns>
+                <DataGridTextColumn Header="{loc:Tr T51fac985e95345d9}" Binding="{Binding Address}" Width="*"/>
+                <DataGridTextColumn Header="{loc:Tr T920e413c7d411b61}">
+                  <DataGridTextColumn.Binding>
+                    <MultiBinding Converter="{StaticResource LocalizedValue}">
+                      <Binding Path="Status"/>
+                      <Binding Source="{x:Static i18n:Texts.Instance}" Path="LanguageTag"/>
+                    </MultiBinding>
+                  </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="{loc:Tr T06e70139fcf5e5c7}" Binding="{Binding Attempts}"/>
+                <DataGridTextColumn Header="{loc:Tr T54a0e8c17ebb21a1}" Width="*">
+                  <DataGridTextColumn.Binding>
+                    <MultiBinding Converter="{StaticResource LocalizedValue}">
+                      <Binding Path="Error"/>
+                      <Binding Source="{x:Static i18n:Texts.Instance}" Path="LanguageTag"/>
+                    </MultiBinding>
+                  </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+              </DataGrid.Columns>
+            </DataGrid>
+          </Grid>
+          <Border Grid.Column="2" Style="{StaticResource Card}">
+            <StackPanel>
+              <Button Content="{loc:Tr T45cc42099f1c616f}" Command="{Binding NewRecipientCommand}"/>
+              <TextBlock Text="{loc:Tr Tdcd1d5223f73b3a9}"/>
+              <TextBox Text="{Binding RecipientDraft.Name}"/>
+              <TextBlock Text="{loc:Tr T969ccbd3cf6300ec}"/>
+              <TextBox Text="{Binding RecipientDraft.Email}"/>
+              <TextBlock Text="{loc:Tr T6d770b06abfa034f}" TextWrapping="Wrap"/>
+              <TextBox Text="{Binding RecipientDraft.ClassFilter}"/>
+              <TextBlock Text="{loc:Tr T391b3d3c1b6deacc}"/>
+              <TextBox Text="{Binding RecipientDraft.CameraId, TargetNullValue=''}"/>
+              <TextBlock Text="{loc:Tr T4f0b011effef496d}"/>
+              <ComboBox ItemsSource="{Binding Severities}" SelectedItem="{Binding RecipientDraft.MinimumSeverity}" ItemTemplate="{StaticResource LocalizedChoiceTemplate}"/>
+              <CheckBox Content="{loc:Tr T92c1cdfdf4cb9cf6}" IsChecked="{Binding RecipientDraft.Enabled}"/>
+              <Button Content="{loc:Tr Tb8c80d41de1a608d}" Command="{Binding SaveRecipientCommand}" Style="{StaticResource PrimaryButton}"/>
+            </StackPanel>
+          </Border>
+        </Grid>
+      </TabItem>
+      <TabItem Header="{loc:Tr T6725e7bbcd28f3a8}" Visibility="{Binding Administrator, Converter={StaticResource BoolVisibility}}" AutomationProperties.AutomationId="TabSystem">
+        <Grid>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="500"/>
+            <ColumnDefinition Width="*"/>
+          </Grid.ColumnDefinitions>
+          <Border Style="{StaticResource Card}">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+              <StackPanel>
+                <TextBlock Text="{loc:Tr T58b9411c551be704}" Style="{StaticResource Title}"/>
+                <TextBlock Text="{loc:Tr T01f5c2ff2899c16a}"/>
+                <TextBox Text="{Binding ModelDirectory}"/>
+                <Button Content="{loc:Tr Tf72904bbc0bc98df}" Command="{Binding ValidateModelCommand}"/>
+                <TextBlock Text="{Binding ModelDetails}" TextWrapping="Wrap" Foreground="{StaticResource AccentBrush}"/>
+                <CheckBox Content="{loc:Tr T106ba1bafa7713c7}" IsChecked="{Binding EvidenceEnabled}"/>
+                <TextBlock Text="{loc:Tr T7c3c80d239d11cfb}"/>
+                <TextBox Text="{Binding RetentionDays}"/>
+                <TextBlock Text="{loc:Tr T3325acac441bf3ee}"/>
+                <ComboBox ItemsSource="{Binding LogLevels}" SelectedItem="{Binding LoggingLevel}" ItemTemplate="{StaticResource LocalizedChoiceTemplate}"/>
+                <Button Content="{loc:Tr Ta6a7b3ded90c73e0}" Command="{Binding SaveSystemCommand}" Style="{StaticResource PrimaryButton}"/>
+                <TextBlock Text="{Binding EvidenceLocationText}" TextWrapping="Wrap" Style="{StaticResource Caption}"/>
+                <TextBlock Text="{loc:Tr Td1e6e8d2656963ad}" TextWrapping="Wrap" Foreground="#F4BD61"/>
+              </StackPanel>
+            </ScrollViewer>
+          </Border>
+          <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+              <RowDefinition Height="Auto"/>
+              <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="{loc:Tr T3889ce7e856b26c8}" Style="{StaticResource Title}"/>
+            <DataGrid Grid.Row="1" ItemsSource="{Binding Audit}">
+              <DataGrid.Columns>
+                <DataGridTextColumn Header="{loc:Tr T4aee1f423b8a3a10}" Binding="{Binding TimestampUtc, StringFormat=g}" Width="160"/>
+                <DataGridTextColumn Header="{loc:Tr T64cff1319d2fd2cb}" Width="*">
+                  <DataGridTextColumn.Binding>
+                    <MultiBinding Converter="{StaticResource LocalizedValue}">
+                      <Binding Path="Action"/>
+                      <Binding Source="{x:Static i18n:Texts.Instance}" Path="LanguageTag"/>
+                    </MultiBinding>
+                  </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+              </DataGrid.Columns>
+            </DataGrid>
+          </Grid>
+        </Grid>
+      </TabItem>
+      <TabItem Header="{loc:Tr T6b0cc904d081a8c1}" Visibility="{Binding Administrator, Converter={StaticResource BoolVisibility}}" AutomationProperties.AutomationId="TabUsers">
+        <Grid>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="360"/>
+          </Grid.ColumnDefinitions>
+          <DataGrid ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser}">
+            <DataGrid.Columns>
+              <DataGridTextColumn Header="{loc:Tr Te3b89e9d33f88e52}" Binding="{Binding Username}" Width="*"/>
+              <DataGridTextColumn Header="{loc:Tr T14736a2eb9f4159f}" Width="*">
+                <DataGridTextColumn.Binding>
+                  <MultiBinding Converter="{StaticResource LocalizedValue}">
+                    <Binding Path="Role"/>
+                    <Binding Source="{x:Static i18n:Texts.Instance}" Path="LanguageTag"/>
+                  </MultiBinding>
+                </DataGridTextColumn.Binding>
+              </DataGridTextColumn>
+              <DataGridCheckBoxColumn Header="{loc:Tr T92340695899bd2d8}" Binding="{Binding Active}"/>
+            </DataGrid.Columns>
+          </DataGrid>
+          <Border Grid.Column="1" Style="{StaticResource Card}" VerticalAlignment="Top">
+            <StackPanel>
+              <TextBlock Text="{loc:Tr T832b508b1f614d34}" Style="{StaticResource Title}"/>
+              <Button Content="{loc:Tr T6384ffa7712cb2d5}" Command="{Binding NewUserCommand}"/>
+              <TextBlock Text="{loc:Tr Te3b89e9d33f88e52}"/>
+              <TextBox Text="{Binding UserDraft.Username}"/>
+              <ComboBox ItemsSource="{Binding Roles}" SelectedItem="{Binding UserDraft.Role}" ItemTemplate="{StaticResource LocalizedChoiceTemplate}"/>
+              <CheckBox Content="{loc:Tr T92340695899bd2d8}" IsChecked="{Binding UserDraft.Active}"/>
+              <TextBlock Text="{loc:Tr Ta8aa0960d45ebc2f}"/>
+              <PasswordBox x:Name="UserPassword"/>
+              <Button Content="{loc:Tr T038128ec4d37e4e5}" Command="{Binding SaveUserCommand}" CommandParameter="{Binding ElementName=UserPassword}" Style="{StaticResource PrimaryButton}"/>
+            </StackPanel>
+          </Border>
+        </Grid>
+      </TabItem>
+      <TabItem Header="{loc:Tr Tb53181a4d853c390}" AutomationProperties.AutomationId="TabMyaccount">
+        <Border Style="{StaticResource Card}" Width="420" HorizontalAlignment="Left" VerticalAlignment="Top">
+          <StackPanel>
+            <TextBlock Text="{loc:Tr T8a6a1da8ec839127}" Style="{StaticResource Title}"/>
+            <StackPanel x:Name="PasswordChangePanel">
+              <TextBlock Text="{loc:Tr T72ed2bd767cef627}"/>
+              <PasswordBox/>
+              <TextBlock Text="{loc:Tr Tdeb54cdd6f279d26}"/>
+              <PasswordBox/>
+            </StackPanel>
+            <Button Content="{loc:Tr T3f9c991f63a9a376}" Command="{Binding ChangePasswordCommand}" CommandParameter="{Binding ElementName=PasswordChangePanel}"/>
+          </StackPanel>
+        </Border>
+      </TabItem>
+    </TabControl>
+    <TextBlock Grid.Row="2" Text="{Binding Message}" Foreground="#F4BD61" TextWrapping="Wrap" Margin="4,12,4,0" AutomationProperties.AutomationId="StatusMessage"/>
+    <Border Grid.RowSpan="3" Background="#080F1B" DataContext="{Binding}">
+      <Border.Style>
+        <Style TargetType="Border">
+          <Setter Property="Visibility" Value="Visible"/>
+          <Style.Triggers>
+            <DataTrigger Binding="{Binding FullscreenCamera}" Value="{x:Null}">
+              <Setter Property="Visibility" Value="Collapsed"/>
+            </DataTrigger>
+          </Style.Triggers>
+        </Style>
+      </Border.Style>
+      <Grid Margin="20">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="*"/>
+          <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <DockPanel>
+          <TextBlock Text="{Binding FullscreenCamera.Name}" Style="{StaticResource Title}"/>
+          <Button Content="{loc:Tr T02e565ef63bc0338}" Command="{Binding CloseFullscreenCommand}" HorizontalAlignment="Right" AutomationProperties.AutomationId="CloseFullscreen"/>
+        </DockPanel>
+        <Image Grid.Row="1" Source="{Binding FullscreenCamera.Image}" Stretch="Uniform"/>
+        <TextBlock Grid.Row="2" Text="{Binding FullscreenCamera.Metrics}"/>
+      </Grid>
+    </Border>
+  </Grid>
+</Window>
