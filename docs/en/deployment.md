@@ -21,7 +21,7 @@ UI smoke requires an unlocked interactive Windows desktop. It creates a unique t
 
 Stop the app and back up the entire data root before upgrades. Test migrations/restores on a copy. Preserve the original DPAPI Windows account/profile or plan to reenter secrets. Copying only a live SQLite database can lose WAL changes. There is no downgrade tool, automatic updater, installer, signing or unattended recovery service.
 
-The original console preview runs with `dotnet run --project SurveillanceAI.csproj -- optional-video-path`; add `--proximity` for diagnostic lines. It is a developer compatibility path without desktop authentication/persistence/notifications. Physical hardware behavior for it was not tested.
+The legacy console project has been removed. Run the WPF application using `dotnet run --project src/SurveillanceAI.Desktop` or the published `artifacts/publish/SurveillanceAI.Desktop.exe`.
 
 ## Diagnostics
 

@@ -33,7 +33,7 @@ flowchart TD
     Application --> Domain[Entidades / detecções / perfis]
 ```
 
-Console e modelos originais foram preservados. Os cinco projetos novos não têm dependências circulares. Consulte [arquitetura](docs/architecture.md) e [auditoria](docs/audit.md).
+O projeto de console legado foi retirado da solução. O executável principal é `SurveillanceAI.Desktop`; os modelos ONNX necessários foram preservados. Os cinco projetos de produção não têm dependências circulares. Consulte [arquitetura](docs/architecture.md) e [auditoria](docs/audit.md).
 
 ## Compilar e iniciar
 
@@ -53,7 +53,7 @@ Defina `SURVEILLANCEAI_DATA` antes de abrir para usar uma pasta local privada fo
 
 ## Operação
 
-1. **Câmeras:** crie uma câmera com nome, descrição, localização, origem e FPS (1–30). Use 0 para a webcam padrão, caminho completo para vídeo ou URI RTSP. A origem é mascarada/protegida; vazia na edição preserva a anterior. Salve e teste. Habilite/desabilite e salve para iniciar/parar; reaplicar configuração reinicia os trabalhadores configurados.
+1. **Câmeras:** crie uma câmera com nome, descrição, localização, origem e FPS (1–30). Use 0 para a webcam padrão, caminho completo para vídeo ou URI RTSP. A origem é visível durante a digitação e protegida no armazenamento; vazia na edição preserva a anterior. Selecione `HttpStream` para streams HTTP/HTTPS, como os do LensCast. Salve e teste. Habilite/desabilite e salve para iniciar/parar; reaplicar configuração reinicia os trabalhadores configurados.
 2. **Visão geral e ao vivo:** acompanhe conexão, vídeo, modelo, FPS, latência, descartes, reconexões e fila. Amplie para tela cheia; Escape retorna. Pausar a prévia mantém a inferência. Nenhuma câmera é cadastrada automaticamente.
 3. **Regras de alerta:** use a classe exata do manifesto, confiança, confirmações, janela, IoU, intervalo e severidade. Um ID opcional limita por câmera. Habilite explicitamente. Valores iniciais são exemplos que exigem validação. A classe canônica continua sendo, por exemplo, `person`, mesmo em português.
 4. **Eventos:** busque classe/anotações e filtre câmera, datas locais, severidade e revisão. Horários dos eventos são UTC, com formato regional. Páginas têm até 100 registros. Operadores/administradores podem anotar, revisar e marcar falsos positivos; visualizadores não alteram eventos.
