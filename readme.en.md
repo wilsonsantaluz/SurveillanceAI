@@ -84,6 +84,53 @@ Tests use temporary databases, mock sources, generated MJPEG video, the bundled 
 
 See [validation](docs/en/validation.md), [deployment](docs/en/deployment.md), [database](docs/en/database.md) and [security/privacy](docs/en/security.md).
 
+## Technology glossary
+
+This glossary explains how each technology fits into the architecture. Items under evaluation are labeled **planned**, not presented as available features.
+
+| Technology / concept | What it is | Role in SurveillanceAI |
+| --- | --- | --- |
+| **C# / .NET 10** | Programming language and application platform. | Implement the desktop app, services, processing, and monitoring logic. |
+| **WPF** | Windows desktop UI framework. | Displays cameras, configuration, events, and alerts. |
+| **MVVM / CommunityToolkit.Mvvm** | UI separation pattern and supporting toolkit. | Structure views and application state. |
+| **Generic Host** | .NET infrastructure for dependency injection and hosted services. | Manages service initialization and application lifecycle. |
+| **YOLOv8n (You Only Look Once)** | Neural object detector from the YOLO family. | Detects predefined categories such as people and cell phones and produces bounding boxes; validated firearm detection is not part of the current model. |
+| **ONNX** | Interoperable machine-learning model format. | Packages inference models independently of their training framework. |
+| **ONNX Runtime** | Inference engine for ONNX models. | Runs local detection; the current integration uses CPU. |
+| **Inference** | Running a pretrained model on new data. | Analyzes video frames without retraining. |
+| **Bounding box** | Rectangle approximating an object's location. | Displays detections and supports event evidence. |
+| **Confidence / score** | Model-provided score for a prediction. | Helps filter detections; it is not necessarily a calibrated probability. |
+| **NMS (Non-Maximum Suppression)** | Filtering of redundant detection boxes. | Reduces overlapping duplicate detections. |
+| **IoU (Intersection over Union)** | Measure of overlap between regions. | Supports existing spatial association, not persistent person tracking. |
+| **RTSP** | Network media streaming control protocol. | Connects compatible IP camera streams. |
+| **HTTP / MJPEG** | Network delivery of images or video frames. | Supports compatible HTTP streams, including mobile camera feeds. |
+| **SQLite / EF Core** | Embedded database and .NET data-access framework. | Store camera settings, events, reviews, and audit data. |
+| **DPAPI** | Windows-bound data protection mechanism. | Protects saved credentials and sensitive source values. |
+| **MailKit / SMTP** | Email library and sending protocol. | Deliver configured notifications through a persistent queue. |
+| **Florence-2 (planned)** | Microsoft's vision foundation model supporting tasks such as text-guided localization. | Candidate local complementary detector for possible weapons; integration and accuracy remain unvalidated. |
+| **Phrase grounding (planned)** | Locating image regions that match text descriptions. | Could locate objects described as `handgun` or `revolver`, subject to testing. |
+| **Temporal tracking (planned)** | Associating objects across successive frames. | Potential basis for running and crowd-motion analysis; persistent person tracking is not yet implemented. |
+| **Audio event classification (future)** | Recognition of sound events. | Could support scream alerts using separate audio input and models; Florence-2 does not process sound. |
+
+## Product direction: monitoring templates
+
+The intended UX for supermarkets, pharmacies, and similar locations is a **camera-specific set of selectable monitoring templates**, rather than exposing class IDs, IoU, and time-window parameters to every operator. **These are roadmap concepts, not validated or completed features.**
+
+| Proposed template | Technical approach | Status |
+| --- | --- | --- |
+| **Known objects** | Existing YOLOv8n classes and alert-rule infrastructure. | Detection foundation implemented; simplified template UI planned. |
+| **Possible firearms and replicas** | Evaluate Florence-2 or another local detector, regardless of a person's identity, intent, or proximity. | Experimental; firearm recognition not validated. |
+| **Knives and sharp objects** | Suitable object detection with measured accuracy. | Planned; no specialized capability claimed. |
+| **People running** | Person detections plus temporal tracking and displacement. | Planned; running cannot be established from a single still frame. |
+| **Unusual crowding** | Person counts, density, zones, and change over time. | Planned; must be calibrated to the location. |
+| **Possible physical confrontation** | Temporal activity analysis, potentially pose estimation or action recognition. | Research; proximity alone does not prove a fight. |
+| **Screams / calls for help** | Audio capture plus a local sound-event classifier. | Future; requires a separate audio pipeline and model. |
+| **After-hours movement** | Motion analysis and configurable schedules. | Proposed template; implementation and testing required. |
+
+**Intended operator experience:** toggle templates, select cameras or regions of interest, and adjust sensitivity. Events can be reviewed and marked as false positives. The software must distinguish **preventive alerts** from **confirmed incidents**.
+
+**Design principles:** local inference where feasible, preservation of the existing ONNX detector, modularity, approachable configuration, and real-world measurement of false positives, misses, and latency before commercial claims. A possible-firearm alert should depend on the suspicious object itself, including when stationary, not on the identity or presumed intent of nearby people.
+
 ## Limitations and next release work
 
 - No persistent Windows Service, auto-start, watchdog or 24/7 guarantee.
