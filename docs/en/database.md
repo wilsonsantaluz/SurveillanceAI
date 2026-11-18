@@ -30,3 +30,7 @@ Install `dotnet-ef` 10.0.15 to `.tools`, then use:
 ```
 
 If using the local SDK, set DOTNET_ROOT and prepend `.tools/dotnet` to PATH. DesignTimeFactory uses a separate surveillance-design.db. Do not substitute EnsureCreated for migrations. Test upgrades on a copy and back up the entire data root with the application stopped. Copying only the database while WAL is active can omit writes. SQLite is not encrypted by EF and is not a shared-network/distributed database.
+
+## Template-alert migration
+
+SmartAlertEpisodes preserves existing rows and identifies legacy events as YOLO. It adds detector/template IDs, nullable confidence, actions and acknowledgement/closure/human review. A partial unique index enforces one open episode per camera/template. Settings stores smartMonitoring; managed template rules retain stable IDs and legacy rules stay intact. No incident seeding. Back up before upgrade; do not downgrade Florence events without planning metadata loss.

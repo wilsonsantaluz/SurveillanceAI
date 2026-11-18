@@ -98,3 +98,9 @@ See [validation](docs/en/validation.md), [deployment](docs/en/deployment.md), [d
 Before a pilot: hardware soak tests, operator review, model/rule validation, privacy/licensing review, backup/restore exercises and signed packaging. Add a persistent host only after its lifecycle, account/key ownership and IPC authorization are tested.
 
 Language-switch/persistence UI smoke: `./scripts/Smoke-Localization.ps1`.
+
+## Florence-2 and simplified alerts
+
+Alerts now offers checkbox templates while preserving legacy advanced rules. Local Florence-2 base-ft complements unchanged YOLO. Image test runs either/both models with boxes and latency. Possible-firearm events save first evidence immediately and deduplicate open episodes, with separate human acknowledgement/confirmation/closure. Weapon/knife recognition is not validated; running/audio/after-hours motion remain unavailable with reasons.
+
+Run `scripts/Install-FlorenceModel.ps1` explicitly, then select its folder under Alerts / Advanced settings. [Installation, checkpoint and limits](docs/en/florence-alerts.md). No startup downloads, paid APIs, Python sidecar or training.

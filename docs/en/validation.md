@@ -57,3 +57,11 @@ See [changed-file inventory](changes.md) for the actual source/documentation fil
 ## Internationalization follow-up
 
 35 tests passed (15 unit, 20 integration), none failed/skipped. The Windows publish includes the English satellite. Portuguese video UI smoke passed. Smoke-Localization.ps1 verified default Portuguese, translated validation, live pt/en changes, preserved form/session and persisted language after restart. Screenshots were inspected.
+
+## Florence/template follow-up
+
+Real CPU base-ft OD/grounding and the published image UI were executed on the public bus fixture. Tests cover legacy migration, immediate evidence, deduplication, manual review, independent YOLO under slow Florence, cancellation and invalid files. Mock firearm regions test event semantics, not recognition. No weapon/knife images were available. See [delivery details](florence-alerts.md).
+
+Final validation: 50 tests passed (15 unit, 35 integration), none skipped, with the installed local base-ft bundle. Desktop/video, pt/en switching, maximized startup, automatic Florence initialization, real OD/grounding, and shutdown during inference smoke checks passed. Calendar, filters, and screen navigation were visually inspected.
+
+Event action fix: 50 tests passed. Automatic alerts reject grounding; closure/false-positive require a newer negative OD observation before rearming, surviving restart/deletion. Deletion permissions, evidence and notification removal passed. Isolated UI checks confirmed refreshed closed details, cancellation preserving the event, and confirmed deletion. This build is in `artifacts/publish-event-fix` because the previous published app was running.

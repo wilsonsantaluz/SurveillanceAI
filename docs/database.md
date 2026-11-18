@@ -26,3 +26,7 @@ Instale dotnet-ef 10.0.15 em .tools. Use `.tools/dotnet-ef migrations add SuaMig
 Com SDK local, defina DOTNET_ROOT e PATH. A fábrica de projeto usa surveillance-design.db separado. Não substitua migrações por EnsureCreated. Teste em cópia e faça backup de toda a pasta com o aplicativo fechado; copiar só o banco ativo pode perder WAL. EF não criptografa SQLite, que não é banco distribuído/de rede.
 
 Idioma não muda esquema, enums, classes ou filtros persistidos. language.json fica fora das tabelas para funcionar antes da autenticação e não contém credenciais.
+
+## Migração de alertas por templates
+
+SmartAlertEpisodes preserva câmeras/regras/eventos anteriores e identifica os eventos antigos como YOLO. Adiciona ID de detector/template, confiança anulável, ações, reconhecimento/encerramento e confirmação humana. Um índice único parcial impede dois episódios abertos da mesma câmera/template. A preferência smartMonitoring usa Settings; regras de templates têm TemplateId e não substituem as regras legadas. Nenhum incidente é semeado. Faça backup antes de atualizar e não faça downgrade sobre eventos Florence sem planejar a perda desses metadados.

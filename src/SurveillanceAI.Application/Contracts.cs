@@ -36,7 +36,7 @@ public interface IEvidenceStore
     void Delete(string relativePath);
     string Resolve(string relativePath);
 }
-public sealed record CameraSnapshot(Guid Id, string Name, string State, byte[]? Jpeg, double LatencyMs, double CaptureFps, double InferenceFps, long DroppedFrames, int QueueDepth, int Reconnects, string ModelVersion);
+public sealed record CameraSnapshot(Guid Id, string Name, string State, byte[]? Jpeg, double LatencyMs, double CaptureFps, double InferenceFps, long DroppedFrames, int QueueDepth, int Reconnects, string ModelVersion, long VideoFrame = 0, double VideoSeconds = 0);
 public interface IMonitoringControl
 {
     IReadOnlyList<CameraSnapshot> Snapshots { get; }
@@ -49,6 +49,8 @@ public interface IMonitoringStore
     Task<IReadOnlyList<AlertRule>> RulesAsync(CancellationToken token);
     Task<string> ModelDirectoryAsync(CancellationToken token);
     Task RecordAsync(DetectionEvent item, byte[]? jpeg, CancellationToken token);
+    Task ObserveFirearmAbsenceAsync(Guid cameraId, DateTime capturedUtc, CancellationToken token) => Task.CompletedTask;
+    Task<SmartMonitoringSettings> SmartSettingsAsync(CancellationToken token) => Task.FromResult(new SmartMonitoringSettings());
 }
 public sealed class TemporalRules
 {

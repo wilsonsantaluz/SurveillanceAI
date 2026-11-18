@@ -31,7 +31,7 @@ public sealed class DetectionEvent
     public Guid CameraId { get; set; }
     public DateTime TimestampUtc { get; set; } = DateTime.UtcNow;
     public string Label { get; set; } = "";
-    public float Confidence { get; set; }
+    public float? Confidence { get; set; }
     public float X { get; set; }
     public float Y { get; set; }
     public float Width { get; set; }
@@ -44,9 +44,20 @@ public sealed class DetectionEvent
     public DateTime? ReviewedUtc { get; set; }
     public string Notes { get; set; } = "";
     public string? EvidencePath { get; set; }
+    public string DetectorId { get; set; } = "yolo";
+    public string? TemplateId { get; set; }
+    public bool EpisodeOpen { get; set; }
+    public DateTime? AcknowledgedUtc { get; set; }
+    public DateTime? ClosedUtc { get; set; }
+    public bool HumanConfirmed { get; set; }
+    public bool VisualAlert { get; set; } = true;
+    public bool SoundAlert { get; set; }
+    public bool SaveEvidence { get; set; }
+    public bool NotifyEmail { get; set; } = true;
 }
 public sealed class AlertRule
 {
+    public string? TemplateId { get; set; }
     public Guid Id { get; set; } = Guid.NewGuid();
     public string Name { get; set; } = "";
     public string Label { get; set; } = "person";

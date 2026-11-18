@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:loc="clr-namespace:SurveillanceAI.Desktop.Localization" xmlns:i18n="clr-namespace:SurveillanceAI.Application.Localization;assembly=SurveillanceAI.Application">
+  <SolidColorBrush x:Key="BorderBrush" Color="#3C536C"/>
+  <SolidColorBrush x:Key="TextBrush" Color="#EDF2FA"/>
+  <SolidColorBrush x:Key="InputBrush" Color="#101C2D"/>
   <loc:LocalizedValueConverter x:Key="LocalizedValue"/>
+  <loc:ConfidenceValueConverter x:Key="ConfidenceValue"/>
   <DataTemplate x:Key="LocalizedChoiceTemplate">
-    <TextBlock Foreground="#101C2D">
+    <TextBlock Foreground="{DynamicResource TextBrush}">
       <TextBlock.Text>
         <MultiBinding Converter="{StaticResource LocalizedValue}">
           <Binding/>
@@ -44,7 +48,7 @@
   </Style>
   <Style TargetType="Button">
     <Setter Property="Margin" Value="4"/>
-    <Setter Property="Padding" Value="14,8"/>
+    <Setter Property="Padding" Value="12,6"/>
     <Setter Property="Background" Value="#253951"/>
     <Setter Property="Foreground" Value="#EDF2FA"/>
     <Setter Property="BorderBrush" Value="#3C536C"/>
@@ -66,6 +70,7 @@
         </ControlTemplate>
       </Setter.Value>
     </Setter>
+    <Setter Property="MinHeight" Value="34"/>
   </Style>
   <Style x:Key="PrimaryButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
     <Setter Property="Background" Value="{StaticResource AccentBrush}"/>
@@ -80,6 +85,9 @@
     <Setter Property="CaretBrush" Value="White"/>
     <Setter Property="BorderBrush" Value="#3C536C"/>
     <Setter Property="MinWidth" Value="80"/>
+    <Setter Property="MinHeight" Value="34"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Setter Property="HorizontalAlignment" Value="Stretch"/>
   </Style>
   <Style TargetType="PasswordBox">
     <Setter Property="Margin" Value="4"/>
@@ -87,11 +95,53 @@
     <Setter Property="Background" Value="#101C2D"/>
     <Setter Property="Foreground" Value="#EDF2FA"/>
     <Setter Property="BorderBrush" Value="#3C536C"/>
+    <Setter Property="MinHeight" Value="34"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Setter Property="HorizontalAlignment" Value="Stretch"/>
   </Style>
   <Style TargetType="ComboBox">
     <Setter Property="Margin" Value="4"/>
-    <Setter Property="Padding" Value="7,5"/>
-    <Setter Property="MinWidth" Value="100"/>
+    <Setter Property="MinHeight" Value="34"/>
+    <Setter Property="Padding" Value="8,5"/>
+    <Setter Property="Background" Value="{StaticResource InputBrush}"/>
+    <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+    <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+    <Setter Property="MaxDropDownHeight" Value="260"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="ComboBox">
+          <Grid>
+            <ToggleButton Focusable="False" ClickMode="Press" IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}">
+              <ToggleButton.Template>
+                <ControlTemplate TargetType="ToggleButton">
+                  <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="4">
+                    <Path Data="M 0 0 L 4 4 L 8 0" Stroke="#A4B3CA" StrokeThickness="1.5" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                  </Border>
+                </ControlTemplate>
+              </ToggleButton.Template>
+            </ToggleButton>
+            <ContentPresenter x:Name="Selection" Margin="10,0,30,0" Content="{TemplateBinding SelectionBoxItem}" ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}" IsHitTestVisible="False" VerticalAlignment="Center"/>
+            <TextBox x:Name="PART_EditableTextBox" Margin="5,0,26,0" Background="Transparent" BorderThickness="0" Visibility="Collapsed" IsReadOnly="{TemplateBinding IsReadOnly}"/>
+            <Popup x:Name="PART_Popup" Placement="Bottom" IsOpen="{TemplateBinding IsDropDownOpen}" AllowsTransparency="True" Focusable="False" PopupAnimation="Fade">
+              <Border MinWidth="{TemplateBinding ActualWidth}" Background="{StaticResource SurfaceBrush}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" CornerRadius="4" Padding="3">
+                <ScrollViewer MaxHeight="{TemplateBinding MaxDropDownHeight}" CanContentScroll="True">
+                  <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained"/>
+                </ScrollViewer>
+              </Border>
+            </Popup>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+              <Setter Property="Opacity" Value="0.45"/>
+            </Trigger>
+            <Trigger Property="IsEditable" Value="True">
+              <Setter TargetName="Selection" Property="Visibility" Value="Collapsed"/>
+              <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
   </Style>
   <Style TargetType="CheckBox">
     <Setter Property="Margin" Value="6,8"/>
@@ -152,4 +202,239 @@
     <Setter Property="Margin" Value="4"/>
   </Style>
   <BooleanToVisibilityConverter x:Key="BoolVisibility"/>
+  <Style TargetType="ComboBoxItem">
+    <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+    <Setter Property="Padding" Value="8,5"/>
+    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="ComboBoxItem">
+          <Border x:Name="Item" Padding="{TemplateBinding Padding}" Background="Transparent" CornerRadius="3">
+            <ContentPresenter/>
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsHighlighted" Value="True">
+              <Setter TargetName="Item" Property="Background" Value="#253951"/>
+            </Trigger>
+            <Trigger Property="IsSelected" Value="True">
+              <Setter TargetName="Item" Property="Background" Value="#253951"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style TargetType="ScrollBar">
+    <Setter Property="Width" Value="10"/>
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="ScrollBar">
+          <Grid Background="{TemplateBinding Background}" Margin="1">
+            <Track x:Name="PART_Track" IsDirectionReversed="True" Minimum="{TemplateBinding Minimum}" Maximum="{TemplateBinding Maximum}" Value="{TemplateBinding Value}" ViewportSize="{TemplateBinding ViewportSize}">
+              <Track.DecreaseRepeatButton>
+                <RepeatButton Command="ScrollBar.PageUpCommand" Opacity="0" Focusable="False"/>
+              </Track.DecreaseRepeatButton>
+              <Track.Thumb>
+                <Thumb MinHeight="22">
+                  <Thumb.Template>
+                    <ControlTemplate TargetType="Thumb">
+                      <Border x:Name="ThumbFill" Background="#435873" CornerRadius="4"/>
+                      <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                          <Setter TargetName="ThumbFill" Property="Background" Value="#35D1C4"/>
+                        </Trigger>
+                      </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                  </Thumb.Template>
+                </Thumb>
+              </Track.Thumb>
+              <Track.IncreaseRepeatButton>
+                <RepeatButton Command="ScrollBar.PageDownCommand" Opacity="0" Focusable="False"/>
+              </Track.IncreaseRepeatButton>
+            </Track>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="Orientation" Value="Horizontal">
+              <Setter Property="Height" Value="10"/>
+              <Setter Property="Width" Value="Auto"/>
+              <Setter TargetName="PART_Track" Property="IsDirectionReversed" Value="False"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style TargetType="DatePickerTextBox">
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+    <Setter Property="BorderThickness" Value="0"/>
+    <Setter Property="Padding" Value="8,5"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="DatePickerTextBox">
+          <Grid>
+            <VisualStateManager.VisualStateGroups>
+              <VisualStateGroup x:Name="WatermarkStates">
+                <VisualState x:Name="Unwatermarked">
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="PART_Watermark" Storyboard.TargetProperty="Opacity" To="0" Duration="0"/>
+                  </Storyboard>
+                </VisualState>
+                <VisualState x:Name="Watermarked">
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="PART_Watermark" Storyboard.TargetProperty="Opacity" To="1" Duration="0"/>
+                  </Storyboard>
+                </VisualState>
+              </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}"/>
+            <ContentControl x:Name="PART_Watermark" Foreground="#A4B3CA" IsHitTestVisible="False" Focusable="False" Margin="{TemplateBinding Padding}" VerticalAlignment="Center" Opacity="0"/>
+          </Grid>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style TargetType="DatePicker">
+    <Setter Property="CalendarStyle" Value="{DynamicResource DarkCalendar}"/>
+    <Setter Property="Margin" Value="4"/>
+    <Setter Property="MinHeight" Value="34"/>
+    <Setter Property="Background" Value="{StaticResource InputBrush}"/>
+    <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+    <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="DatePicker">
+          <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="4">
+            <Grid x:Name="PART_Root">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="30"/>
+              </Grid.ColumnDefinitions>
+              <DatePickerTextBox x:Name="PART_TextBox" HorizontalContentAlignment="Stretch"/>
+              <Button x:Name="PART_Button" Grid.Column="1" Margin="0" Padding="0" MinHeight="30" Background="Transparent" BorderBrush="Transparent" Content="▦" FontSize="18"/>
+              <Popup x:Name="PART_Popup" Placement="Bottom" StaysOpen="False" AllowsTransparency="True" Focusable="False"/>
+            </Grid>
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="CalendarDay" TargetType="CalendarDayButton">
+    <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+    <Setter Property="MinWidth" Value="30"/>
+    <Setter Property="MinHeight" Value="30"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="CalendarDayButton">
+          <Border x:Name="Day" Background="Transparent" CornerRadius="3">
+            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter TargetName="Day" Property="Background" Value="#253951"/>
+            </Trigger>
+            <Trigger Property="IsSelected" Value="True">
+              <Setter TargetName="Day" Property="Background" Value="#26776F"/>
+            </Trigger>
+            <Trigger Property="IsInactive" Value="True">
+              <Setter Property="Opacity" Value="0.4"/>
+            </Trigger>
+            <Trigger Property="IsBlackedOut" Value="True">
+              <Setter Property="Opacity" Value="0.2"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="CalendarMonth" TargetType="CalendarButton">
+    <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="CalendarButton">
+          <Border x:Name="Month" Background="Transparent" Padding="8">
+            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter TargetName="Month" Property="Background" Value="#253951"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="CalendarItemDark" TargetType="CalendarItem">
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="CalendarItem">
+          <ControlTemplate.Resources>
+            <DataTemplate x:Key="{x:Static CalendarItem.DayTitleTemplateResourceKey}">
+              <TextBlock Text="{Binding}" Foreground="{StaticResource MutedBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3"/>
+            </DataTemplate>
+          </ControlTemplate.Resources>
+          <Border Background="{StaticResource SurfaceBrush}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Padding="8" CornerRadius="4">
+            <Grid x:Name="PART_Root">
+              <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+              </Grid.RowDefinitions>
+              <Grid>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="36"/>
+                  <ColumnDefinition Width="*"/>
+                  <ColumnDefinition Width="36"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="PART_PreviousButton" Content="‹" Padding="0" Margin="0"/>
+                <Button x:Name="PART_HeaderButton" Grid.Column="1" Padding="4" Margin="2,0"/>
+                <Button x:Name="PART_NextButton" Grid.Column="2" Content="›" Padding="0" Margin="0"/>
+              </Grid>
+              <Grid x:Name="PART_MonthView" Grid.Row="1" Margin="0,5,0,0">
+                <Grid.RowDefinitions>
+                  <RowDefinition/>
+                  <RowDefinition/>
+                  <RowDefinition/>
+                  <RowDefinition/>
+                  <RowDefinition/>
+                  <RowDefinition/>
+                  <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition/>
+                  <ColumnDefinition/>
+                  <ColumnDefinition/>
+                  <ColumnDefinition/>
+                  <ColumnDefinition/>
+                  <ColumnDefinition/>
+                  <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+              </Grid>
+              <Grid x:Name="PART_YearView" Grid.Row="1" Visibility="Hidden">
+                <Grid.RowDefinitions>
+                  <RowDefinition/>
+                  <RowDefinition/>
+                  <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition/>
+                  <ColumnDefinition/>
+                  <ColumnDefinition/>
+                  <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+              </Grid>
+            </Grid>
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style x:Key="DarkCalendar" TargetType="Calendar">
+    <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+    <Setter Property="Background" Value="{StaticResource SurfaceBrush}"/>
+    <Setter Property="CalendarItemStyle" Value="{StaticResource CalendarItemDark}"/>
+    <Setter Property="CalendarDayButtonStyle" Value="{StaticResource CalendarDay}"/>
+    <Setter Property="CalendarButtonStyle" Value="{StaticResource CalendarMonth}"/>
+  </Style>
 </ResourceDictionary>

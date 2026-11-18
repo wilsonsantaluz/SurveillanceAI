@@ -8,7 +8,7 @@ using SurveillanceAI.Domain;
 namespace SurveillanceAI.Infrastructure;
 
 // Operator-facing operations always authorize here; monitoring persistence has a separate internal workflow.
-public sealed class ProductStore(IDbContextFactory<AppDbContext> factory, Session session, ISecretProtector secrets)
+public sealed class ProductStore(IDbContextFactory<AppDbContext> factory, Session session, ISecretProtector secrets, IEvidenceStore? evidence = null)
 {
     public async Task<EventCounts> EventCountsAsync()
     {
@@ -50,16 +50,50 @@ public sealed class ProductStore(IDbContextFactory<AppDbContext> factory, Sessio
         session.Require(UserRole.Operator); await using var db = await factory.CreateDbContextAsync();
         if (!Enum.IsDefined(status)) throw new ArgumentException(Texts.T("Invalid review status."));
         var item = await db.Events.SingleAsync(x => x.Id == id);
+        if (status == ReviewStatus.FalsePositive) { item.EpisodeOpen = false; item.ClosedUtc = DateTime.UtcNow; item.HumanConfirmed = false; await EpisodeRearm.CloseAsync(db, item); }
         item.Status = status; item.Notes = notes; item.ReviewerId = session.UserId; item.ReviewedUtc = DateTime.UtcNow;
         Audit(db, $"Event review: {id}, {status}"); await db.SaveChangesAsync();
     }
     public async Task<List<AlertRule>> RulesAsync() { session.Require(); await using var db = await factory.CreateDbContextAsync(); return await db.Rules.AsNoTracking().ToListAsync(); }
+    public async Task ActOnEpisodeAsync(Guid id, string action, string notes)
+    {
+        session.Require(UserRole.Operator); await using var db = await factory.CreateDbContextAsync();
+        var item = await db.Events.SingleAsync(x => x.Id == id);
+        switch (action)
+        {
+            case "acknowledge": item.AcknowledgedUtc ??= DateTime.UtcNow; break;
+            case "confirm": item.HumanConfirmed = true; item.Status = ReviewStatus.Reviewed; item.ReviewedUtc = DateTime.UtcNow; break;
+            case "close": item.EpisodeOpen = false; item.ClosedUtc ??= DateTime.UtcNow; await EpisodeRearm.CloseAsync(db, item); break;
+            default: throw new ArgumentException(Texts.T("Unknown episode action."));
+        }
+        item.ReviewerId = session.UserId; item.Notes = notes;
+        Audit(db, $"Episode {action}: {id}"); await db.SaveChangesAsync();
+    }
+    public async Task DeleteEventAsync(Guid id)
+    {
+        session.Require(UserRole.Operator);
+        await using var db = await factory.CreateDbContextAsync();
+        await using var transaction = await db.Database.BeginTransactionAsync();
+        var item = await db.Events.SingleAsync(x => x.Id == id);
+        await EpisodeRearm.CloseAsync(db, item);
+        db.Deliveries.RemoveRange(await db.Deliveries.Where(d => d.EventId == id).ToListAsync());
+        db.Events.Remove(item);
+        Audit(db, $"Event deleted: {id}");
+        await db.SaveChangesAsync(); await transaction.CommitAsync();
+        if (item.EvidencePath != null) evidence?.Delete(item.EvidencePath);
+    }
+    public async Task<List<DetectionEvent>> ActiveAlertsAsync()
+    {
+        session.Require(); await using var db = await factory.CreateDbContextAsync();
+        return await db.Events.AsNoTracking().Where(x => x.TemplateId != null && x.Status == ReviewStatus.Pending && x.ClosedUtc == null && x.AcknowledgedUtc == null).OrderByDescending(x => x.TimestampUtc).Take(100).ToListAsync();
+    }
     public async Task SaveRuleAsync(AlertRule rule)
     {
         session.Require(UserRole.Administrator);
         if (string.IsNullOrWhiteSpace(rule.Name) || string.IsNullOrWhiteSpace(rule.Label) || !float.IsFinite(rule.Confidence) || rule.Confidence is < 0 or > 1 || rule.Confirmations is < 2 or > 100 || rule.WindowSeconds is < 1 or > 3600 || rule.CooldownSeconds is < 1 or > 86400 || !float.IsFinite(rule.AssociationIou) || rule.AssociationIou is <= 0 or > 1) throw new ArgumentException(Texts.T("Invalid rule: require 2–100 confirmations, a positive window/cooldown and confidence/IoU within 0–1."));
         await using var db = await factory.CreateDbContextAsync();
         if (rule.CameraId is { } camera && !await db.Cameras.AnyAsync(x => x.Id == camera)) throw new ArgumentException(Texts.T("The rule camera does not exist."));
+        if (rule.TemplateId != null || await db.Rules.AnyAsync(r => r.Id == rule.Id && r.TemplateId != null)) throw new ArgumentException(Texts.T("Edit template rules through the monitoring choices."));
         if (await db.Rules.AnyAsync(x => x.Id == rule.Id)) db.Rules.Update(rule); else db.Rules.Add(rule);
         Audit(db, $"Rule saved: {rule.Id}"); await db.SaveChangesAsync();
     }

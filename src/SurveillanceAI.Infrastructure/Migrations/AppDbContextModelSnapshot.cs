@@ -52,6 +52,9 @@ namespace SurveillanceAI.Infrastructure.Migrations
                     b.Property<int>("Severity")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("TemplateId")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("WindowSeconds")
                         .HasColumnType("INTEGER");
 
@@ -123,17 +126,33 @@ namespace SurveillanceAI.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
+                    b.Property<DateTime?>("AcknowledgedUtc")
+                        .HasColumnType("TEXT");
+
                     b.Property<Guid>("CameraId")
                         .HasColumnType("TEXT");
 
-                    b.Property<float>("Confidence")
+                    b.Property<DateTime?>("ClosedUtc")
+                        .HasColumnType("TEXT");
+
+                    b.Property<float?>("Confidence")
                         .HasColumnType("REAL");
+
+                    b.Property<string>("DetectorId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("EpisodeOpen")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("EvidencePath")
                         .HasColumnType("TEXT");
 
                     b.Property<float>("Height")
                         .HasColumnType("REAL");
+
+                    b.Property<bool>("HumanConfirmed")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Label")
                         .IsRequired()
@@ -147,6 +166,9 @@ namespace SurveillanceAI.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("NotifyEmail")
+                        .HasColumnType("INTEGER");
+
                     b.Property<DateTime?>("ReviewedUtc")
                         .HasColumnType("TEXT");
 
@@ -156,14 +178,26 @@ namespace SurveillanceAI.Infrastructure.Migrations
                     b.Property<Guid>("RuleId")
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("SaveEvidence")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("Severity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("SoundAlert")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Status")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("TemplateId")
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime>("TimestampUtc")
                         .HasColumnType("TEXT");
+
+                    b.Property<bool>("VisualAlert")
+                        .HasColumnType("INTEGER");
 
                     b.Property<float>("Width")
                         .HasColumnType("REAL");
@@ -176,9 +210,11 @@ namespace SurveillanceAI.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CameraId");
-
                     b.HasIndex("RuleId");
+
+                    b.HasIndex("CameraId", "TemplateId")
+                        .IsUnique()
+                        .HasFilter("\"EpisodeOpen\" = 1 AND \"TemplateId\" IS NOT NULL");
 
                     b.HasIndex("Status", "Severity");
 

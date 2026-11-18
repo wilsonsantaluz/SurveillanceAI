@@ -23,3 +23,7 @@ A fase 3 inspecionada do treinamento era ResNet18, ImageNet e logits `[batch,cla
 Regras usam classe/confiança e câmera opcional. IoU permite um acerto por trilha por quadro/instante. Acertos expiram na janela; múltiplos confirmam uma possível detecção, respeitando intervalo por trilha. Trilhas expiram/reiniciam ao desconectar. Isso não identifica pessoas ou comportamento; oclusão/movimento podem dividir trilhas e duplicar eventos.
 
 Proximidade experimental não gera alertas. Linhas são diagnóstico; pessoas próximas/múltiplas não implicam agressão/roubo. Classes como person e bus permanecem canônicas nos dois idiomas para preservar regras, metadados e compatibilidade.
+
+## Detector complementar Florence-2
+
+O YOLO não foi substituído. Florence tem modelo compartilhado, fila independente de um quadro por câmera, cancelamento e diagnóstico próprios. O teste por imagem executa OD e localização por frase reais. O fluxo de possível arma usa primeira evidência, confiança nula e episódio persistente. Veja [configuração e limitações](florence-alerts.md).

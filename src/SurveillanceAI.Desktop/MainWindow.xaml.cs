@@ -10,6 +10,7 @@ public partial class MainWindow : Window
     {
         if (stopped) return;
         e.Cancel = true; IsEnabled = false;
+        (DataContext as MainViewModel)?.PrepareForShutdown();
         try { await ((App)System.Windows.Application.Current).StopAsync(); }
         finally { stopped = true; Close(); }
     }

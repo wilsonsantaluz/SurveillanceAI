@@ -20,6 +20,7 @@ public sealed class AppDbContext(DbContextOptions<AppDbContext> options) : DbCon
         model.Entity<SystemSetting>().HasKey(x => x.Key);
         model.Entity<DetectionEvent>().HasIndex(x => new { x.TimestampUtc, x.CameraId });
         model.Entity<DetectionEvent>().HasIndex(x => new { x.Status, x.Severity });
+        model.Entity<DetectionEvent>().HasIndex(x => new { x.CameraId, x.TemplateId }).IsUnique().HasFilter("\"EpisodeOpen\" = 1 AND \"TemplateId\" IS NOT NULL");
         model.Entity<NotificationDelivery>().HasIndex(x => new { x.EventId, x.RecipientId }).IsUnique();
         model.Entity<NotificationDelivery>().HasIndex(x => new { x.Status, x.NextAttemptUtc });
         model.Entity<DetectionEvent>().HasOne<Camera>().WithMany().HasForeignKey(x => x.CameraId).OnDelete(DeleteBehavior.Restrict);

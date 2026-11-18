@@ -22,3 +22,10 @@ public sealed class LocalizedValueConverter : IMultiValueConverter
         => values.Length == 0 || values[0] == DependencyProperty.UnsetValue ? "" : Texts.Display(values[0]?.ToString() ?? "");
     public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture) => throw new NotSupportedException();
 }
+
+public sealed class ConfidenceValueConverter : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        => value is float confidence ? confidence.ToString("P1", culture) : Texts.T("Not provided");
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => throw new NotSupportedException();
+}

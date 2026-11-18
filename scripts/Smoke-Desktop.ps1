@@ -1,7 +1,8 @@
 ﻿param(
     [string]$Executable = "$PSScriptRoot\..\artifacts\publish\SurveillanceAI.Desktop.exe",
     [string]$ScreenshotDirectory = "$PSScriptRoot\..\artifacts\screenshots",
-    [string]$VideoPath = ''
+    [string]$VideoPath = '',
+    [switch]$RequireFlorence
 )
 $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName UIAutomationClient, UIAutomationTypes, System.Drawing, System.Windows.Forms
@@ -72,6 +73,11 @@ try {
         Wait-For {
             $window.FindAll([System.Windows.Automation.TreeScope]::Descendants, [System.Windows.Automation.Condition]::TrueCondition) | Where-Object { $_.Current.Name -like 'yolov8n-coco-*' } | Select-Object -First 1
         } | Out-Null
+        if ($RequireFlorence) {
+            Wait-For {
+                $window.FindAll([System.Windows.Automation.TreeScope]::Descendants, [System.Windows.Automation.Condition]::TrueCondition) | Where-Object { $_.Current.Name -match 'Florence:.*· [1-9][0-9]* (análises|analyses)' } | Select-Object -First 1
+            } | Out-Null
+        }
         Screenshot 'live-video'
         Invoke-Button (Find-Id 'TogglePreview')
         Invoke-Button (Find-Id 'TogglePreview')

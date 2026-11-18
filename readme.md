@@ -98,3 +98,9 @@ Guias: [validação](docs/validation.md), [implantação](docs/deployment.md), [
 Antes do piloto: testes prolongados com hardware, revisão por operadores, validação de modelo/regras, privacidade/licenciamento, recuperação e empacotamento assinado. Host persistente exige testes próprios de ciclo de vida e autorização.
 
 Teste da troca e persistência de idioma: `./scripts/Smoke-Localization.ps1`.
+
+## Florence-2 e alertas simples
+
+A tela **Alertas** usa templates selecionáveis e mantém regras antigas no modo avançado. Florence-2 base-ft local complementa YOLO sem substituir seu detector; a tela **Teste por imagem** executa os dois modelos e mostra caixas/latência. O template de possível arma registra a primeira evidência sem confirmação em múltiplos quadros, suprime repetições por episódio e distingue revisão humana. Não houve validação positiva com armas/facas. Corrida, áudio e movimento por horário permanecem indisponíveis com o motivo visível.
+
+Instalação explícita: `./scripts/Install-FlorenceModel.ps1`. Depois selecione a pasta em **Alertas → Configurações avançadas**. [Instalação, checkpoint e limites](docs/florence-alerts.md). Nenhum modelo é baixado ao iniciar; nenhuma API paga ou treinamento é usado.

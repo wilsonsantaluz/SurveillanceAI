@@ -29,3 +29,7 @@ Experimental legacy proximity code is not a product alert source. Optional dista
 ## HTTP camera streams
 
 Register phone or IP camera HTTP/HTTPS streams using camera type `HttpStream` and the exact URL supplied by the camera app (for example `http://192.168.1.246:8080/stream`). Streams are opened through OpenCV with FFmpeg; MJPEG compatibility depends on the source codec and server. The camera origin is now a readable text field instead of a password field. Leave it blank when editing an existing camera to retain the saved protected source. Avoid displaying URLs containing embedded credentials in public screenshots.
+
+## Complementary Florence-2 detector
+
+YOLO is unchanged. Florence has a shared model and independent bounded per-camera queues, cancellation and diagnostics. Image testing runs real OD/phrase grounding. Firearm hypotheses save first evidence with nullable confidence and a persistent episode. See [setup and limits](florence-alerts.md).

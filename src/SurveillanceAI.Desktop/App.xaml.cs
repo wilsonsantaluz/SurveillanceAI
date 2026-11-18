@@ -39,11 +39,14 @@ public partial class App : System.Windows.Application
                 services.AddSingleton(logPreferences);
                 services.AddSingleton(languagePreferences);
                 services.AddSingleton<Authentication>(); services.AddSingleton<ProductStore>(); services.AddSingleton<NotificationAdmin>();
+                services.AddSingleton<IFlorenceDetector, FlorenceDetector>();
+                services.AddSingleton(sp => new SmartConfigStore(sp.GetRequiredService<IDbContextFactory<AppDbContext>>(), sp.GetRequiredService<Session>(), sp.GetRequiredService<IFlorenceDetector>(), path => ModelManifest.Load(path).Manifest.Labels, Path.Combine(AppContext.BaseDirectory, "models", "legacy"), FlorenceModelPaths.Resolve));
                 services.AddSingleton<IEvidenceStore>(new EvidenceStore(Path.Combine(root, "evidence")));
                 services.AddSingleton<IMailTransport, MailKitTransport>(); services.AddSingleton<EventWriter>();
-                services.AddSingleton<IMonitoringStore>(sp => new MonitoringStore(sp.GetRequiredService<IDbContextFactory<AppDbContext>>(), sp.GetRequiredService<EventWriter>(), Path.Combine(AppContext.BaseDirectory, "models", "legacy")));
-                services.AddSingleton<CameraManager>(); services.AddSingleton<IMonitoringControl>(sp => sp.GetRequiredService<CameraManager>());
+                services.AddSingleton<IMonitoringStore>(sp => new MonitoringStore(sp.GetRequiredService<IDbContextFactory<AppDbContext>>(), sp.GetRequiredService<EventWriter>(), Path.Combine(AppContext.BaseDirectory, "models", "legacy"), FlorenceModelPaths.Resolve));
+                services.AddSingleton(sp => new CameraManager(sp.GetRequiredService<IMonitoringStore>(), sp.GetRequiredService<ISecretProtector>(), sp.GetRequiredService<Session>(), sp.GetRequiredService<ILogger<CameraManager>>(), sp.GetRequiredService<IFlorenceDetector>(), Path.Combine(root, "frame-buffer"))); services.AddSingleton<IMonitoringControl>(sp => sp.GetRequiredService<CameraManager>());
                 services.AddHostedService(sp => sp.GetRequiredService<CameraManager>()); services.AddHostedService<NotificationWorker>(); services.AddHostedService<RetentionWorker>();
+                services.AddHostedService<FlorenceStartupService>();
                 services.AddSingleton<MainViewModel>(); services.AddSingleton<MainWindow>();
             }).Build();
             await using (var db = await host.Services.GetRequiredService<IDbContextFactory<AppDbContext>>().CreateDbContextAsync())

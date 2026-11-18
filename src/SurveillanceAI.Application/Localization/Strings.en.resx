@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<root>
+<?xml version="1.0" ?><root>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -996,4 +995,704 @@ Queue {4}/1 · Dropped {5} · Reconnects {6}</comment>
     <value>SurveillanceAI test notification</value>
     <comment>SurveillanceAI test notification</comment>
   </data>
-</root>
+  <data name="Tf62e9267d196c761" xml:space="preserve">
+    <value>Alerts</value>
+    <comment>Alerts</comment>
+  </data>
+  <data name="T0f0c3f2c9058c2aa" xml:space="preserve">
+    <value>Smart monitoring</value>
+    <comment>Smart monitoring</comment>
+  </data>
+  <data name="T14905df2ed4a7ee5" xml:space="preserve">
+    <value>Choose cameras</value>
+    <comment>Choose cameras</comment>
+  </data>
+  <data name="T8b1d225e7a86c6fc" xml:space="preserve">
+    <value>All cameras</value>
+    <comment>All cameras</comment>
+  </data>
+  <data name="T55972b4ece208976" xml:space="preserve">
+    <value>What would you like to monitor?</value>
+    <comment>What would you like to monitor?</comment>
+  </data>
+  <data name="Tbff17dea8a4e88a1" xml:space="preserve">
+    <value>Choose supported objects</value>
+    <comment>Choose supported objects</comment>
+  </data>
+  <data name="Tc1e202d0b14e7c02" xml:space="preserve">
+    <value>When detected</value>
+    <comment>When detected</comment>
+  </data>
+  <data name="T9ae370eb2a87a244" xml:space="preserve">
+    <value>Events are always recorded. Firearm evidence is always saved.</value>
+    <comment>Events are always recorded. Firearm evidence is always saved.</comment>
+  </data>
+  <data name="Tefbdb2d07ab947dc" xml:space="preserve">
+    <value>Visual alert</value>
+    <comment>Visual alert</comment>
+  </data>
+  <data name="T5be86d46e813620a" xml:space="preserve">
+    <value>Sound warning</value>
+    <comment>Sound warning</comment>
+  </data>
+  <data name="T5a613e7664b3c8a8" xml:space="preserve">
+    <value>Save evidence image</value>
+    <comment>Save evidence image</comment>
+  </data>
+  <data name="T2955ad4f40a77eeb" xml:space="preserve">
+    <value>Email notification</value>
+    <comment>Email notification</comment>
+  </data>
+  <data name="T5e7076ae27f714dd" xml:space="preserve">
+    <value>Save monitoring choices</value>
+    <comment>Save monitoring choices</comment>
+  </data>
+  <data name="T1addde9e160e8fab" xml:space="preserve">
+    <value>Detection status</value>
+    <comment>Detection status</comment>
+  </data>
+  <data name="T7b0bd218a84eef9a" xml:space="preserve">
+    <value>Advanced settings</value>
+    <comment>Advanced settings</comment>
+  </data>
+  <data name="Tb49164551fa39f97" xml:space="preserve">
+    <value>Enable YOLO</value>
+    <comment>Enable YOLO</comment>
+  </data>
+  <data name="Ta390299710085438" xml:space="preserve">
+    <value>Enable Florence-2</value>
+    <comment>Enable Florence-2</comment>
+  </data>
+  <data name="T26b1081d39b98aca" xml:space="preserve">
+    <value>Local base-ft model folder</value>
+    <comment>Local base-ft model folder</comment>
+  </data>
+  <data name="T97670df6c2cf3a09" xml:space="preserve">
+    <value>Choose model folder</value>
+    <comment>Choose model folder</comment>
+  </data>
+  <data name="Tac4e1f69f2e72caa" xml:space="preserve">
+    <value>Load Florence on CPU</value>
+    <comment>Load Florence on CPU</comment>
+  </data>
+  <data name="T15d4444a6e09f562" xml:space="preserve">
+    <value>Disable and unload Florence</value>
+    <comment>Disable and unload Florence</comment>
+  </data>
+  <data name="Td95e1b66c48707e7" xml:space="preserve">
+    <value>Processing interval (seconds)</value>
+    <comment>Processing interval (seconds)</comment>
+  </data>
+  <data name="Td34d0b7f11a337d5" xml:space="preserve">
+    <value>Maximum generated tokens (32-256)</value>
+    <comment>Maximum generated tokens (32-256)</comment>
+  </data>
+  <data name="T26f993fbed6633f7" xml:space="preserve">
+    <value>CPU, four threads, one shared model. No automatic model downloads.</value>
+    <comment>CPU, two threads, one shared model. No automatic model downloads.</comment>
+  </data>
+  <data name="Tb34caa289a63cc5e" xml:space="preserve">
+    <value>No guarantee of firearm recognition. Validate with representative images before deployment.</value>
+    <comment>No guarantee of firearm recognition. Validate with representative images before deployment.</comment>
+  </data>
+  <data name="Td3d28476ed2a7400" xml:space="preserve">
+    <value>Image test</value>
+    <comment>Image test</comment>
+  </data>
+  <data name="T8ca3f22a2e8382ad" xml:space="preserve">
+    <value>Test a local image</value>
+    <comment>Test a local image</comment>
+  </data>
+  <data name="Tf7e6f67fb7b5137f" xml:space="preserve">
+    <value>Choose image</value>
+    <comment>Choose image</comment>
+  </data>
+  <data name="T46e84233668ae456" xml:space="preserve">
+    <value>Locate an English description</value>
+    <comment>Locate an English description</comment>
+  </data>
+  <data name="Tcea0115c2c7752b9" xml:space="preserve">
+    <value>Run inference</value>
+    <comment>Run inference</comment>
+  </data>
+  <data name="T19766ed6ccb2f4a3" xml:space="preserve">
+    <value>Cancel</value>
+    <comment>Cancel</comment>
+  </data>
+  <data name="Tda9017c1bce3fe3e" xml:space="preserve">
+    <value>Detector / model</value>
+    <comment>Detector / model</comment>
+  </data>
+  <data name="Td3a008ef1335692d" xml:space="preserve">
+    <value>Region</value>
+    <comment>Region</comment>
+  </data>
+  <data name="T8f58d324c8c86ae8" xml:space="preserve">
+    <value>Advanced rules</value>
+    <comment>Advanced rules</comment>
+  </data>
+  <data name="T8069b6afaa7967e4" xml:space="preserve">
+    <value>Acknowledge alert</value>
+    <comment>Acknowledge alert</comment>
+  </data>
+  <data name="Tbef400c529ef9674" xml:space="preserve">
+    <value>Confirm visually</value>
+    <comment>Confirm visually</comment>
+  </data>
+  <data name="T4b84cead7544c564" xml:space="preserve">
+    <value>Close episode</value>
+    <comment>Close episode</comment>
+  </data>
+  <data name="Td83b9ff3c07a8390" xml:space="preserve">
+    <value>Not provided</value>
+    <comment>Not provided</comment>
+  </data>
+  <data name="T16711fa96081bcc3" xml:space="preserve">
+    <value>Unloaded</value>
+    <comment>Unloaded</comment>
+  </data>
+  <data name="Tdc380888c4e2c776" xml:space="preserve">
+    <value>Loading</value>
+    <comment>Loading</comment>
+  </data>
+  <data name="T5fa7aac5375c5815" xml:space="preserve">
+    <value>Ready</value>
+    <comment>Ready</comment>
+  </data>
+  <data name="T2f0262b1cca77005" xml:space="preserve">
+    <value>Select at least one camera or use all cameras.</value>
+    <comment>Select at least one camera or use all cameras.</comment>
+  </data>
+  <data name="T210e1a10050954db" xml:space="preserve">
+    <value>Monitoring templates saved.</value>
+    <comment>Monitoring templates saved.</comment>
+  </data>
+  <data name="Tb45819c58ff0f1bb" xml:space="preserve">
+    <value>Florence loaded locally on CPU.</value>
+    <comment>Florence loaded locally on CPU.</comment>
+  </data>
+  <data name="T973cbc6d7a2ff14c" xml:space="preserve">
+    <value>Choose at least one detector.</value>
+    <comment>Choose at least one detector.</comment>
+  </data>
+  <data name="T409c9fed319078e0" xml:space="preserve">
+    <value>Choose an image of at most 16 MB.</value>
+    <comment>Choose an image of at most 16 MB.</comment>
+  </data>
+  <data name="Tbf37b0a198f69b45" xml:space="preserve">
+    <value>Invalid image or image dimensions too large.</value>
+    <comment>Invalid image or image dimensions too large.</comment>
+  </data>
+  <data name="T0845a380ae633e36" xml:space="preserve">
+    <value>Operator action recorded.</value>
+    <comment>Operator action recorded.</comment>
+  </data>
+  <data name="T3d0ae071051458a7" xml:space="preserve">
+    <value>{0} potential detection(s) awaiting acknowledgement. Review Events.</value>
+    <comment>{0} potential detection(s) awaiting acknowledgement. Review Events.</comment>
+  </data>
+  <data name="Tc19c8805fb46a753" xml:space="preserve">
+    <value>Florence: {0} | {1} | {2} | {3:F0} ms | dropped: {4} | {5}</value>
+    <comment>Florence: {0} | {1} | {2} | {3:F0} ms | dropped: {4} | {5}</comment>
+  </data>
+  <data name="Td7cc0721d51c23d6" xml:space="preserve">
+    <value>Firearms and replicas</value>
+    <comment>Firearms and replicas</comment>
+  </data>
+  <data name="Teb77e6d7a530dc8a" xml:space="preserve">
+    <value>Record possible firearms immediately, including unattended objects. Experimental: operator review required.</value>
+    <comment>Record possible firearms immediately, including unattended objects. Experimental: operator review required.</comment>
+  </data>
+  <data name="T06147be94316b577" xml:space="preserve">
+    <value>Load the local Florence-2 base-ft bundle first.</value>
+    <comment>Load the local Florence-2 base-ft bundle first.</comment>
+  </data>
+  <data name="Tdb53c2f1eb05b709" xml:space="preserve">
+    <value>Knives and sharp objects</value>
+    <comment>Knives and sharp objects</comment>
+  </data>
+  <data name="Tb6ab5cad0203143b" xml:space="preserve">
+    <value>Identify visible knives independently of people or context.</value>
+    <comment>Identify visible knives independently of people or context.</comment>
+  </data>
+  <data name="Teab0530f9b223eaf" xml:space="preserve">
+    <value>The model has a knife class, but knife-image validation has not been performed.</value>
+    <comment>The model has a knife class, but knife-image validation has not been performed.</comment>
+  </data>
+  <data name="T307ed3b10d824102" xml:space="preserve">
+    <value>The active detector has no knife class.</value>
+    <comment>The active detector has no knife class.</comment>
+  </data>
+  <data name="T93557ab722c86982" xml:space="preserve">
+    <value>Selected objects</value>
+    <comment>Selected objects</comment>
+  </data>
+  <data name="Ta9abe8daea7f1fe9" xml:space="preserve">
+    <value>Choose objects supported by the active YOLO model.</value>
+    <comment>Choose objects supported by the active YOLO model.</comment>
+  </data>
+  <data name="Ta9ff804c5f77af06" xml:space="preserve">
+    <value>Load a valid YOLO model first.</value>
+    <comment>Load a valid YOLO model first.</comment>
+  </data>
+  <data name="T214f7947b45030d4" xml:space="preserve">
+    <value>People running</value>
+    <comment>People running</comment>
+  </data>
+  <data name="Tfc36f3e3a5990a99" xml:space="preserve">
+    <value>Requires verified movement analysis across frames.</value>
+    <comment>Requires verified movement analysis across frames.</comment>
+  </data>
+  <data name="Tba0d1da6fd4b7d96" xml:space="preserve">
+    <value>Persistent motion tracking and running validation are not implemented.</value>
+    <comment>Persistent motion tracking and running validation are not implemented.</comment>
+  </data>
+  <data name="T2e84429371f9d957" xml:space="preserve">
+    <value>Screams and calls for help</value>
+    <comment>Screams and calls for help</comment>
+  </data>
+  <data name="T24850bdbd97a254d" xml:space="preserve">
+    <value>Requires a local acoustic event classifier and audio capture.</value>
+    <comment>Requires a local acoustic event classifier and audio capture.</comment>
+  </data>
+  <data name="T12667137ef65860d" xml:space="preserve">
+    <value>Audio capture and a validated acoustic model are not implemented. Florence-2 does not process audio.</value>
+    <comment>Audio capture and a validated acoustic model are not implemented. Florence-2 does not process audio.</comment>
+  </data>
+  <data name="T949fc7a947c6e5a8" xml:space="preserve">
+    <value>After-hours movement</value>
+    <comment>After-hours movement</comment>
+  </data>
+  <data name="Ta7bf707871d2e132" xml:space="preserve">
+    <value>Requires actual motion detection and camera schedules.</value>
+    <comment>Requires actual motion detection and camera schedules.</comment>
+  </data>
+  <data name="T7369f11c5ea9b51a" xml:space="preserve">
+    <value>There is no motion detector or schedule engine in this installation.</value>
+    <comment>There is no motion detector or schedule engine in this installation.</comment>
+  </data>
+  <data name="T8d6866022398bfca" xml:space="preserve">
+    <value>Object: person</value>
+    <comment>Object: person</comment>
+  </data>
+  <data name="Te1e6cfc19f6e075c" xml:space="preserve">
+    <value>Object: bicycle</value>
+    <comment>Object: bicycle</comment>
+  </data>
+  <data name="Tde04fb466e8c130e" xml:space="preserve">
+    <value>Object: car</value>
+    <comment>Object: car</comment>
+  </data>
+  <data name="Tf4aeef792fd01763" xml:space="preserve">
+    <value>Object: motorcycle</value>
+    <comment>Object: motorcycle</comment>
+  </data>
+  <data name="Tfda106de184fcd54" xml:space="preserve">
+    <value>Object: airplane</value>
+    <comment>Object: airplane</comment>
+  </data>
+  <data name="T7855f8d281791b8b" xml:space="preserve">
+    <value>Object: bus</value>
+    <comment>Object: bus</comment>
+  </data>
+  <data name="T3af5c070d267ba8a" xml:space="preserve">
+    <value>Object: train</value>
+    <comment>Object: train</comment>
+  </data>
+  <data name="T20ff6431f25e9f3a" xml:space="preserve">
+    <value>Object: truck</value>
+    <comment>Object: truck</comment>
+  </data>
+  <data name="T8b943abff4f24ca0" xml:space="preserve">
+    <value>Object: boat</value>
+    <comment>Object: boat</comment>
+  </data>
+  <data name="Taa9d1e361fa37a2c" xml:space="preserve">
+    <value>Object: traffic light</value>
+    <comment>Object: traffic light</comment>
+  </data>
+  <data name="T422c993d68be83a2" xml:space="preserve">
+    <value>Object: fire hydrant</value>
+    <comment>Object: fire hydrant</comment>
+  </data>
+  <data name="Tdc5caaa5b0cbfdf6" xml:space="preserve">
+    <value>Object: stop sign</value>
+    <comment>Object: stop sign</comment>
+  </data>
+  <data name="T039c451e1190af67" xml:space="preserve">
+    <value>Object: parking meter</value>
+    <comment>Object: parking meter</comment>
+  </data>
+  <data name="Tb85bf7db9a5f79d9" xml:space="preserve">
+    <value>Object: bench</value>
+    <comment>Object: bench</comment>
+  </data>
+  <data name="T81947f449a44996a" xml:space="preserve">
+    <value>Object: bird</value>
+    <comment>Object: bird</comment>
+  </data>
+  <data name="Te39ccd6921fdc7d1" xml:space="preserve">
+    <value>Object: cat</value>
+    <comment>Object: cat</comment>
+  </data>
+  <data name="Te857ea98b0861737" xml:space="preserve">
+    <value>Object: dog</value>
+    <comment>Object: dog</comment>
+  </data>
+  <data name="T65f6e07c214507f8" xml:space="preserve">
+    <value>Object: horse</value>
+    <comment>Object: horse</comment>
+  </data>
+  <data name="T3ba7c56518be16d6" xml:space="preserve">
+    <value>Object: sheep</value>
+    <comment>Object: sheep</comment>
+  </data>
+  <data name="Td82cbb05287b8dea" xml:space="preserve">
+    <value>Object: cow</value>
+    <comment>Object: cow</comment>
+  </data>
+  <data name="Tf94782512b82edd0" xml:space="preserve">
+    <value>Object: elephant</value>
+    <comment>Object: elephant</comment>
+  </data>
+  <data name="Ted44374e262f4e02" xml:space="preserve">
+    <value>Object: bear</value>
+    <comment>Object: bear</comment>
+  </data>
+  <data name="T9eae6a4444963840" xml:space="preserve">
+    <value>Object: zebra</value>
+    <comment>Object: zebra</comment>
+  </data>
+  <data name="T03a4b080a297a006" xml:space="preserve">
+    <value>Object: giraffe</value>
+    <comment>Object: giraffe</comment>
+  </data>
+  <data name="T72b5ee0725c2041e" xml:space="preserve">
+    <value>Object: backpack</value>
+    <comment>Object: backpack</comment>
+  </data>
+  <data name="T1245215fae7074ca" xml:space="preserve">
+    <value>Object: umbrella</value>
+    <comment>Object: umbrella</comment>
+  </data>
+  <data name="T4af49d325d5319da" xml:space="preserve">
+    <value>Object: handbag</value>
+    <comment>Object: handbag</comment>
+  </data>
+  <data name="T0c9727b7cfa40519" xml:space="preserve">
+    <value>Object: tie</value>
+    <comment>Object: tie</comment>
+  </data>
+  <data name="Ta0a178ab1d94b8c4" xml:space="preserve">
+    <value>Object: suitcase</value>
+    <comment>Object: suitcase</comment>
+  </data>
+  <data name="Ted98378ff9d698b5" xml:space="preserve">
+    <value>Object: frisbee</value>
+    <comment>Object: frisbee</comment>
+  </data>
+  <data name="T635c48334769d7af" xml:space="preserve">
+    <value>Object: skis</value>
+    <comment>Object: skis</comment>
+  </data>
+  <data name="T182a712665b886c0" xml:space="preserve">
+    <value>Object: snowboard</value>
+    <comment>Object: snowboard</comment>
+  </data>
+  <data name="T491a62ea4f95f05e" xml:space="preserve">
+    <value>Object: sports ball</value>
+    <comment>Object: sports ball</comment>
+  </data>
+  <data name="Te2a4e11b6c02830f" xml:space="preserve">
+    <value>Object: kite</value>
+    <comment>Object: kite</comment>
+  </data>
+  <data name="Tb19fb4a49423091b" xml:space="preserve">
+    <value>Object: baseball bat</value>
+    <comment>Object: baseball bat</comment>
+  </data>
+  <data name="T9bbae34e91052f31" xml:space="preserve">
+    <value>Object: baseball glove</value>
+    <comment>Object: baseball glove</comment>
+  </data>
+  <data name="Ta166149cc08e60a7" xml:space="preserve">
+    <value>Object: skateboard</value>
+    <comment>Object: skateboard</comment>
+  </data>
+  <data name="Ta1e808e35f986733" xml:space="preserve">
+    <value>Object: surfboard</value>
+    <comment>Object: surfboard</comment>
+  </data>
+  <data name="Tc1f692e55cb709e9" xml:space="preserve">
+    <value>Object: tennis racket</value>
+    <comment>Object: tennis racket</comment>
+  </data>
+  <data name="Tc85957d89e834f3a" xml:space="preserve">
+    <value>Object: bottle</value>
+    <comment>Object: bottle</comment>
+  </data>
+  <data name="T98adcede9a31d689" xml:space="preserve">
+    <value>Object: wine glass</value>
+    <comment>Object: wine glass</comment>
+  </data>
+  <data name="T4109f4b26e7b1742" xml:space="preserve">
+    <value>Object: cup</value>
+    <comment>Object: cup</comment>
+  </data>
+  <data name="Taff6f3fedd4cec5d" xml:space="preserve">
+    <value>Object: fork</value>
+    <comment>Object: fork</comment>
+  </data>
+  <data name="T08241a19596dda9d" xml:space="preserve">
+    <value>Object: knife</value>
+    <comment>Object: knife</comment>
+  </data>
+  <data name="T5bd94b233711a456" xml:space="preserve">
+    <value>Object: spoon</value>
+    <comment>Object: spoon</comment>
+  </data>
+  <data name="Tf820b9ab0cb529d6" xml:space="preserve">
+    <value>Object: bowl</value>
+    <comment>Object: bowl</comment>
+  </data>
+  <data name="T2388f573b6c70d8c" xml:space="preserve">
+    <value>Object: banana</value>
+    <comment>Object: banana</comment>
+  </data>
+  <data name="Td44dde7335cdb78b" xml:space="preserve">
+    <value>Object: apple</value>
+    <comment>Object: apple</comment>
+  </data>
+  <data name="Te1b4e396b02cfb21" xml:space="preserve">
+    <value>Object: sandwich</value>
+    <comment>Object: sandwich</comment>
+  </data>
+  <data name="Tf2caa78ca7708a0f" xml:space="preserve">
+    <value>Object: orange</value>
+    <comment>Object: orange</comment>
+  </data>
+  <data name="T4747295609d96cf5" xml:space="preserve">
+    <value>Object: broccoli</value>
+    <comment>Object: broccoli</comment>
+  </data>
+  <data name="T56b49b319179233d" xml:space="preserve">
+    <value>Object: carrot</value>
+    <comment>Object: carrot</comment>
+  </data>
+  <data name="T83ba6f76e4287849" xml:space="preserve">
+    <value>Object: hot dog</value>
+    <comment>Object: hot dog</comment>
+  </data>
+  <data name="Tb8f9a4f6d84329a1" xml:space="preserve">
+    <value>Object: pizza</value>
+    <comment>Object: pizza</comment>
+  </data>
+  <data name="T16697fba13c59d75" xml:space="preserve">
+    <value>Object: donut</value>
+    <comment>Object: donut</comment>
+  </data>
+  <data name="T87152698a57ec64e" xml:space="preserve">
+    <value>Object: cake</value>
+    <comment>Object: cake</comment>
+  </data>
+  <data name="T4720fb94d6086d17" xml:space="preserve">
+    <value>Object: chair</value>
+    <comment>Object: chair</comment>
+  </data>
+  <data name="T0e5afa5e5a063307" xml:space="preserve">
+    <value>Object: couch</value>
+    <comment>Object: couch</comment>
+  </data>
+  <data name="T185e6d7172756f10" xml:space="preserve">
+    <value>Object: potted plant</value>
+    <comment>Object: potted plant</comment>
+  </data>
+  <data name="T25b319feb98f50de" xml:space="preserve">
+    <value>Object: bed</value>
+    <comment>Object: bed</comment>
+  </data>
+  <data name="T55122b7bcfa75f12" xml:space="preserve">
+    <value>Object: dining table</value>
+    <comment>Object: dining table</comment>
+  </data>
+  <data name="Tbef37ea06f19fca2" xml:space="preserve">
+    <value>Object: toilet</value>
+    <comment>Object: toilet</comment>
+  </data>
+  <data name="Tcfc0fadbea7b2710" xml:space="preserve">
+    <value>Object: tv</value>
+    <comment>Object: tv</comment>
+  </data>
+  <data name="T16870a7d7c46d1ac" xml:space="preserve">
+    <value>Object: laptop</value>
+    <comment>Object: laptop</comment>
+  </data>
+  <data name="T6be7a66ebbdf435d" xml:space="preserve">
+    <value>Object: mouse</value>
+    <comment>Object: mouse</comment>
+  </data>
+  <data name="Tb071d1640d63b641" xml:space="preserve">
+    <value>Object: remote</value>
+    <comment>Object: remote</comment>
+  </data>
+  <data name="Tae19c597339137e6" xml:space="preserve">
+    <value>Object: keyboard</value>
+    <comment>Object: keyboard</comment>
+  </data>
+  <data name="T2b456bfd86f6ae64" xml:space="preserve">
+    <value>Object: cell phone</value>
+    <comment>Object: cell phone</comment>
+  </data>
+  <data name="Tde8df9794366b743" xml:space="preserve">
+    <value>Object: microwave</value>
+    <comment>Object: microwave</comment>
+  </data>
+  <data name="Tdddfe01076c4c6aa" xml:space="preserve">
+    <value>Object: oven</value>
+    <comment>Object: oven</comment>
+  </data>
+  <data name="Tbff96609c24d4660" xml:space="preserve">
+    <value>Object: toaster</value>
+    <comment>Object: toaster</comment>
+  </data>
+  <data name="T84c35484c60f5917" xml:space="preserve">
+    <value>Object: sink</value>
+    <comment>Object: sink</comment>
+  </data>
+  <data name="T5dc0aa57f2c96e46" xml:space="preserve">
+    <value>Object: refrigerator</value>
+    <comment>Object: refrigerator</comment>
+  </data>
+  <data name="Tfc788b61bf31de88" xml:space="preserve">
+    <value>Object: book</value>
+    <comment>Object: book</comment>
+  </data>
+  <data name="T926c4fa4d65ddeed" xml:space="preserve">
+    <value>Object: clock</value>
+    <comment>Object: clock</comment>
+  </data>
+  <data name="Te8ec9da8ce670d6f" xml:space="preserve">
+    <value>Object: vase</value>
+    <comment>Object: vase</comment>
+  </data>
+  <data name="T446af0283c80f3a7" xml:space="preserve">
+    <value>Object: scissors</value>
+    <comment>Object: scissors</comment>
+  </data>
+  <data name="Tf439f55f631054db" xml:space="preserve">
+    <value>Object: teddy bear</value>
+    <comment>Object: teddy bear</comment>
+  </data>
+  <data name="T89acee3aab75ec36" xml:space="preserve">
+    <value>Object: hair drier</value>
+    <comment>Object: hair drier</comment>
+  </data>
+  <data name="Tc10c8bd6d39c3f3d" xml:space="preserve">
+    <value>Object: toothbrush</value>
+    <comment>Object: toothbrush</comment>
+  </data>
+  <data name="T386cf3b4f8ac4401" xml:space="preserve">
+    <value>Operation cancelled.</value>
+    <comment>Operation cancelled.</comment>
+  </data>
+  <data name="Te670c14f87787f0f" xml:space="preserve">
+    <value>Open episode</value>
+    <comment>Open episode</comment>
+  </data>
+  <data name="Tf9f8c34933b1063a" xml:space="preserve">
+    <value>Closed episode</value>
+    <comment>Closed episode</comment>
+  </data>
+  <data name="Ta9ce542ca6ae0bb8" xml:space="preserve">
+    <value>Human confirmed</value>
+    <comment>Human confirmed</comment>
+  </data>
+  <data name="Ta7d3b95a3e182a46" xml:space="preserve">
+    <value>Not confirmed by an operator</value>
+    <comment>Not confirmed by an operator</comment>
+  </data>
+  <data name="Ted1e65f753fb7019" xml:space="preserve">
+    <value>Detector: {0} | {1} | {2}</value>
+    <comment>Detector: {0} | {1} | {2}</comment>
+  </data>
+  <data name="T9ae190b5d5f9bc77" xml:space="preserve">
+    <value>Invalid Florence interval or token limit.</value>
+    <comment>Invalid Florence interval or token limit.</comment>
+  </data>
+  <data name="Ta46edc8cf83f1164" xml:space="preserve">
+    <value>Load and enable Florence before selecting the firearm template.</value>
+    <comment>Load and enable Florence before selecting the firearm template.</comment>
+  </data>
+  <data name="T159bc672ebefe04f" xml:space="preserve">
+    <value>Select at least one object supported by the enabled YOLO detector.</value>
+    <comment>Select at least one object supported by the enabled YOLO detector.</comment>
+  </data>
+  <data name="Tdb174dd15c272ede" xml:space="preserve">
+    <value>Select existing cameras.</value>
+    <comment>Select existing cameras.</comment>
+  </data>
+  <data name="T9c44f1bc400a93c3" xml:space="preserve">
+    <value>Unknown episode action.</value>
+    <comment>Unknown episode action.</comment>
+  </data>
+  <data name="T71438dcfe1dfdc55" xml:space="preserve">
+    <value>Use the verified Florence-2-base-ft export installed by scripts/Install-FlorenceModel.ps1; base is not base-ft.</value>
+    <comment>Use the verified Florence-2-base-ft export installed by scripts/Install-FlorenceModel.ps1; base is not base-ft.</comment>
+  </data>
+  <data name="Tedd2ed1fe5233c68" xml:space="preserve">
+    <value>Image exceeds the 16 MB inference limit.</value>
+    <comment>Image exceeds the 16 MB inference limit.</comment>
+  </data>
+  <data name="T7c7c1b1f846d73c3" xml:space="preserve">
+    <value>Grounding requires a prompt of 1-256 characters.</value>
+    <comment>Grounding requires a prompt of 1-256 characters.</comment>
+  </data>
+  <data name="T7b8ce28efeacb2df" xml:space="preserve">
+    <value>Load Florence before running inference.</value>
+    <comment>Load Florence before running inference.</comment>
+  </data>
+  <data name="T3c5dbae5af82571a" xml:space="preserve">
+    <value>Florence ONNX checksum mismatch: {0}</value>
+    <comment>Florence ONNX checksum mismatch: {0}</comment>
+  </data>
+  <data name="T037924a607e2cedf" xml:space="preserve">
+    <value>Florence configuration checksum mismatch: {0}</value>
+    <comment>Florence configuration checksum mismatch: {0}</comment>
+  </data>
+  <data name="T74ccb914b0142718" xml:space="preserve">
+    <value>possible_firearm</value>
+    <comment>possible_firearm</comment>
+  </data>
+  <data name="Tbb7ca79de73d055b" xml:space="preserve">
+    <value>Additional vision: {0}</value>
+    <comment>Additional vision: {0}</comment>
+  </data>
+  <data name="T16c4f72bf53819a3" xml:space="preserve">
+    <value>Edit template rules through the monitoring choices.</value>
+    <comment>Edit template rules through the monitoring choices.</comment>
+  </data>
+  <data name="Tdb78ab1a9c1e3a3b" xml:space="preserve">
+    <value>Starting required Florence analysis...</value>
+    <comment>Starting required Florence analysis...</comment>
+  </data>
+  <data name="Tdf48711be6887233" xml:space="preserve">
+    <value>Florence is required and is not ready. Open Alerts to configure the local model.</value>
+    <comment>Florence is required and is not ready. Open Alerts to configure the local model.</comment>
+  </data>
+  <data name="Te043135d48a40492" xml:space="preserve">
+    <value>Florence is required for smart monitoring.</value>
+    <comment>Florence is required for smart monitoring.</comment>
+  </data>
+  <data name="Tb57a9ecc775893c0" xml:space="preserve">
+    <value>Select an event to view its details.</value>
+    <comment>Select an event to view its details.</comment>
+  </data>
+  <data name="Tcb0858397077685f" xml:space="preserve">
+    <value>Detection metadata</value>
+    <comment>Detection metadata</comment>
+  </data>
+<data name="Tb872a42ed4ccaa26" xml:space="preserve"><value>Delete event</value><comment>Delete event</comment></data><data name="Tc679cf4bee7d4f91" xml:space="preserve"><value>Delete this event, its evidence and notification history? This cannot be undone.</value><comment>Delete this event, its evidence and notification history? This cannot be undone.</comment></data><data name="T8d32c89a5314199c" xml:space="preserve"><value>Event deleted.</value><comment>Event deleted.</comment></data><data name="T19086286a836ff06" xml:space="preserve"><value>Event evidence</value><comment>Event evidence</comment></data><data name="T294736152034e122" xml:space="preserve"><value>Fit image</value><comment>Fit image</comment></data><data name="T6141fd5e02438490" xml:space="preserve"><value>Detected region</value><comment>Detected region</comment></data><data name="Tb709d10a424e46b6" xml:space="preserve"><value>Show detection box</value><comment>Show detection box</comment></data><data name="T3867f27b2857bca1" xml:space="preserve"><value>Save image…</value><comment>Save image…</comment></data><data name="Tec9624bf320e4ac1" xml:space="preserve"><value>Yellow box: model hypothesis, requiring operator review. Ctrl + mouse wheel to zoom.</value><comment>Yellow box: model hypothesis, requiring operator review. Ctrl + mouse wheel to zoom.</comment></data><data name="T1376c4d9aac87bc5" xml:space="preserve"><value>Could not save the image. Check the destination folder.</value><comment>Could not save the image. Check the destination folder.</comment></data><data name="Tf917108391fb901e" xml:space="preserve"><value>Enlarge evidence</value><comment>Enlarge evidence</comment></data><data name="T7d9eb7acb13e2462" xml:space="preserve"><value>Close</value><comment>Close</comment></data><data name="T3708069cdeea27a6" xml:space="preserve"><value>Waiting for model</value><comment>Waiting for model</comment></data><data name="T04d3a1be5d63ad8f" xml:space="preserve"><value>Waiting for frames</value><comment>Waiting for frames</comment></data><data name="Td883ccc4a3bb9938" xml:space="preserve"><value>Analyzing objects</value><comment>Analyzing objects</comment></data><data name="Tf3e3d36a6e37c4bc" xml:space="preserve"><value>Searching for weapons</value><comment>Searching for weapons</comment></data><data name="T7cc02a6900aa9f8d" xml:space="preserve"><value>Retrying model</value><comment>Retrying model</comment></data><data name="T217b3f1007d238ff" xml:space="preserve"><value>Florence: camera not selected for analysis</value><comment>Florence: camera not selected for analysis</comment></data><data name="Tcc756f4c27200c93" xml:space="preserve"><value>Florence: {0} · {1} analyses · {2:F0} ms</value><comment>Florence: {0} · {1} analyses · {2:F0} ms</comment></data><data name="Tec9e61962d3f9801" xml:space="preserve"><value>Last Florence analysis (UTC): {0:HH:mm:ss}</value><comment>Last Florence analysis (UTC): {0:HH:mm:ss}</comment></data><data name="T543eb8f28e46a940" xml:space="preserve"><value>No Florence analysis completed yet.</value><comment>No Florence analysis completed yet.</comment></data><data name="T4b497fba1db84f8a" xml:space="preserve"><value>{0}
+Capture {1:F1} fps · Inference {2:F1} fps · {3:F0} ms
+YOLO queue {4}/1 · Dropped {5} · Reconnects {6}</value><comment>{0}
+Capture {1:F1} fps · Inference {2:F1} fps · {3:F0} ms
+YOLO queue {4}/1 · Dropped {5} · Reconnects {6}</comment></data><data name="Tdedbd416635bd9f1" xml:space="preserve"><value>Florence skipped (sampling/queue): {0}</value><comment>Florence skipped (sampling/queue): {0}</comment></data><data name="T45635012f3cc203a" xml:space="preserve"><value>Florence CPU threads (1–64)</value><comment>Florence CPU threads (1–64)</comment></data><data name="T20479249d863f407" xml:space="preserve"><value>Choose between 1 and 64 Florence CPU threads.</value><comment>Choose between 1 and 64 Florence CPU threads.</comment></data><data name="Tcc977aafb02bb53c" xml:space="preserve"><value>Active CPU threads: {0}</value><comment>Active CPU threads: {0}</comment></data><data name="Ta9d4656b7248a14e" xml:space="preserve"><value>Save monitoring options to apply and remember the thread count. Higher values may increase CPU use without improving speed.</value><comment>Save monitoring options to apply and remember the thread count. Higher values may increase CPU use without improving speed.</comment></data><data name="T5a8ebb9effe242bf" xml:space="preserve"><value>CPU, configurable threads, one shared model. No automatic model downloads.</value><comment>CPU, configurable threads, one shared model. No automatic model downloads.</comment></data><data name="Tcf5f17f90a685aaf" xml:space="preserve"><value>Analyze every frame of video files (slower, without sampling)</value><comment>Analyze every frame of video files (slower, without sampling)</comment></data><data name="Ta412125c871d92d9" xml:space="preserve"><value>Require object detection confirmation on the grounded crop</value><comment>Require object detection confirmation on the grounded crop</comment></data><data name="Ta98b24e894c804a9" xml:space="preserve"><value>Video files advance only after analysis finishes. Live cameras still use sampling.</value><comment>Video files advance only after analysis finishes. Live cameras still use sampling.</comment></data><data name="T5134bb734587e949" xml:space="preserve"><value>Sequential video: frame {0} · video position {1:F2} s</value><comment>Sequential video: frame {0} · video position {1:F2} s</comment></data><data name="T9b8156bbe2af0856" xml:space="preserve"><value>Checking detected region</value><comment>Checking detected region</comment></data><data name="T43ae960ec5f74027" xml:space="preserve"><value>Video analysis complete</value><comment>Video analysis complete</comment></data></root>

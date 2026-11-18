@@ -72,3 +72,7 @@ Alterações locais sem commit em feature/desktop-foundation. Pesos preservados.
 - Teste visual com identificadores independentes do idioma.
 
 SDK/ferramentas, publicação, capturas e vídeo de teste ficam em .tools/artifacts ignorados. Nenhum banco, segredo ou filmagem privada foi preparado para commit ou enviado.
+
+## Florence e revisão visual
+
+Veja o [inventário desta entrega](florence-changes.md) e o [guia de uso](florence-alerts.md).

@@ -97,14 +97,16 @@ public sealed partial class MainViewModel : ObservableObject
     public string EvidenceDirectory => Path.GetDirectoryName(evidence.Resolve("location.marker"))!;
     public string EvidenceLocationText => Texts.Format("Evidence directory: {0}", EvidenceDirectory);
     public IReadOnlyList<LanguageChoice> Languages { get; } = [new("pt-BR", "Português (Brasil)"), new("en-US", "English")];
-    public MainViewModel(Authentication auth, ProductStore store, Session session, CameraManager monitoring, ISecretProtector secrets, NotificationAdmin notifications, IEvidenceStore evidence, LogPreferences logPreferences, LanguagePreferences languagePreferences)
+    public MainViewModel(Authentication auth, ProductStore store, Session session, CameraManager monitoring, ISecretProtector secrets, NotificationAdmin notifications, IEvidenceStore evidence, LogPreferences logPreferences, LanguagePreferences languagePreferences, SmartConfigStore smartStore, IFlorenceDetector florence)
     {
         this.auth = auth; this.store = store; this.session = session; this.monitoring = monitoring; this.secrets = secrets; this.notifications = notifications; this.evidence = evidence;
         this.logPreferences = logPreferences;
         this.languagePreferences = languagePreferences;
+        this.smartStore = smartStore; this.florence = florence;
         selectedLanguage = Texts.Instance.LanguageTag;
         timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(500) }; timer.Tick += async (_, _) =>
         {
+            RefreshDetectorDiagnostic();
             RefreshTiles();
             if (LoggedIn && DateTime.UtcNow >= refreshEventsAt)
             {
@@ -113,6 +115,7 @@ public sealed partial class MainViewModel : ObservableObject
                 await Run(async () => { await LoadDashboardAsync(); if (SelectedEvent is null) await LoadEventsAsync(); });
             }
         };
+        timer.Start();
     }
     public async Task InitializeAsync() => Setup = await auth.NeedsSetupAsync();
     partial void OnSelectedLanguageChanged(string value)
@@ -122,6 +125,7 @@ public sealed partial class MainViewModel : ObservableObject
             languagePreferences.Save(value);
             Texts.Instance.SetLanguage(value);
             RoleDisplay = LoggedIn ? $"{Username} · {Texts.T(session.Role.ToString())}" : "";
+            RefreshSmartTranslations();
             PageDisplay = Texts.Format("Page {0} · {1} results (100 per page)", eventPage + 1, Events.Count);
             ModelDetails = "";
             OnPropertyChanged(nameof(EvidenceLocationText));
@@ -138,6 +142,7 @@ public sealed partial class MainViewModel : ObservableObject
     private async Task Run(Func<Task> action)
     {
         try { Message = ""; await action(); }
+        catch (OperationCanceledException) { Message = Texts.T("Operation cancelled."); }
         catch (Exception error) { Message = error is ArgumentException or UnauthorizedAccessException or InvalidDataException or InvalidOperationException ? error.Message : Texts.Format("Operation failed ({0}). Check configuration and diagnostics.", error.GetType().Name); }
     }
     private static T Copy<T>(T item) => System.Text.Json.JsonSerializer.Deserialize<T>(System.Text.Json.JsonSerializer.Serialize(item))!;
@@ -154,17 +159,19 @@ public sealed partial class MainViewModel : ObservableObject
     });
     [RelayCommand] private void Logout()
     {
-        timer.Stop(); auth.Logout(); LoggedIn = false; LoginVisible = true; Administrator = false; CanReview = false;
+        ClearSmartSession();
+        auth.Logout(); LoggedIn = false; LoginVisible = true; Administrator = false; CanReview = false;
         Tiles.Clear(); Events.Clear(); RecentEvents.Clear(); Cameras.Clear(); Rules.Clear(); Recipients.Clear(); Users.Clear(); Audit.Clear(); Deliveries.Clear();
         SelectedCamera = null; SelectedEvent = null; SelectedUser = null; SelectedRule = null; SelectedRecipient = null; FullscreenCamera = null;
-        CameraDraft = new(); RuleDraft = new(); RecipientDraft = new(); UserDraft = new(); Smtp = new(); EvidenceImage = null; Message = "";
+        CameraDraft = new(); RuleDraft = new(); RecipientDraft = new(); UserDraft = new(); Smtp = new(); EvidenceImage = null; EvidencePreview = null; Message = "";
     }
     private async Task LoadAsync()
     {
-        Replace(Cameras, await store.CamerasAsync()); Replace(Rules, await store.RulesAsync()); await LoadEventsAsync();
+        Replace(Cameras, await store.CamerasAsync()); Replace(Rules, (await store.RulesAsync()).Where(r => r.TemplateId == null)); await LoadEventsAsync();
         await LoadDashboardAsync();
         if (Administrator)
         {
+            await InitializeSmartAsync();
             Replace(Recipients, await store.RecipientsAsync()); Replace(Users, await auth.UsersAsync()); Replace(Deliveries, await store.DeliveriesAsync()); Replace(Audit, await store.AuditAsync());
             Smtp = await store.SettingAsync("smtp", new SmtpSettings());
             ModelDirectory = await store.SettingAsync("modelDirectory", ModelDirectory);
@@ -174,7 +181,7 @@ public sealed partial class MainViewModel : ObservableObject
         }
         RefreshTiles();
     }
-    private async Task LoadDashboardAsync() { counts = await store.EventCountsAsync(); Replace(RecentEvents, (await store.EventsAsync(new EventFilter())).Take(5)); }
+    private async Task LoadDashboardAsync() { counts = await store.EventCountsAsync(); Replace(RecentEvents, (await store.EventsAsync(new EventFilter())).Take(5)); await RefreshActiveAlertsAsync(); }
     [RelayCommand] private Task RefreshAsync() => Run(LoadAsync);
     partial void OnSelectedCameraChanged(Camera? value) { if (value is not null) CameraDraft = Copy(value); }
     partial void OnSelectedRuleChanged(AlertRule? value) { if (value is not null) RuleDraft = Copy(value); }
@@ -182,15 +189,16 @@ public sealed partial class MainViewModel : ObservableObject
     partial void OnSelectedUserChanged(User? value) { if (value is not null) UserDraft = Copy(value); }
     partial void OnSelectedEventChanged(DetectionEvent? value)
     {
-        Notes = value?.Notes ?? ""; EvidenceImage = null;
-        if (value?.EvidencePath is { } path) { try { EvidenceImage = Decode(File.ReadAllBytes(evidence.Resolve(path))); } catch { Message = Texts.T("Evidence is unavailable or has expired."); } }
+        OnPropertyChanged(nameof(EpisodeDescription));
+        Notes = value?.Notes ?? ""; EvidenceImage = null; EvidencePreview = null;
+        if (value?.EvidencePath is { } path) { try { EvidenceImage = Decode(File.ReadAllBytes(evidence.Resolve(path))); EvidencePreview = EvidenceRendering.Annotate(EvidenceImage, value!); } catch { Message = Texts.T("Evidence is unavailable or has expired."); } }
     }
     [RelayCommand] private void NewCamera() { SelectedCamera = null; CameraDraft = new(); }
     [RelayCommand] private Task SaveCameraAsync(TextBox box) => Run(async () => { var source = box.Text; box.Clear(); await store.SaveCameraAsync(CameraDraft, source); await monitoring.ReloadAsync(); Replace(Cameras, await store.CamerasAsync()); Message = Texts.T("Camera saved and monitoring configuration applied."); });
     [RelayCommand] private Task TestCameraAsync() => Run(async () => { Message = await monitoring.TestAsync(CameraDraft) ? Texts.T("Connection succeeded; a frame was received.") : Texts.T("Connection failed. Save the source first, then check device availability."); });
     [RelayCommand] private Task RestartMonitoringAsync() => Run(async () => { await monitoring.ReloadAsync(); Message = Texts.T("Monitoring configuration applied."); });
     [RelayCommand] private void NewRule() { SelectedRule = null; RuleDraft = new(); }
-    [RelayCommand] private Task SaveRuleAsync() => Run(async () => { await store.SaveRuleAsync(RuleDraft); Replace(Rules, await store.RulesAsync()); Message = Texts.T("Rule saved. Active workers refresh rules within five seconds."); });
+    [RelayCommand] private Task SaveRuleAsync() => Run(async () => { await store.SaveRuleAsync(RuleDraft); Replace(Rules, (await store.RulesAsync()).Where(r => r.TemplateId == null)); Message = Texts.T("Rule saved. Active workers refresh rules within five seconds."); });
     [RelayCommand] private void NewRecipient() { SelectedRecipient = null; RecipientDraft = new(); }
     [RelayCommand] private Task SaveRecipientAsync() => Run(async () => { await store.SaveRecipientAsync(RecipientDraft); Replace(Recipients, await store.RecipientsAsync()); Message = Texts.T("Recipient saved."); });
     [RelayCommand] private void NewUser() { SelectedUser = null; UserDraft = new(); }
@@ -206,14 +214,16 @@ public sealed partial class MainViewModel : ObservableObject
     {
         var status = Enum.TryParse<ReviewStatus>(FilterStatus, out var s) ? s : (ReviewStatus?)null;
         var severity = Enum.TryParse<Severity>(FilterSeverity, out var v) ? v : (Severity?)null;
+        var selectedId = SelectedEvent?.Id;
         Replace(Events, await store.EventsAsync(new EventFilter(Search, FilterCamera?.Id, status, severity, FromDate?.ToUniversalTime(), ToDate?.Date.AddDays(1).AddTicks(-1).ToUniversalTime(), eventPage)));
+        SelectedEvent = Events.FirstOrDefault(x => x.Id == selectedId);
         PageDisplay = Texts.Format("Page {0} · {1} results (100 per page)", eventPage + 1, Events.Count);
     }
     [RelayCommand] private Task SearchEventsAsync() => Run(async () => { eventPage = 0; await LoadEventsAsync(); });
     [RelayCommand] private Task NextPageAsync() => Run(async () => { eventPage++; await LoadEventsAsync(); });
     [RelayCommand] private Task PreviousPageAsync() => Run(async () => { eventPage = Math.Max(0, eventPage - 1); await LoadEventsAsync(); });
     [RelayCommand] private Task ClearFiltersAsync() => Run(async () => { Search = ""; FilterCamera = null; FilterStatus = "All"; FilterSeverity = "All"; FromDate = null; ToDate = null; eventPage = 0; await LoadEventsAsync(); });
-    [RelayCommand] private Task ReviewAsync(string value) => Run(async () => { if (SelectedEvent is null) throw new ArgumentException(Texts.T("Select an event first.")); await store.ReviewAsync(SelectedEvent.Id, Enum.Parse<ReviewStatus>(value), Notes); await LoadEventsAsync(); Message = Texts.T("Event review saved."); });
+    [RelayCommand] private Task ReviewAsync(string value) => Run(async () => { if (SelectedEvent is null) throw new ArgumentException(Texts.T("Select an event first.")); await store.ReviewAsync(SelectedEvent.Id, Enum.Parse<ReviewStatus>(value), Notes); await LoadEventsAsync(); await RefreshActiveAlertsAsync(); Message = Texts.T("Event review saved."); });
     [RelayCommand] private Task SaveSmtpAsync(PasswordBox box) => Run(async () =>
     {
         session.Require(UserRole.Administrator);
@@ -250,16 +260,23 @@ public sealed partial class MainViewModel : ObservableObject
     {
         if (!LoggedIn) return;
         var snapshots = monitoring.Snapshots;
+        var florenceSnapshots = monitoring.FlorenceSnapshots;
         foreach (var old in Tiles.Where(x => snapshots.All(s => s.Id != x.Id)).ToList()) Tiles.Remove(old);
         foreach (var snapshot in snapshots)
         {
             var tile = Tiles.FirstOrDefault(x => x.Id == snapshot.Id);
             if (tile is null) { tile = new CameraTile { Id = snapshot.Id }; Tiles.Add(tile); }
             tile.Name = snapshot.Name; tile.State = Texts.T(snapshot.State);
-            tile.Metrics = Texts.Format("{0}\nCapture {1:F1} fps · Inference {2:F1} fps · {3:F0} ms\nQueue {4}/1 · Dropped {5} · Reconnects {6}", snapshot.ModelVersion, snapshot.CaptureFps, snapshot.InferenceFps, snapshot.LatencyMs, snapshot.QueueDepth, snapshot.DroppedFrames, snapshot.Reconnects);
+            tile.Metrics = Texts.Format("{0}\nCapture {1:F1} fps · Inference {2:F1} fps · {3:F0} ms\nYOLO queue {4}/1 · Dropped {5} · Reconnects {6}", snapshot.ModelVersion, snapshot.CaptureFps, snapshot.InferenceFps, snapshot.LatencyMs, snapshot.QueueDepth, snapshot.DroppedFrames, snapshot.Reconnects);
+            if (snapshot.VideoFrame > 0) tile.Metrics += "\n" + Texts.Format("Sequential video: frame {0} · video position {1:F2} s", snapshot.VideoFrame, snapshot.VideoSeconds);
+            var additional = florenceSnapshots.FirstOrDefault(x => x.CameraId == snapshot.Id);
+            tile.Metrics += "\n" + (additional is null ? Texts.T("Florence: camera not selected for analysis") :
+                Texts.Format("Florence: {0} · {1} analyses · {2:F0} ms", Texts.T(snapshot.State == "Video analysis complete" ? snapshot.State : additional.State), additional.Analyses, additional.LatencyMs) + "\n" + Texts.Format("Florence skipped (sampling/queue): {0}", additional.DroppedFrames) + "\n" +
+                (additional.LastAnalysisUtc is {} last ? Texts.Format("Last Florence analysis (UTC): {0:HH:mm:ss}", last) : Texts.T("No Florence analysis completed yet.")) +
+                (additional.Error is {} error ? " · " + error : ""));
             if (!PreviewPaused) { try { tile.Image = snapshot.Jpeg is null ? null : Decode(snapshot.Jpeg); } catch { tile.Image = null; } }
         }
-        Summary = Texts.Format("{0} cameras   /   {1} online   /   {2} offline or starting   /   {3} pending   /   {4} events today (UTC)   /   {5} retained   /   Memory {6} MB", Cameras.Count, snapshots.Count(x => x.State == "Online"), snapshots.Count(x => x.State != "Online"), counts.Pending, counts.Today, counts.Total, Environment.WorkingSet / 1048576);
+        Summary = Texts.Format("{0} cameras   /   {1} online   /   {2} offline or starting   /   {3} pending   /   {4} events today (UTC)   /   {5} retained   /   Memory {6} MB", Cameras.Count, snapshots.Count(x => x.State == "Online"), snapshots.Count(x => x.State is not ("Online" or "Video analysis complete")), counts.Pending, counts.Today, counts.Total, Environment.WorkingSet / 1048576);
     }
     private static BitmapImage Decode(byte[] data)
     {

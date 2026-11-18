@@ -21,6 +21,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveillanceAI.UnitTests", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveillanceAI.IntegrationTests", "tests\SurveillanceAI.IntegrationTests\SurveillanceAI.IntegrationTests.csproj", "{D25C60DF-61CB-44DF-B499-70F7BDC6E0B7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "third_party", "third_party", "{0DC175A4-010F-A5A8-72A9-B7A5E3C716E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Florence2", "third_party\Florence2\Florence2.csproj", "{2FA6C37A-04F0-4E7B-90BB-ABCA50E9168E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -115,6 +119,18 @@ Global
 		{D25C60DF-61CB-44DF-B499-70F7BDC6E0B7}.Release|x64.Build.0 = Release|Any CPU
 		{D25C60DF-61CB-44DF-B499-70F7BDC6E0B7}.Release|x86.ActiveCfg = Release|Any CPU
 		{D25C60DF-61CB-44DF-B499-70F7BDC6E0B7}.Release|x86.Build.0 = Release|Any CPU
+		{2FA6C37A-04F0-4E7B-90BB-ABCA50E9168E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FA6C37A-04F0-4E7B-90BB-ABCA50E9168E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FA6C37A-04F0-4E7B-90BB-ABCA50E9168E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2FA6C37A-04F0-4E7B-90BB-ABCA50E9168E}.Debug|x64.Build.0 = Debug|Any CPU
+		{2FA6C37A-04F0-4E7B-90BB-ABCA50E9168E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2FA6C37A-04F0-4E7B-90BB-ABCA50E9168E}.Debug|x86.Build.0 = Debug|Any CPU
+		{2FA6C37A-04F0-4E7B-90BB-ABCA50E9168E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FA6C37A-04F0-4E7B-90BB-ABCA50E9168E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FA6C37A-04F0-4E7B-90BB-ABCA50E9168E}.Release|x64.ActiveCfg = Release|Any CPU
+		{2FA6C37A-04F0-4E7B-90BB-ABCA50E9168E}.Release|x64.Build.0 = Release|Any CPU
+		{2FA6C37A-04F0-4E7B-90BB-ABCA50E9168E}.Release|x86.ActiveCfg = Release|Any CPU
+		{2FA6C37A-04F0-4E7B-90BB-ABCA50E9168E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -127,6 +143,7 @@ Global
 		{BDF9FFE5-F367-4344-A26C-BFDEC674605C} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{165DF732-2DE7-45F0-AC26-E62718A9BCBD} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
 		{D25C60DF-61CB-44DF-B499-70F7BDC6E0B7} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
+		{2FA6C37A-04F0-4E7B-90BB-ABCA50E9168E} = {0DC175A4-010F-A5A8-72A9-B7A5E3C716E6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7F540874-8DF0-40CA-99A2-29FE63B87605}

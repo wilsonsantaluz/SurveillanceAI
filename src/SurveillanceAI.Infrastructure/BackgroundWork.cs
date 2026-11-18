@@ -62,21 +62,49 @@ public sealed class MailKitTransport(ISecretProtector secrets) : IMailTransport
 }
 public sealed class EventWriter(IDbContextFactory<AppDbContext> factory, IEvidenceStore evidence)
 {
+    private readonly SemaphoreSlim episodeGate = new(1);
     public async Task RecordAsync(DetectionEvent item, byte[]? jpeg, CancellationToken token)
     {
+        await episodeGate.WaitAsync(token);
+        try {
         await using var db = await factory.CreateDbContextAsync(token);
+        if (item.EpisodeOpen && item.TemplateId != null && await db.Events.AnyAsync(e => e.CameraId == item.CameraId && e.TemplateId == item.TemplateId && e.EpisodeOpen, token)) return;
+        if (item.EpisodeOpen && item.TemplateId != null && await db.Events.AnyAsync(e => e.CameraId == item.CameraId && e.TemplateId == item.TemplateId && e.ClosedUtc >= item.TimestampUtc, token)) return;
+        if (item.TemplateId == TemplateIds.Firearms)
+        {
+            var closed = await EpisodeRearm.LastClosedAsync(db, item.CameraId, token);
+            var clear = await ReadSettingAsync(db, EpisodeRearm.ClearKey(item.CameraId), DateTime.MinValue, token);
+            if (closed != DateTime.MinValue && (clear <= closed || item.TimestampUtc <= clear)) return;
+        }
         var evidenceEnabled = await ReadSettingAsync(db, "evidenceEnabled", false, token);
+        if (item.TemplateId != null) evidenceEnabled = item.SaveEvidence || item.TemplateId == TemplateIds.Firearms;
         if (evidenceEnabled && jpeg is not null) item.EvidencePath = await evidence.SaveAsync(item.Id, jpeg, token);
         db.Events.Add(item);
         var smtp = await ReadSettingAsync(db, "smtp", new SmtpSettings(), token);
-        if (smtp.Enabled)
+        if (smtp.Enabled && item.NotifyEmail)
         {
             var recipients = await db.Recipients.Where(x => x.Enabled && (x.CameraId == null || x.CameraId == item.CameraId) && x.MinimumSeverity <= item.Severity).ToListAsync(token);
             foreach (var recipient in recipients.Where(r => string.IsNullOrWhiteSpace(r.ClassFilter) || r.ClassFilter.Split(',', StringSplitOptions.TrimEntries).Contains(item.Label)))
-                db.Deliveries.Add(new NotificationDelivery { EventId = item.Id, RecipientId = recipient.Id, Address = recipient.Email, Subject = Texts.Format("Potential {0} detection — review required", item.Label), Body = Texts.Format("Camera: {0}\nUTC: {1:O}\nClass: {2}\nConfidence: {3:P1}\nModel: {4}\nEvent: {5}\nThis is an unverified detection requiring operator review.", item.CameraId, item.TimestampUtc, item.Label, item.Confidence, item.ModelVersion, item.Id) });
+                db.Deliveries.Add(new NotificationDelivery { EventId = item.Id, RecipientId = recipient.Id, Address = recipient.Email, Subject = Texts.Format("Potential {0} detection — review required", item.Label), Body = Texts.Format("Camera: {0}\nUTC: {1:O}\nClass: {2}\nConfidence: {3:P1}\nModel: {4}\nEvent: {5}\nThis is an unverified detection requiring operator review.", item.CameraId, item.TimestampUtc, item.Label, item.Confidence is {} confidence ? (object)confidence : Texts.T("Not provided"), item.ModelVersion + " / " + item.DetectorId, item.Id) });
         }
         try { await db.SaveChangesAsync(token); }
         catch { if (item.EvidencePath is not null) evidence.Delete(item.EvidencePath); throw; }
+        } finally { episodeGate.Release(); }
+    }
+    public async Task ObserveFirearmAbsenceAsync(Guid cameraId, DateTime capturedUtc, CancellationToken token)
+    {
+        await episodeGate.WaitAsync(token);
+        try
+        {
+            await using var db = await factory.CreateDbContextAsync(token);
+            var closed = await EpisodeRearm.LastClosedAsync(db, cameraId, token);
+            if (closed == DateTime.MinValue || capturedUtc <= closed) return;
+            var clear = await ReadSettingAsync(db, EpisodeRearm.ClearKey(cameraId), DateTime.MinValue, token);
+            if (clear > closed) return;
+            await EpisodeRearm.SetAsync(db, EpisodeRearm.ClearKey(cameraId), capturedUtc, token);
+            await db.SaveChangesAsync(token);
+        }
+        finally { episodeGate.Release(); }
     }
     internal static async Task<T> ReadSettingAsync<T>(AppDbContext db, string key, T fallback, CancellationToken token)
     {
